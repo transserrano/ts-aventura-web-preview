@@ -769,19 +769,35 @@ a {
 }
 
 .ts-media-slot--approved::before {
-	background: linear-gradient(180deg, rgb(23 33 27 / 8%) 35%, rgb(23 33 27 / 72%) 100%);
+	background: linear-gradient(180deg, rgb(23 33 27 / 3%) 54%, rgb(23 33 27 / 34%) 100%);
 	inset: 0;
 	z-index: 1;
 }
 
 .ts-media-slot--approved::after {
-	background: repeating-radial-gradient(circle at 82% 18%, transparent 0 30px, rgb(255 255 255 / 20%) 31px 32px);
+	background: repeating-radial-gradient(circle at 82% 18%, transparent 0 30px, rgb(255 255 255 / 12%) 31px 32px);
 	border-radius: 0;
 	inset: -28% -18% 35% 32%;
 	height: auto;
 	transform: rotate(-7deg);
 	width: auto;
 	z-index: 2;
+}
+
+.ts-activity-hero-media--alva .ts-approved-media img {
+	object-position: 50% 52%;
+}
+
+.ts-activity-hero-media--estrela-4x4 .ts-approved-media img {
+	object-position: 50% 42%;
+}
+
+.ts-activity-hero-media--buggy .ts-approved-media img {
+	object-position: 32% 50%;
+}
+
+.ts-hero-art--photo .ts-approved-media img {
+	object-position: 50% 48%;
 }
 
 .ts-media-slot--approved .ts-media-label,
@@ -1524,6 +1540,20 @@ a {
 	border-left-color: var(--wp--preset--color--clay-500, #a64d1f);
 	border-radius: 0 var(--wp--custom--radius--control, 0.5rem) var(--wp--custom--radius--control, 0.5rem) 0;
 	margin-top: 1.5rem;
+}
+
+.ts-partner-status__label,
+.ts-partner-status__title {
+	display: block;
+}
+
+.ts-partner-status__label {
+	margin: 0 0 0.45rem;
+}
+
+.ts-partner-status__title {
+	line-height: 1.25;
+	margin-bottom: 0.65rem;
 }
 
 .ts-catalog-guidance p:last-child,
@@ -2475,7 +2505,11 @@ a {
 	align-items: stretch;
 	display: grid;
 	gap: clamp(2rem, 5vw, 5rem);
+	grid-template-areas:
+		"intro media"
+		"meta media";
 	grid-template-columns: minmax(0, 0.8fr) minmax(28rem, 1.2fr);
+	grid-template-rows: auto 1fr;
 }
 
 .ts-activity-cover__copy {
@@ -2483,6 +2517,14 @@ a {
 	display: grid;
 	gap: 1.5rem;
 	padding-block: 1rem;
+}
+
+.ts-activity-cover__intro {
+	grid-area: intro;
+}
+
+.ts-activity-cover__meta {
+	grid-area: meta;
 }
 
 .ts-activity-cover .ts-partner-status {
@@ -2563,6 +2605,7 @@ a {
 	clip-path: polygon(8% 0, 100% 0, 100% 91%, 88% 100%, 0 100%, 0 9%);
 	min-height: 500px;
 	padding: 0;
+	grid-area: media;
 }
 
 .ts-activity-summary {
@@ -2648,6 +2691,14 @@ a {
 	.ts-editorial-intro,
 	.ts-activity-summary__grid {
 		grid-template-columns: 1fr;
+	}
+
+	.ts-activity-cover__grid {
+		grid-template-areas:
+			"intro"
+			"media"
+			"meta";
+		grid-template-rows: auto;
 	}
 
 	.ts-hero__copy h1,
