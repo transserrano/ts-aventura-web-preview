@@ -517,11 +517,8 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
   margin: 0 0 1rem;
 }
 
-.svh-editorial-note a {
-  display: inline-flex;
-  font-weight: 800;
+.svh-editorial-note .ts-editorial-link {
   margin-top: 0.75rem;
-  text-underline-offset: 0.2em;
 }
 
 .svh-contact-promise {

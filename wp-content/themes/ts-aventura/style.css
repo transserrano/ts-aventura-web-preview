@@ -2207,7 +2207,72 @@ a {
 }
 
 .ts-cover-line span {
-	color: rgb(255 255 255 / 72%);
+	color: var(--wp--preset--color--forest-700, #285c40);
+}
+
+.ts-hero .ts-cover-line span,
+.ts-activity-cover .ts-cover-line span {
+	color: var(--wp--preset--color--river-100, #d8edf0);
+}
+
+.ts-editorial-link,
+.ts-editorial-link:visited {
+	align-items: baseline;
+	color: var(--wp--preset--color--river-700, #0b6170);
+	display: inline-flex;
+	font-weight: 750;
+	gap: 0.38em;
+	text-decoration-color: currentcolor;
+	text-decoration-line: underline;
+	text-decoration-thickness: 0.09em;
+	text-underline-offset: 0.22em;
+}
+
+.ts-editorial-link:hover {
+	color: var(--wp--preset--color--ember-800, #91370e);
+	text-decoration-thickness: 0.14em;
+}
+
+.ts-editorial-link:focus-visible {
+	color: var(--wp--preset--color--forest-900, #173d2b);
+	outline: 3px solid var(--wp--preset--color--river-700, #0b6170);
+	outline-offset: 3px;
+	text-decoration-thickness: 0.14em;
+}
+
+.ts-editorial-link__arrow {
+	display: inline-block;
+	transition: transform 160ms ease;
+}
+
+.ts-editorial-link:hover .ts-editorial-link__arrow,
+.ts-editorial-link:focus-visible .ts-editorial-link__arrow {
+	transform: translateX(0.16rem);
+}
+
+.ts-destination-card .ts-editorial-link,
+.ts-destination-card .ts-editorial-link:visited {
+	color: var(--wp--preset--color--river-100, #d8edf0);
+}
+
+.ts-destination-card .ts-editorial-link:hover,
+.ts-destination-card .ts-editorial-link:focus-visible {
+	color: var(--wp--preset--color--white, #fff);
+}
+
+.ts-destination-card .ts-editorial-link:focus-visible {
+	outline-color: var(--wp--preset--color--river-100, #d8edf0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ts-editorial-link__arrow {
+		transition: none;
+	}
+
+	.ts-editorial-link:hover .ts-editorial-link__arrow,
+	.ts-editorial-link:focus-visible .ts-editorial-link__arrow {
+		transform: none;
+	}
 }
 
 .ts-hero {
@@ -2460,8 +2525,6 @@ a {
 	min-height: 0;
 }
 
-.ts-audience-card a,
-.ts-audience-card a:visited,
 .ts-language-switcher a,
 .ts-language-switcher a:visited {
 	color: var(--wp--preset--color--forest-900, #173d2b);
@@ -2469,7 +2532,6 @@ a {
 	text-decoration-color: color-mix(in srgb, currentcolor 42%, transparent);
 }
 
-.ts-audience-card a:hover,
 .ts-language-switcher a:hover {
 	color: var(--wp--preset--color--ember-700, #b44712);
 	text-decoration-color: currentcolor;
