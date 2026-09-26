@@ -170,6 +170,14 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
   position: relative;
 }
 
+.svh-catalog-hero .svh-archive-hero__grid {
+  padding-block: clamp(2rem, 4vw, 3.5rem);
+}
+
+.ts-catalog-section {
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+}
+
 .svh-archive-hero__grid .ts-section-heading,
 .svh-activity-intro-grid .ts-section-heading {
   margin: 0;

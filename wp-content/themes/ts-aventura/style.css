@@ -2520,6 +2520,56 @@ a {
 	width: 1rem;
 }
 
+.ts-card__facts {
+	border-block: var(--ts-editorial-rule);
+	display: grid;
+	gap: 0;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin: 0;
+}
+
+.ts-card__facts div {
+	padding-block: 0.65rem;
+}
+
+.ts-card__facts div + div {
+	border-inline-start: var(--ts-editorial-rule);
+	padding-inline-start: 0.8rem;
+}
+
+.ts-card__facts dt {
+	color: var(--wp--preset--color--ink-600, #4d5a52);
+	font-size: var(--wp--preset--font-size--small, 0.875rem);
+	font-weight: 800;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+}
+
+.ts-card__facts dd {
+	font-size: var(--wp--preset--font-size--small, 0.875rem);
+	font-weight: 700;
+	margin: 0.12rem 0 0;
+}
+
+.ts-catalog-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	justify-content: flex-end;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ts-catalog-chips li {
+	border: 1px solid var(--wp--preset--color--river-700, #0b6170);
+	border-radius: var(--wp--custom--radius--pill, 999px);
+	color: var(--wp--preset--color--forest-900, #173d2b);
+	font-size: var(--wp--preset--font-size--small, 0.875rem);
+	font-weight: 750;
+	padding: 0.35rem 0.72rem;
+}
+
 .ts-audience-card {
 	border-top: var(--ts-editorial-rule);
 	min-height: 0;
@@ -2591,6 +2641,18 @@ a {
 
 .ts-activity-cover__meta {
 	grid-area: meta;
+}
+
+.ts-activity-cover__actions {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	gap: 0.7rem;
+}
+
+.ts-activity-cover .ts-inline-link--quiet {
+	color: var(--wp--preset--color--river-100, #d8edf0);
+	font-size: var(--wp--preset--font-size--small, 0.875rem);
 }
 
 .ts-activity-cover .ts-partner-status {
@@ -2741,6 +2803,35 @@ a {
 	border-top: 0.35rem solid var(--wp--preset--color--river-700, #0b6170);
 }
 
+.ts-water-walking-truth {
+	border-block: var(--ts-editorial-rule);
+	padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+.ts-water-walking-truth__grid {
+	display: grid;
+	gap: clamp(1.2rem, 3vw, 2.5rem);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ts-water-walking-truth__grid section {
+	border-top: 0.3rem solid var(--wp--preset--color--river-700, #0b6170);
+	padding-top: 1rem;
+}
+
+.ts-water-walking-truth__grid h3 {
+	font-size: var(--wp--preset--font-size--heading-4, 1.35rem);
+	margin-top: 0;
+}
+
+.ts-water-walking-truth__grid :where(ul, p) {
+	margin-bottom: 0;
+}
+
+.ts-related__intro {
+	max-width: 48rem;
+}
+
 @media (max-width: 63.999rem) {
 	.ts-hero__layout,
 	.ts-activity-cover__grid {
@@ -2879,5 +2970,15 @@ a {
 
 	.ts-localized-navigation ul {
 		flex-wrap: nowrap;
+	}
+}
+
+@media (max-width: 48.875rem) {
+	.ts-water-walking-truth__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.ts-catalog-chips {
+		justify-content: flex-start;
 	}
 }
