@@ -93,14 +93,37 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
 
 .svh-mobile-nav {
   display: none;
-  position: static;
+  position: relative;
+}
+
+.svh-mobile-nav[open] {
+  isolation: isolate;
+  z-index: 60;
+}
+
+.svh-mobile-nav[open]::before {
+  background: rgb(23 33 27 / 46%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
 }
 
 .svh-mobile-nav summary {
   cursor: pointer;
   font-weight: 750;
+  list-style: none;
   min-height: 44px;
   padding: 0.55rem 0.7rem;
+}
+
+.svh-mobile-nav summary::-webkit-details-marker {
+  display: none;
+}
+
+.svh-mobile-nav summary::marker {
+  content: "";
 }
 
 .svh-skip-link:focus-visible,
@@ -126,6 +149,9 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
   align-items: stretch;
   display: grid;
   gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .svh-mobile-nav[open] li + li {
@@ -171,11 +197,17 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
 }
 
 .svh-catalog-hero .svh-archive-hero__grid {
-  padding-block: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 3.5rem);
+  padding-block: clamp(1rem, 2vw, 1.75rem);
+}
+
+.svh-catalog-hero::before {
+  content: none;
 }
 
 .ts-catalog-section {
-  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .svh-archive-hero__grid .ts-section-heading,
@@ -336,7 +368,7 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
 }
 
 .svh-catalog-photos {
-  min-height: clamp(24rem, 36vw, 31rem);
+  min-height: clamp(12rem, 20vw, 18rem);
   position: relative;
 }
 
@@ -355,12 +387,12 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
 
 .svh-catalog-photos__secondary {
   aspect-ratio: 4 / 3;
-  border: 0.45rem solid var(--wp--preset--color--sand-100);
+  border: 0.3rem solid var(--wp--preset--color--sand-100);
   bottom: 0;
-  height: 42%;
+  height: 30%;
   position: absolute;
   right: 0;
-  width: 48%;
+  width: 38%;
   z-index: 3;
 }
 
@@ -373,27 +405,22 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
 }
 
 .ts-catalog-intro {
-  align-items: end;
+  align-items: center;
   border-bottom: var(--ts-border);
   display: grid;
-  gap: clamp(1.5rem, 5vw, 5rem);
-  grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.65fr);
-  margin-bottom: clamp(2rem, 5vw, 4rem);
-  padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-.ts-catalog-intro h2 {
-  font-family: var(--ts-editorial-display);
-  font-size: clamp(2.2rem, 4vw, 4rem);
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1;
-  margin: 0;
-  max-width: 17ch;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1fr);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.25rem, 2.5vw, 2rem);
 }
 
 .ts-catalog-intro p {
   margin: 0;
+}
+
+.ts-catalog-intro h2 {
+  margin: 0;
+  max-width: 24ch;
 }
 
 .svh-territory-mark {
@@ -430,13 +457,6 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
 .svh-honeypot {
   left: -10000px;
   position: absolute;
-}
-
-.svh-sink-status {
-  border-left: 3px solid var(--wp--preset--color--river-700);
-  font-size: 0.86rem;
-  margin: 0;
-  padding-left: 0.75rem;
 }
 
 .svh-form-error {
@@ -678,7 +698,16 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
   .svh-editorial-grid,
   .svh-faq-layout,
   .ts-catalog-intro {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .svh-page-hero__grid > *,
+  .svh-archive-hero__grid > *,
+  .svh-activity-intro-grid > *,
+  .svh-editorial-grid > *,
+  .svh-faq-layout > *,
+  .ts-catalog-intro > * {
+    min-width: 0;
   }
 
   .svh-page-hero__media {
@@ -692,7 +721,33 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
   }
 
   .svh-catalog-photos {
-    min-height: clamp(20rem, 92vw, 31rem);
+    min-height: 0;
+    margin-top: 0.25rem;
+  }
+
+  .svh-catalog-photos__primary {
+    aspect-ratio: 3 / 1;
+    height: auto;
+    left: auto;
+    max-height: 7rem;
+    position: relative;
+    top: auto;
+    width: 100%;
+  }
+
+  .svh-catalog-photos__secondary {
+    display: none;
+  }
+
+  .ts-catalog-intro {
+    gap: 0.35rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .svh-catalog-hero .svh-archive-hero__grid {
+    gap: 0.9rem;
+    padding-block: 0.75rem 1rem;
   }
 }
 
