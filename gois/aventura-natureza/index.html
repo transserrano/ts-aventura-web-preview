@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="robots" content="index,follow">
   <meta name="description" content="Conheça o contexto de Góis entre o rio Ceira e a Serra da Lousã antes de comparar atividades e pedir informação à equipa local.">
   <meta name="theme-color" content="#173d2b">
   <meta property="og:type" content="website">
@@ -26,8 +26,13 @@
   <style>:root { --wp--preset--color--forest-deep: #123525;
     --wp--preset--color--forest-900: #173D2B;
     --wp--preset--color--forest-700: #285C40;
+    --wp--preset--color--forest-100: #E8F1E9;
     --wp--preset--color--river-700: #0B6170;
     --wp--preset--color--river-100: #D8EDF0;
+    --wp--preset--color--brand-blue: #0A8BCD;
+    --wp--preset--color--brand-green: #89BD41;
+    --wp--preset--color--brand-lime: #C1D72D;
+    --wp--preset--color--brand-lime-100: #F5F8D6;
     --wp--preset--color--ember-700: #B44712;
     --wp--preset--color--ember-800: #91370E;
     --wp--preset--color--moss-600: #647A32;
@@ -37,6 +42,7 @@
     --wp--preset--color--ink-900: #17211B;
     --wp--preset--color--ink-600: #4D5A52;
     --wp--preset--color--white: #FFFFFF;
+    --wp--preset--color--neutral-050: #F5F7F7;
     --wp--preset--color--success-700: #276738;
     --wp--preset--color--warning-700: #8A5A00;
     --wp--preset--color--error-700: #A62E2E;
@@ -50,28 +56,70 @@
     --wp--preset--spacing--80: 64px;
     --wp--preset--spacing--90: 96px;
     --wp--preset--spacing--100: 128px;
-    --wp--preset--font-family--editorial-display: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+    --wp--preset--font-family--editorial-display: "Segoe UI Variable Display", "Aptos Display", system-ui, -apple-system, "Segoe UI", sans-serif;
     --wp--preset--font-family--heading: "Segoe UI Variable Display", "Aptos Display", system-ui, -apple-system, "Segoe UI", sans-serif;
     --wp--preset--font-family--body: "Segoe UI Variable Text", Aptos, system-ui, -apple-system, "Segoe UI", sans-serif;
-    --wp--preset--font-size--small: 14px;
-    --wp--preset--font-size--label: 16px;
-    --wp--preset--font-size--body: 17px;
-    --wp--preset--font-size--body-large: clamp(1.125rem, 1.6vw, 1.1875rem);
+    --wp--preset--font-size--small: clamp(0.875rem, 0.2vw + 0.83rem, 0.9375rem);
+    --wp--preset--font-size--label: clamp(0.9375rem, 0.2vw + 0.9rem, 1rem);
+    --wp--preset--font-size--body: clamp(1rem, 0.35vw + 0.95rem, 1.125rem);
+    --wp--preset--font-size--body-large: clamp(1.125rem, 0.7vw + 0.98rem, 1.25rem);
     --wp--preset--font-size--heading-4: clamp(1.25rem, 1.5vw, 1.3125rem);
     --wp--preset--font-size--heading-3: clamp(1.4375rem, 2vw, 1.625rem);
     --wp--preset--font-size--heading-2: clamp(1.75rem, 3vw, 2.125rem);
     --wp--preset--font-size--heading-1: clamp(2.125rem, 4vw, 2.75rem);
-    --wp--preset--font-size--display: clamp(2.75rem, 5.8vw, 4.5rem);
+    --wp--preset--font-size--display: clamp(2.75rem, 6vw, 5.75rem);
     --wp--custom--border--hairline: 1px;
     --wp--custom--container--content: 760px;
     --wp--custom--container--wide: 1200px;
+    --wp--custom--container--bleed: 1440px;
+    --wp--custom--container--reading: 72ch;
+    --wp--custom--container--gutter: clamp(1rem, 4vw, 2.5rem);
+    --wp--custom--color--semantic--text: var(--wp--preset--color--ink-900);
+    --wp--custom--color--semantic--text-muted: var(--wp--preset--color--ink-600);
+    --wp--custom--color--semantic--canvas: var(--wp--preset--color--white);
+    --wp--custom--color--semantic--surface: var(--wp--preset--color--neutral-050);
+    --wp--custom--color--semantic--surface-raised: var(--wp--preset--color--white);
+    --wp--custom--color--semantic--border: var(--wp--preset--color--stone-300);
+    --wp--custom--color--semantic--action: var(--wp--preset--color--river-700);
+    --wp--custom--color--semantic--action-hover: var(--wp--preset--color--river-700);
+    --wp--custom--color--semantic--focus: var(--wp--preset--color--brand-blue);
+    --wp--custom--color--semantic--success: var(--wp--preset--color--success-700);
+    --wp--custom--color--semantic--warning: var(--wp--preset--color--warning-700);
+    --wp--custom--color--semantic--error: var(--wp--preset--color--error-700);
+    --wp--custom--color--category--water-text: var(--wp--preset--color--river-700);
+    --wp--custom--color--category--water-surface: var(--wp--preset--color--river-100);
+    --wp--custom--color--category--land-text: var(--wp--preset--color--forest-900);
+    --wp--custom--color--category--land-surface: var(--wp--preset--color--forest-100);
+    --wp--custom--color--category--team-text: var(--wp--preset--color--ink-900);
+    --wp--custom--color--category--team-surface: var(--wp--preset--color--brand-lime-100);
     --wp--custom--elevation--card: 0 14px 34px rgb(23 33 27 / 10%);
     --wp--custom--elevation--overlay: 0 24px 64px rgb(23 33 27 / 18%);
-    --wp--custom--motion--distance: 18px;
+    --wp--custom--grid--columns-mobile: 4;
+    --wp--custom--grid--columns-tablet: 8;
+    --wp--custom--grid--columns-desktop: 12;
+    --wp--custom--grid--gap: clamp(0.75rem, 2vw, 1.5rem);
+    --wp--custom--grid--card-min: 17rem;
+    --wp--custom--breakpoint--mobile: 48.875rem;
+    --wp--custom--breakpoint--navigation: 64rem;
+    --wp--custom--breakpoint--wide: 90rem;
     --wp--custom--motion--duration--fast: 180ms;
     --wp--custom--motion--duration--base: 210ms;
     --wp--custom--motion--duration--slow: 360ms;
     --wp--custom--motion--easing--standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --wp--custom--motion--easing--enter: cubic-bezier(0.16, 1, 0.3, 1);
+    --wp--custom--motion--distance: 16px;
+    --wp--custom--motion--hover-distance: 2px;
+    --wp--custom--motion--image-scale: 1.025;
+    --wp--custom--state--focus-width: 3px;
+    --wp--custom--state--focus-offset: 3px;
+    --wp--custom--state--target-min: 44px;
+    --wp--custom--state--disabled-opacity: 0.58;
+    --wp--custom--z-index--sticky: 10;
+    --wp--custom--z-index--header: 30;
+    --wp--custom--z-index--menu: 40;
+    --wp--custom--z-index--skip-link: 100;
+    --wp--custom--overlay--light: rgb(255 255 255 / 88%);
+    --wp--custom--overlay--dark: rgb(23 61 43 / 88%);
     --wp--custom--radius--control: 6px;
     --wp--custom--radius--card: 12px;
     --wp--custom--radius--feature: 24px;
@@ -82,15 +130,59 @@
     /* Keep the review-only mobile navigation reachable if its auxiliary stylesheet fails. */
     @media (max-width: 74rem) { .svh-desktop-nav { display: none; } .svh-mobile-nav { display: block; } }
   </style>
-  <link rel="stylesheet" href="/wp-content/themes/ts-aventura/style.css">
+  <link rel="stylesheet" href="/wp-content/themes/ts-aventura/style-locations-17.css">
+
   <link rel="stylesheet" href="/__harness/harness.css">
+<link rel="stylesheet" href="/wp-content/themes/ts-aventura/assets/css/water-walking.css">
   <link rel="stylesheet" href="/__harness/v3-shell.css">
+<style>.ts-sprint-35 .ts-aventura-site-header .ts-site-brand::before{content:none}.ts-sprint-35 .ts-site-brand picture,.ts-sprint-35 .ts-site-brand__logo{display:block;width:100%;height:auto}.ts-sprint-35 .ts-mobile-menu__panel{left:auto;right:0;inset-inline-start:auto;inset-inline-end:0;display:block;max-height:calc(100dvh - 90px);overflow:auto}</style>
 </head>
-<body>
-  <a class="skip-link" href="#main-content">Saltar para o conteúdo</a><header class="ts-aventura-site-header"><div class="ts-header-shell"><a class="ts-site-brand" href="/" aria-label="TS Aventura"><img class="ts-site-brand__logo" src="/wp-content/themes/ts-aventura/assets/brand/transserrano-logo-horizontal.png" width="2154" height="1050" alt="" decoding="async"></a><div class="ts-navigation-shell"><nav class="ts-primary-navigation ts-primary-navigation--desktop" aria-label="Navegação principal"><ul><li><a href="/atividades/">Atividades</a></li><li><a href="/para-quem/grupos/">Grupos</a></li><li><a href="/para-quem/escolas/">Escolas</a></li><li><a href="/para-quem/empresas/">Empresas</a></li><li><a href="/sobre/">Sobre</a></li><li><a href="/faq/">FAQ</a></li></ul></nav><div class="ts-navigation-utilities--desktop"><nav class="ts-language-switcher" aria-label="Idioma"><ul><li><a href="/gois/aventura-natureza/" aria-current="page">PT</a></li><li><a href="/en/gois/outdoor-adventure/">EN</a></li></ul></nav></div><a class="ts-navigation-cta--desktop wp-block-button__link" href="/contactos/">Pedir informação</a><details class="ts-mobile-menu"><summary class="ts-mobile-menu__toggle"><span>Menu</span><span class="ts-mobile-menu__icon" aria-hidden="true"></span></summary><div class="ts-mobile-menu__panel"><nav class="ts-primary-navigation ts-primary-navigation--mobile" aria-label="Navegação mobile"><ul><li><a href="/atividades/">Atividades</a></li><li><a href="/para-quem/grupos/">Grupos</a></li><li><a href="/para-quem/escolas/">Escolas</a></li><li><a href="/para-quem/empresas/">Empresas</a></li><li><a href="/sobre/">Sobre</a></li><li><a href="/faq/">FAQ</a></li></ul></nav><nav class="ts-language-switcher" aria-label="Idioma"><ul><li><a href="/gois/aventura-natureza/" aria-current="page">PT</a></li><li><a href="/en/gois/outdoor-adventure/">EN</a></li></ul></nav><a class="ts-navigation-cta" href="/contactos/">Pedir informação</a></div></details></div></div></header>
-  <main id="main-content" tabindex="-1"><section class="svh-page-hero has-sand-100-background-color"><div class="alignwide"><div class="svh-page-hero__grid"><div class="ts-section-heading"><p class="ts-cover-line">TS Aventura · Centro de Portugal</p><h1 class="has-heading-1-font-size">Góis: aventura entre rios e serras</h1><p class="has-body-large-font-size ts-page-lead">Góis é o ponto de partida da TS Aventura. Este guia ajuda a ler o território antes de escolher, sem substituir a ficha, as condições ou a confirmação de cada atividade.</p></div><figure class="wp-block-group ts-media-slot ts-media-slot--approved svh-page-hero__media" data-media-id="media72-070" data-media-source="owner-authorized-project-photography" data-media-publication="owner-authorized-2026-09-25">
-    <picture class="ts-approved-media"><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-480.avif 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-768.avif 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-960.avif 960w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 41vw, 560px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-480.webp 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-768.webp 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-960.webp 960w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 41vw, 560px"><img src="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-960.jpg" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-480.jpg 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-768.jpg 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-960.jpg 960w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 41vw, 560px" width="960" height="750" alt="Grupo equipado junto à água antes de uma atividade em Góis" loading="eager" fetchpriority="high" decoding="async"></picture>
-  </figure></div></div></section><section class="wp-block-group ts-section"><div class="alignwide svh-editorial-grid"><div><section class="ts-content-section svh-source-section"><h2>Um concelho entre serra e rio</h2><p>Góis situa-se entre as serras da Lousã e do Açor e é atravessado pelo rio Ceira. Essa relação entre água, relevo e povoações ajuda a compreender o cenário, mas não determina por si só a atividade adequada.</p></section><section class="ts-content-section svh-source-section"><h2>Quatro Aldeias do Xisto</h2><p>Aigra Nova, Aigra Velha, Comareira e Pena integram a rede das Aldeias do Xisto no concelho de Góis. São referências culturais do território, não pontos de encontro implícitos para as atividades.</p></section><section class="ts-content-section svh-source-section"><h2>Escolher pelo terreno, confirmar pela ficha</h2><p>Água, serra, caminhos e experiências de grupo pedem preparações diferentes. Compare primeiro as páginas das atividades e confirme depois os requisitos, o local e as condições aplicáveis ao seu caso.</p></section><section class="ts-content-section svh-source-section"><h2>Transformar curiosidade num plano</h2><p>Use este contexto para fazer melhores perguntas: quem participa, que tipo de terreno procura e que informação falta. Quando a resposta depender das condições operacionais, peça confirmação à equipa.</p></section></div><aside class="svh-editorial-note"><h2>Antes de partir</h2><p>Use este guia para se preparar e consulte depois a ficha da atividade para os detalhes práticos.</p></aside></div><div class="ts-page-cta"><h2>Explorar atividades</h2><p>Continue para as atividades para conhecer percursos, preparação e o pedido de informação.</p><div class="wp-block-buttons"><div class="wp-block-button "><a class="wp-block-button__link wp-element-button" href="/atividades/">Explorar atividades</a></div></div></div></div></section></main>
-  <footer class="ts-aventura-site-footer"><div class="ts-footer-grid"><section><p class="ts-site-brand">TS Aventura</p><p>Experiências ao ar livre em Góis e na região.</p><p>Desde 1999 · Góis</p></section><nav aria-label="Explorar"><h2>Explorar</h2><ul><li><a href="/atividades/">Atividades</a></li><li><a href="/para-quem/grupos/">Grupos</a></li><li><a href="/planear/seguranca-seguros/">Preparação e segurança</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/contactos/">Contactos</a></li></ul></nav><nav aria-label="Informação"><h2>Informação</h2><ul><li><a href="/legal/privacidade/">Privacidade</a></li><li><a href="/legal/cookies/">Cookies</a></li><li><a href="/legal/acessibilidade/">Acessibilidade</a></li><li><a href="/legal/termos-condicoes/">Condições</a></li></ul></nav></div><p class="ts-footer-note">Reservas, pagamentos e envio de formulários estão desativados.</p></footer>
+<body class="ts-sprint-35">
+  <a class="skip-link" href="#main-content">Saltar para o conteúdo</a><header class="ts-aventura-site-header"><div class="ts-header-shell"><a class="ts-site-brand" href="/" aria-label="Trans Serrano — TS Aventura"><picture><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-128.avif 128w, /wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-256.avif 256w" sizes="(max-width: 782px) 112px, 144px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-128.webp 128w, /wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-256.webp 256w" sizes="(max-width: 782px) 112px, 144px"><img class="ts-site-brand__logo" src="/wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-256.png" width="256" height="125" alt="Trans Serrano" decoding="async"></picture></a><div class="ts-navigation-shell"><nav class="ts-primary-navigation ts-primary-navigation--desktop" aria-label="Navegação principal"><ul><li><a href="/atividades/">Atividades</a></li><li><a href="/para-quem/grupos/">Grupos</a></li><li><a href="/para-quem/escolas/">Escolas</a></li><li><a href="/para-quem/empresas/">Empresas</a></li><li><a href="/sobre/">Sobre</a></li><li><a href="/faq/">FAQ</a></li></ul></nav><div class="ts-navigation-utilities--desktop"><nav class="ts-language-switcher" aria-label="Idioma"><ul><li><a href="/gois/aventura-natureza/" lang="pt-PT" hreflang="pt-PT" aria-label="Português" aria-current="page">PT</a></li><li><a href="/en/gois/outdoor-adventure/" lang="en" hreflang="en" aria-label="English">EN</a></li></ul></nav></div><a class="ts-navigation-cta--desktop wp-block-button__link" href="/contactos/">Pedir informação</a><details class="ts-mobile-menu"><summary class="ts-mobile-menu__toggle" aria-controls="ts-mobile-menu-panel"><span class="ts-mobile-menu__label--closed">Menu</span><span class="ts-mobile-menu__label--open">Fechar menu</span><span class="ts-mobile-menu__icon" aria-hidden="true"></span></summary><div id="ts-mobile-menu-panel" class="ts-mobile-menu__panel"><button class="ts-mobile-menu__close" type="button" data-menu-close hidden>Fechar menu</button><nav class="ts-primary-navigation ts-primary-navigation--mobile" aria-label="Navegação mobile"><ul><li><a href="/atividades/">Atividades</a></li><li><a href="/para-quem/grupos/">Grupos</a></li><li><a href="/para-quem/escolas/">Escolas</a></li><li><a href="/para-quem/empresas/">Empresas</a></li><li><a href="/sobre/">Sobre</a></li><li><a href="/faq/">FAQ</a></li></ul></nav><nav class="ts-language-switcher" aria-label="Idioma"><ul><li><a href="/gois/aventura-natureza/" lang="pt-PT" hreflang="pt-PT" aria-label="Português" aria-current="page">PT</a></li><li><a href="/en/gois/outdoor-adventure/" lang="en" hreflang="en" aria-label="English">EN</a></li></ul></nav><a class="ts-navigation-cta" href="/contactos/">Pedir informação</a></div></details></div></div></header>
+  <main id="main-content" tabindex="-1"><article class="ts-river-page ts-location-page">
+    <nav class="ts-breadcrumbs alignwide" aria-label="Breadcrumb"><ol><li><a href="/">Início</a><span aria-hidden="true">›</span></li><li aria-current="page">Góis, entre rio e serra</li></ol></nav>
+    <section class="ts-river-cover alignwide" aria-labelledby="location-title">
+      <div class="ts-river-cover__copy"><h1 id="location-title">Góis, entre rio e serra</h1><p class="ts-page-lead">Góis situa-se entre as serras da Lousã e do Açor e é atravessado pelo rio Ceira.</p>
+        <div class="ts-activity-actions"><a class="wp-block-button__link wp-element-button" href="#location-activities">Escolher uma experiência</a><a class="ts-editorial-link" href="/contactos/?locale=pt-PT&amp;source=other#request">Pedir informação</a></div>
+      </div><figure class="wp-block-group ts-media-slot ts-media-slot--approved ts-river-cover__photo" data-media-id="media72-070" data-media-source="owner-authorized-project-photography" data-media-publication="owner-authorized-2026-09-25">
+    <picture class="ts-approved-media"><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-480.avif 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-768.avif 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-960.avif 960w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-1440.avif 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-1920.avif 1920w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1248px) calc((100vw - 3rem - 4vw) * .565218), (max-width: 1600px) calc((1200px - 4vw) * .565218), 642.1px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-480.webp 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-768.webp 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-960.webp 960w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-1440.webp 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-1920.webp 1920w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1248px) calc((100vw - 3rem - 4vw) * .565218), (max-width: 1600px) calc((1200px - 4vw) * .565218), 642.1px"><img src="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-1920.jpg" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-480.jpg 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-768.jpg 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-960.jpg 960w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-1440.jpg 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-070-1920.jpg 1920w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1248px) calc((100vw - 3rem - 4vw) * .565218), (max-width: 1600px) calc((1200px - 4vw) * .565218), 642.1px" width="1920" height="1440" alt="Grupo equipado junto à água antes de uma atividade em Góis" loading="eager" fetchpriority="high" decoding="async"></picture>
+  </figure>
+    </section>
+    <section id="location-activities" class="ts-section ts-audience-related alignwide" aria-labelledby="location-related-title">
+      <header class="ts-section-heading"><h2 id="location-related-title">Atividades ligadas a Góis</h2><p>Comece pela experiência que quer viver. Consulte a ficha para conhecer a preparação e esclarecer os detalhes do percurso.</p></header>
+      <div class="ts-query-grid"><article class="wp-block-group ts-card ts-catalog-card" data-discovery-category="location-gois" data-destinations="gois"><a class="ts-catalog-card__link" href="/atividades/caminhada-aquatica-gois/" aria-labelledby="catalog-title-activity-water-walking-gois">
+    <figure class="wp-block-group ts-media-slot ts-media-slot--approved " data-media-id="media72-176" data-media-source="owner-authorized-project-photography" data-media-publication="owner-authorized-2026-09-25">
+    <picture class="ts-approved-media"><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-480.avif 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-768.avif 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-1440.avif 1440w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-480.webp 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-768.webp 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-1440.webp 1440w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><img src="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-1440.jpg" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-480.jpg 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-768.jpg 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-1440.jpg 1440w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px" width="1440" height="1152" alt="Grupo equipado a progredir num troço de rio rodeado por vegetação" loading="lazy" fetchpriority="auto" decoding="async"></picture>
+  </figure>
+    <div class="wp-block-group ts-card__body">
+      <p class="ts-card__meta"><svg class="ts-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-5.5 11-8 13-2.5-2-8-8-8-13a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Góis</span></p>
+      <h3 id="catalog-title-activity-water-walking-gois" class="wp-block-heading has-heading-3-font-size">Caminhada Aquática em Góis</h3>
+
+      <p class="ts-card__lead">Siga o Rio Ceira, em Góis, pelo leito do rio, alternando troços a pé e a nado. Os saltos são opcionais.</p>
+      <span class="ts-editorial-link ts-card__action">Ver atividade <svg class="ts-editorial-link__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+    </div>
+  </a></article><article class="wp-block-group ts-card ts-catalog-card" data-discovery-category="location-gois" data-destinations="gois ribeira-da-pena"><a class="ts-catalog-card__link" href="/atividades/canyoning-ribeira-da-pena/" aria-labelledby="catalog-title-activity-canyoning-pena">
+    <figure class="wp-block-group ts-media-slot ts-media-slot--approved " data-media-id="media72-003" data-media-source="owner-authorized-project-photography" data-media-publication="owner-authorized-2026-09-25">
+    <picture class="ts-approved-media"><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-480.avif 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-768.avif 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-1440.avif 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-1920.avif 1920w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-480.webp 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-768.webp 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-1440.webp 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-1920.webp 1920w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><img src="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-1920.jpg" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-480.jpg 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-768.jpg 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-1440.jpg 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-003-1920.jpg 1920w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px" width="1920" height="1440" alt="Participante de canyoning a descer por corda numa encosta rochosa" loading="lazy" fetchpriority="auto" decoding="async"></picture>
+  </figure>
+    <div class="wp-block-group ts-card__body">
+      <p class="ts-card__meta"><svg class="ts-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-5.5 11-8 13-2.5-2-8-8-8-13a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Góis · Ribeira da Pena</span></p>
+      <h3 id="catalog-title-activity-canyoning-pena" class="wp-block-heading has-heading-3-font-size">Canyoning na Ribeira da Pena</h3>
+
+      <p class="ts-card__lead">Na Ribeira da Pena, em Góis, o canyoning combina progressão pela água e rapel. Saltos e tobogãs são opcionais.</p>
+      <span class="ts-editorial-link ts-card__action">Ver atividade <svg class="ts-editorial-link__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+    </div>
+  </a></article></div>
+    </section>
+    <section class="ts-river-story alignwide ts-audience-journey" aria-labelledby="location-region-title">
+      <div><h2 id="location-region-title">Conhecer o cenário, escolher o percurso</h2><p class="ts-river-lead">O rio e as serras ajudam a ler a região. O local exato e as condições dependem da atividade escolhida.</p><section><h3>Serra da Lousã</h3><p>A Serra da Lousã reúne paisagens de montanha, cursos de água e aldeias de xisto. É contexto regional, não uma indicação de percurso da TS Aventura.</p></section><section><h3>Rio Ceira</h3><p>O Ceira atravessa Góis e integra a leitura geográfica do concelho. A relação com o rio não identifica o local exato de uma atividade.</p></section><section><h3>Serra do Açor</h3><p>A Serra do Açor enquadra paisagens de montanha, cursos de água e povoações como Piódão. Esta referência não confirma itinerários de atividade.</p></section></div>
+      <section class="ts-river-choice" aria-labelledby="location-planning-title"><h2 id="location-planning-title">Antes de organizar a viagem</h2><p>Depois de escolher a atividade e uma data possível, esclareça estes pontos com a equipa:</p>
+        <ul><li>Qual é o ponto de encontro e como chegar até lá?</li><li>Onde estacionar e é necessário transporte entre o encontro e a atividade?</li><li>Que tempo de viagem considerar a partir do meu local de partida?</li><li>A época e as condições nessa data são adequadas ao percurso e ao grupo?</li></ul><p>Não use a localização geral de Góis como ponto de encontro. Peça a indicação do local para a atividade e data escolhidas.</p>
+      </section>
+    </section>
+    <section class="ts-river-contact alignwide"><div><h2>Do território à sua experiência</h2><p>Compare as atividades ou fale com a equipa sobre o grupo e a data que tem em mente. Um pedido de informação não confirma uma reserva.</p></div><a class="wp-block-button__link wp-element-button" href="/contactos/?locale=pt-PT&amp;source=other#request">Pedir informação</a></section>
+  </article></main>
+  <footer class="ts-aventura-site-footer"><div class="ts-footer-grid"><section class="ts-footer-brand"><p class="ts-site-brand">TS Aventura</p><p>Experiências ao ar livre em Góis e na região.</p><p>Desde 1999 · Góis</p><ul class="ts-footer-section"><li><a href="mailto:geral@transserrano.com">Email: geral@transserrano.com</a></li><li><a href="https://wa.me/351961787772" rel="noopener noreferrer external nofollow">WhatsApp: +351 961 787 772</a></li><li><a href="tel:+351235778938">Telefone fixo: +351 235 778 938</a></li></ul></section><nav class="ts-footer-section" aria-label="Explorar"><h2>Explorar</h2><ul><li><a href="/atividades/">Atividades</a></li><li><a href="/para-quem/grupos/">Grupos</a></li><li><a href="/para-quem/escolas/">Escolas</a></li><li><a href="/para-quem/empresas/">Empresas</a></li><li><a href="/sobre/">Sobre nós</a></li><li><a href="/planear/seguranca-seguros/">Preparação e segurança</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/contactos/">Contactos</a></li></ul></nav><nav class="ts-footer-section" aria-label="Informação"><h2>Informação</h2><ul><li><a href="/legal/privacidade/">Privacidade</a></li><li><a href="/legal/cookies/">Cookies</a></li><li><a href="/legal/acessibilidade/">Acessibilidade</a></li><li><a href="/legal/termos-condicoes/">Condições</a></li></ul><nav class="ts-language-switcher" aria-label="Idioma do rodapé"><ul><li><a href="/gois/aventura-natureza/" lang="pt-PT" hreflang="pt-PT" aria-label="Português" aria-current="page">PT</a></li><li><a href="/en/gois/outdoor-adventure/" lang="en" hreflang="en" aria-label="English">EN</a></li></ul></nav></nav></div><p class="ts-footer-note">Contacte a equipa para planear a sua experiência.</p></footer>
+<script src="/wp-content/themes/ts-aventura/assets/js/navigation.js" defer></script>
 </body>
 </html>

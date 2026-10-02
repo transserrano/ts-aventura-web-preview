@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="robots" content="index,follow">
   <meta name="description" content="Prepare a school nature and adventure visit around its purpose, the class profile and supervision needs.">
   <meta name="theme-color" content="#173d2b">
   <meta property="og:type" content="website">
@@ -26,8 +26,13 @@
   <style>:root { --wp--preset--color--forest-deep: #123525;
     --wp--preset--color--forest-900: #173D2B;
     --wp--preset--color--forest-700: #285C40;
+    --wp--preset--color--forest-100: #E8F1E9;
     --wp--preset--color--river-700: #0B6170;
     --wp--preset--color--river-100: #D8EDF0;
+    --wp--preset--color--brand-blue: #0A8BCD;
+    --wp--preset--color--brand-green: #89BD41;
+    --wp--preset--color--brand-lime: #C1D72D;
+    --wp--preset--color--brand-lime-100: #F5F8D6;
     --wp--preset--color--ember-700: #B44712;
     --wp--preset--color--ember-800: #91370E;
     --wp--preset--color--moss-600: #647A32;
@@ -37,6 +42,7 @@
     --wp--preset--color--ink-900: #17211B;
     --wp--preset--color--ink-600: #4D5A52;
     --wp--preset--color--white: #FFFFFF;
+    --wp--preset--color--neutral-050: #F5F7F7;
     --wp--preset--color--success-700: #276738;
     --wp--preset--color--warning-700: #8A5A00;
     --wp--preset--color--error-700: #A62E2E;
@@ -50,28 +56,70 @@
     --wp--preset--spacing--80: 64px;
     --wp--preset--spacing--90: 96px;
     --wp--preset--spacing--100: 128px;
-    --wp--preset--font-family--editorial-display: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+    --wp--preset--font-family--editorial-display: "Segoe UI Variable Display", "Aptos Display", system-ui, -apple-system, "Segoe UI", sans-serif;
     --wp--preset--font-family--heading: "Segoe UI Variable Display", "Aptos Display", system-ui, -apple-system, "Segoe UI", sans-serif;
     --wp--preset--font-family--body: "Segoe UI Variable Text", Aptos, system-ui, -apple-system, "Segoe UI", sans-serif;
-    --wp--preset--font-size--small: 14px;
-    --wp--preset--font-size--label: 16px;
-    --wp--preset--font-size--body: 17px;
-    --wp--preset--font-size--body-large: clamp(1.125rem, 1.6vw, 1.1875rem);
+    --wp--preset--font-size--small: clamp(0.875rem, 0.2vw + 0.83rem, 0.9375rem);
+    --wp--preset--font-size--label: clamp(0.9375rem, 0.2vw + 0.9rem, 1rem);
+    --wp--preset--font-size--body: clamp(1rem, 0.35vw + 0.95rem, 1.125rem);
+    --wp--preset--font-size--body-large: clamp(1.125rem, 0.7vw + 0.98rem, 1.25rem);
     --wp--preset--font-size--heading-4: clamp(1.25rem, 1.5vw, 1.3125rem);
     --wp--preset--font-size--heading-3: clamp(1.4375rem, 2vw, 1.625rem);
     --wp--preset--font-size--heading-2: clamp(1.75rem, 3vw, 2.125rem);
     --wp--preset--font-size--heading-1: clamp(2.125rem, 4vw, 2.75rem);
-    --wp--preset--font-size--display: clamp(2.75rem, 5.8vw, 4.5rem);
+    --wp--preset--font-size--display: clamp(2.75rem, 6vw, 5.75rem);
     --wp--custom--border--hairline: 1px;
     --wp--custom--container--content: 760px;
     --wp--custom--container--wide: 1200px;
+    --wp--custom--container--bleed: 1440px;
+    --wp--custom--container--reading: 72ch;
+    --wp--custom--container--gutter: clamp(1rem, 4vw, 2.5rem);
+    --wp--custom--color--semantic--text: var(--wp--preset--color--ink-900);
+    --wp--custom--color--semantic--text-muted: var(--wp--preset--color--ink-600);
+    --wp--custom--color--semantic--canvas: var(--wp--preset--color--white);
+    --wp--custom--color--semantic--surface: var(--wp--preset--color--neutral-050);
+    --wp--custom--color--semantic--surface-raised: var(--wp--preset--color--white);
+    --wp--custom--color--semantic--border: var(--wp--preset--color--stone-300);
+    --wp--custom--color--semantic--action: var(--wp--preset--color--river-700);
+    --wp--custom--color--semantic--action-hover: var(--wp--preset--color--river-700);
+    --wp--custom--color--semantic--focus: var(--wp--preset--color--brand-blue);
+    --wp--custom--color--semantic--success: var(--wp--preset--color--success-700);
+    --wp--custom--color--semantic--warning: var(--wp--preset--color--warning-700);
+    --wp--custom--color--semantic--error: var(--wp--preset--color--error-700);
+    --wp--custom--color--category--water-text: var(--wp--preset--color--river-700);
+    --wp--custom--color--category--water-surface: var(--wp--preset--color--river-100);
+    --wp--custom--color--category--land-text: var(--wp--preset--color--forest-900);
+    --wp--custom--color--category--land-surface: var(--wp--preset--color--forest-100);
+    --wp--custom--color--category--team-text: var(--wp--preset--color--ink-900);
+    --wp--custom--color--category--team-surface: var(--wp--preset--color--brand-lime-100);
     --wp--custom--elevation--card: 0 14px 34px rgb(23 33 27 / 10%);
     --wp--custom--elevation--overlay: 0 24px 64px rgb(23 33 27 / 18%);
-    --wp--custom--motion--distance: 18px;
+    --wp--custom--grid--columns-mobile: 4;
+    --wp--custom--grid--columns-tablet: 8;
+    --wp--custom--grid--columns-desktop: 12;
+    --wp--custom--grid--gap: clamp(0.75rem, 2vw, 1.5rem);
+    --wp--custom--grid--card-min: 17rem;
+    --wp--custom--breakpoint--mobile: 48.875rem;
+    --wp--custom--breakpoint--navigation: 64rem;
+    --wp--custom--breakpoint--wide: 90rem;
     --wp--custom--motion--duration--fast: 180ms;
     --wp--custom--motion--duration--base: 210ms;
     --wp--custom--motion--duration--slow: 360ms;
     --wp--custom--motion--easing--standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --wp--custom--motion--easing--enter: cubic-bezier(0.16, 1, 0.3, 1);
+    --wp--custom--motion--distance: 16px;
+    --wp--custom--motion--hover-distance: 2px;
+    --wp--custom--motion--image-scale: 1.025;
+    --wp--custom--state--focus-width: 3px;
+    --wp--custom--state--focus-offset: 3px;
+    --wp--custom--state--target-min: 44px;
+    --wp--custom--state--disabled-opacity: 0.58;
+    --wp--custom--z-index--sticky: 10;
+    --wp--custom--z-index--header: 30;
+    --wp--custom--z-index--menu: 40;
+    --wp--custom--z-index--skip-link: 100;
+    --wp--custom--overlay--light: rgb(255 255 255 / 88%);
+    --wp--custom--overlay--dark: rgb(23 61 43 / 88%);
     --wp--custom--radius--control: 6px;
     --wp--custom--radius--card: 12px;
     --wp--custom--radius--feature: 24px;
@@ -82,22 +130,70 @@
     /* Keep the review-only mobile navigation reachable if its auxiliary stylesheet fails. */
     @media (max-width: 74rem) { .svh-desktop-nav { display: none; } .svh-mobile-nav { display: block; } }
   </style>
-  <link rel="stylesheet" href="/wp-content/themes/ts-aventura/style.css">
+  <link rel="stylesheet" href="/wp-content/themes/ts-aventura/style-audiences-16.css">
+
   <link rel="stylesheet" href="/__harness/harness.css">
+<link rel="stylesheet" href="/wp-content/themes/ts-aventura/assets/css/water-walking.css">
   <link rel="stylesheet" href="/__harness/v3-shell.css">
+<style>.ts-sprint-35 .ts-aventura-site-header .ts-site-brand::before{content:none}.ts-sprint-35 .ts-site-brand picture,.ts-sprint-35 .ts-site-brand__logo{display:block;width:100%;height:auto}.ts-sprint-35 .ts-mobile-menu__panel{left:auto;right:0;inset-inline-start:auto;inset-inline-end:0;display:block;max-height:calc(100dvh - 90px);overflow:auto}</style>
 </head>
-<body>
-  <a class="skip-link" href="#main-content">Saltar para o conteúdo</a><header class="ts-aventura-site-header"><div class="ts-header-shell"><a class="ts-site-brand" href="/" aria-label="TS Aventura"><img class="ts-site-brand__logo" src="/wp-content/themes/ts-aventura/assets/brand/transserrano-logo-horizontal.png" width="2154" height="1050" alt="" decoding="async"></a><div class="ts-navigation-shell"><nav class="ts-primary-navigation ts-primary-navigation--desktop" aria-label="Navegação principal"><ul><li><a href="/atividades/">Atividades</a></li><li><a href="/para-quem/grupos/">Grupos</a></li><li><a href="/para-quem/escolas/">Escolas</a></li><li><a href="/para-quem/empresas/">Empresas</a></li><li><a href="/sobre/">Sobre</a></li><li><a href="/faq/">FAQ</a></li></ul></nav><div class="ts-navigation-utilities--desktop"><nav class="ts-language-switcher" aria-label="Idioma"><ul><li><a href="/para-quem/escolas/" aria-current="page">PT</a></li><li><a href="/en/for/schools/">EN</a></li></ul></nav></div><a class="ts-navigation-cta--desktop wp-block-button__link" href="/contactos/">Pedir informação</a><details class="ts-mobile-menu"><summary class="ts-mobile-menu__toggle"><span>Menu</span><span class="ts-mobile-menu__icon" aria-hidden="true"></span></summary><div class="ts-mobile-menu__panel"><nav class="ts-primary-navigation ts-primary-navigation--mobile" aria-label="Navegação mobile"><ul><li><a href="/atividades/">Atividades</a></li><li><a href="/para-quem/grupos/">Grupos</a></li><li><a href="/para-quem/escolas/">Escolas</a></li><li><a href="/para-quem/empresas/">Empresas</a></li><li><a href="/sobre/">Sobre</a></li><li><a href="/faq/">FAQ</a></li></ul></nav><nav class="ts-language-switcher" aria-label="Idioma"><ul><li><a href="/para-quem/escolas/" aria-current="page">PT</a></li><li><a href="/en/for/schools/">EN</a></li></ul></nav><a class="ts-navigation-cta" href="/contactos/">Pedir informação</a></div></details></div></div></header>
-  <main id="main-content" tabindex="-1"><section class="svh-page-hero has-sand-100-background-color">
-    <div class="alignwide"><nav class="ts-breadcrumbs alignwide" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a><span aria-hidden="true">›</span></li><li aria-current="page">Learning in motion, beyond the classroom</li></ol></nav>
-      <div class="svh-page-hero__grid">
-        <div class="ts-section-heading"><p class="ts-cover-line">Góis · Central Portugal <span>Since 1999</span></p><h1 class="has-heading-1-font-size">Learning in motion, beyond the classroom</h1><p class="has-body-large-font-size ts-page-lead">An outdoor visit can bring the class closer to water, mountains and shared challenges. Start with the purpose of the visit and the needs of the group.</p></div>
-        <figure class="wp-block-group ts-media-slot ts-media-slot--approved svh-page-hero__media" data-media-id="media72-051" data-media-source="owner-authorized-project-photography" data-media-publication="owner-authorized-2026-09-25">
-    <picture class="ts-approved-media"><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-480.avif 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-768.avif 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1024.avif 1024w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 41vw, 560px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-480.webp 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-768.webp 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1024.webp 1024w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 41vw, 560px"><img src="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1024.jpg" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-480.jpg 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-768.jpg 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1024.jpg 1024w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 41vw, 560px" width="1024" height="768" alt="Equipped group on a water activity in front of a waterfall" loading="eager" fetchpriority="high" decoding="async"></picture>
+<body class="ts-sprint-35">
+  <a class="skip-link" href="#main-content">Skip to content</a><header class="ts-aventura-site-header"><div class="ts-header-shell"><a class="ts-site-brand" href="/en/" aria-label="Trans Serrano — TS Aventura"><picture><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-128.avif 128w, /wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-256.avif 256w" sizes="(max-width: 782px) 112px, 144px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-128.webp 128w, /wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-256.webp 256w" sizes="(max-width: 782px) 112px, 144px"><img class="ts-site-brand__logo" src="/wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-256.png" width="256" height="125" alt="Trans Serrano" decoding="async"></picture></a><div class="ts-navigation-shell"><nav class="ts-primary-navigation ts-primary-navigation--desktop" aria-label="Primary navigation"><ul><li><a href="/en/activities/">Activities</a></li><li><a href="/en/for/groups/">Groups</a></li><li><a href="/en/for/schools/">Schools</a></li><li><a href="/en/for/companies/">Companies</a></li><li><a href="/en/about/">About</a></li><li><a href="/en/faq/">FAQ</a></li></ul></nav><div class="ts-navigation-utilities--desktop"><nav class="ts-language-switcher" aria-label="Language"><ul><li><a href="/para-quem/escolas/" lang="pt-PT" hreflang="pt-PT" aria-label="Português">PT</a></li><li><a href="/en/for/schools/" lang="en" hreflang="en" aria-label="English" aria-current="page">EN</a></li></ul></nav></div><a class="ts-navigation-cta--desktop wp-block-button__link" href="/en/contact/">Request information</a><details class="ts-mobile-menu"><summary class="ts-mobile-menu__toggle" aria-controls="ts-mobile-menu-panel"><span class="ts-mobile-menu__label--closed">Menu</span><span class="ts-mobile-menu__label--open">Close menu</span><span class="ts-mobile-menu__icon" aria-hidden="true"></span></summary><div id="ts-mobile-menu-panel" class="ts-mobile-menu__panel"><button class="ts-mobile-menu__close" type="button" data-menu-close hidden>Close menu</button><nav class="ts-primary-navigation ts-primary-navigation--mobile" aria-label="Mobile navigation"><ul><li><a href="/en/activities/">Activities</a></li><li><a href="/en/for/groups/">Groups</a></li><li><a href="/en/for/schools/">Schools</a></li><li><a href="/en/for/companies/">Companies</a></li><li><a href="/en/about/">About</a></li><li><a href="/en/faq/">FAQ</a></li></ul></nav><nav class="ts-language-switcher" aria-label="Language"><ul><li><a href="/para-quem/escolas/" lang="pt-PT" hreflang="pt-PT" aria-label="Português">PT</a></li><li><a href="/en/for/schools/" lang="en" hreflang="en" aria-label="English" aria-current="page">EN</a></li></ul></nav><a class="ts-navigation-cta" href="/en/contact/">Request information</a></div></details></div></div></header>
+  <main id="main-content" tabindex="-1"><article class="ts-river-page ts-audience-page">
+    <nav class="ts-breadcrumbs alignwide" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a><span aria-hidden="true">›</span></li><li aria-current="page">Learning in motion, beyond the classroom</li></ol></nav>
+    <section class="ts-river-cover alignwide" aria-labelledby="audience-title">
+      <div class="ts-river-cover__copy"><h1 id="audience-title">Learning in motion, beyond the classroom</h1><p class="ts-page-lead">A day outdoors can bring a class closer to rivers, mountains and teamwork. Start with the school’s objectives and the pupils’ needs.</p>
+        <div class="ts-activity-actions"><a class="wp-block-button__link wp-element-button" href="/en/contact/?audience=schools&amp;source=schools&amp;locale=en#request" data-audience-prefill="schools">Prepare a school enquiry</a><a class="ts-editorial-link" href="#audience-activities">Explore the activities <span aria-hidden="true">→</span></a></div>
+      </div><figure class="wp-block-group ts-media-slot ts-media-slot--approved ts-river-cover__photo" data-media-id="media72-051" data-media-source="owner-authorized-project-photography" data-media-publication="owner-authorized-2026-09-25">
+    <picture class="ts-approved-media"><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-480.avif 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-768.avif 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1024.avif 1024w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1440.avif 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1920.avif 1920w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1248px) calc((100vw - 3rem - 4vw) * .565218), (max-width: 1600px) calc((1200px - 4vw) * .565218), 642.1px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-480.webp 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-768.webp 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1024.webp 1024w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1440.webp 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1920.webp 1920w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1248px) calc((100vw - 3rem - 4vw) * .565218), (max-width: 1600px) calc((1200px - 4vw) * .565218), 642.1px"><img src="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1920.jpg" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-480.jpg 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-768.jpg 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1024.jpg 1024w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1440.jpg 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-051-1920.jpg 1920w" sizes="(max-width: 782px) calc(100vw - 2rem), (max-width: 1248px) calc((100vw - 3rem - 4vw) * .565218), (max-width: 1600px) calc((1200px - 4vw) * .565218), 642.1px" width="1920" height="1440" alt="Equipped group on a water activity in front of a waterfall" loading="eager" fetchpriority="high" decoding="async"></picture>
   </figure>
-      </div>
+    </section>
+    <section id="audience-activities" class="ts-section ts-audience-related alignwide" aria-labelledby="audience-related-title">
+      <header class="ts-section-heading"><h2 id="audience-related-title">Activities for the school to consider</h2><p>These suggestions do not confirm suitability for a class. Route, supervision, capacity and terms should be checked for the visit.</p></header>
+      <div class="ts-query-grid"><article class="wp-block-group ts-card ts-catalog-card" data-discovery-category="audience-schools" data-destinations="gois"><a class="ts-catalog-card__link" href="/en/activities/water-walking-gois/" aria-labelledby="catalog-title-activity-water-walking-gois">
+    <figure class="wp-block-group ts-media-slot ts-media-slot--approved " data-media-id="media72-176" data-media-source="owner-authorized-project-photography" data-media-publication="owner-authorized-2026-09-25">
+    <picture class="ts-approved-media"><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-480.avif 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-768.avif 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-1440.avif 1440w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-480.webp 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-768.webp 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-1440.webp 1440w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><img src="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-1440.jpg" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-480.jpg 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-768.jpg 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-176-1440.jpg 1440w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px" width="1440" height="1152" alt="Equipped group progressing through a river section surrounded by vegetation" loading="lazy" fetchpriority="auto" decoding="async"></picture>
+  </figure>
+    <div class="wp-block-group ts-card__body">
+      <p class="ts-card__meta"><svg class="ts-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-5.5 11-8 13-2.5-2-8-8-8-13a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Góis</span></p>
+      <h3 id="catalog-title-activity-water-walking-gois" class="wp-block-heading has-heading-3-font-size">Water Walking in Góis</h3>
+
+      <p class="ts-card__lead">Follow the River Ceira through Góis, alternating between walking and swimming. Jumps are optional.</p>
+      <span class="ts-editorial-link ts-card__action">View activity <svg class="ts-editorial-link__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
     </div>
-  </section><section class="wp-block-group ts-section"><div class="alignwide svh-editorial-grid"><div><section class="ts-content-section svh-source-section"><h2>Experiences that change the routine</h2><p>Water walking, canoeing and multi-activities are possible starting points, always subject to the group profile and the conditions on the day.</p></section><section class="ts-content-section svh-source-section"><h2>Prepare pupils and accompanying adults</h2><p>Group profile and size, accompanying adults, mobility, dates and specific needs should be part of the first conversation.</p></section><section class="ts-content-section svh-source-section"><h2>A clear enquiry the school can review</h2><p>Share the aims and expected organisation. The team will bring together the activity and available information for the school to assess before any commitment.</p></section></div><aside class="svh-editorial-note"><h2>Prepare the visit</h2><p>Share the class profile, accompanying adults, dates and any support needs.</p><a class="ts-editorial-link" href="/en/activities/">Explore the activities <span class="ts-editorial-link__arrow" aria-hidden="true">→</span></a></aside></div><div class="ts-content-grid ts-content-grid--request"><section class="ts-contact-panel"><h2>Prepare a school enquiry</h2><p>Describe the learning context and who will take part.</p><p>Sending is disabled. Nothing is sent or stored.</p></section><section class="is-style-ts-surface"><form id="request" class="ts-contact-form" aria-label="Prepare a school enquiry" data-synthetic-sink="memory-only" data-kill-switch="disabled" data-selected-activity="none" data-supported-states="default loading empty validation-error success-synthetic integration-disabled" data-security-contract="csrf honeypot rate-limit double-submit"><div class="ts-form-offline ts-form-field--wide" role="status"><strong>Sending is currently disabled</strong><p>This form is disabled. Do not enter personal data; nothing is sent or stored.</p></div><fieldset disabled><legend>Information request</legend><label>Activity<select><option selected>Choose an activity after contacting the team</option></select></label><label>Request type<select><option selected>Information and availability</option></select></label><label>Name<input type="text" autocomplete="off" placeholder="Available when sending is enabled"></label><label>Email<input type="email" autocomplete="off" placeholder="Available when sending is enabled"></label><label>Possible date or period<input type="text" autocomplete="off" placeholder="To be confirmed"></label><label>Group<input type="text" autocomplete="off" placeholder="Number and context"></label><label class="svh-honeypot" aria-hidden="true">Do not fill<input type="text" name="website" tabindex="-1" autocomplete="off"></label><label class="ts-form-field--wide">Purpose of the visit<textarea placeholder="Available when requests are enabled"></textarea></label><p class="ts-form-field--wide">Share only the information needed to answer your request.</p><button type="button" disabled>Send request · disabled</button></fieldset></form></section></div></div></section></main>
-  <footer class="ts-aventura-site-footer"><div class="ts-footer-grid"><section><p class="ts-site-brand">TS Aventura</p><p>Experiências ao ar livre em Góis e na região.</p><p>Desde 1999 · Góis</p></section><nav aria-label="Explorar"><h2>Explorar</h2><ul><li><a href="/atividades/">Atividades</a></li><li><a href="/para-quem/grupos/">Grupos</a></li><li><a href="/planear/seguranca-seguros/">Preparação e segurança</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/contactos/">Contactos</a></li></ul></nav><nav aria-label="Informação"><h2>Informação</h2><ul><li><a href="/legal/privacidade/">Privacidade</a></li><li><a href="/legal/cookies/">Cookies</a></li><li><a href="/legal/acessibilidade/">Acessibilidade</a></li><li><a href="/legal/termos-condicoes/">Condições</a></li></ul></nav></div><p class="ts-footer-note">Reservas, pagamentos e envio de formulários estão desativados.</p></footer>
+  </a></article><article class="wp-block-group ts-card ts-catalog-card" data-discovery-category="audience-schools" data-destinations="rio-mondego"><a class="ts-catalog-card__link" href="/en/activities/canoeing-river-mondego/" aria-labelledby="catalog-title-activity-canoeing-mondego">
+    <figure class="wp-block-group ts-media-slot ts-media-slot--approved " data-media-id="media72-007" data-media-source="owner-authorized-project-photography" data-media-publication="owner-authorized-2026-09-25">
+    <picture class="ts-approved-media"><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-480.avif 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-768.avif 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-1440.avif 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-1920.avif 1920w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-480.webp 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-768.webp 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-1440.webp 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-1920.webp 1920w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><img src="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-1920.jpg" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-480.jpg 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-768.jpg 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-1440.jpg 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-007-1920.jpg 1920w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px" width="1920" height="1438" alt="Two people kayaking on the River Mondego" loading="lazy" fetchpriority="auto" decoding="async"></picture>
+  </figure>
+    <div class="wp-block-group ts-card__body">
+      <p class="ts-card__meta"><svg class="ts-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-5.5 11-8 13-2.5-2-8-8-8-13a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>River Mondego</span></p>
+      <h3 id="catalog-title-activity-canoeing-mondego" class="wp-block-heading has-heading-3-font-size">Canoeing on the River Mondego</h3>
+
+      <p class="ts-card__lead">Paddle down the River Mondego by canoe. Your canoe, paddle and buoyancy aid are included.</p>
+      <span class="ts-editorial-link ts-card__action">View activity <svg class="ts-editorial-link__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+    </div>
+  </a></article><article class="wp-block-group ts-card ts-catalog-card" data-discovery-category="audience-schools" data-destinations="gois"><a class="ts-catalog-card__link" href="/en/activities/multi-activity-adventure/" aria-labelledby="catalog-title-activity-multi-activities">
+    <figure class="wp-block-group ts-media-slot ts-media-slot--approved " data-media-id="media72-009" data-media-source="owner-authorized-project-photography" data-media-publication="owner-authorized-2026-09-25">
+    <picture class="ts-approved-media"><source type="image/avif" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-480.avif 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-768.avif 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-1440.avif 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-1920.avif 1920w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><source type="image/webp" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-480.webp 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-768.webp 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-1440.webp 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-1920.webp 1920w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px"><img src="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-1920.jpg" srcset="/wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-480.jpg 480w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-768.jpg 768w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-1440.jpg 1440w, /wp-content/themes/ts-aventura/assets/images/homepage-preview/ts-aventura-media-009-1920.jpg 1920w" sizes="(max-width: 599px) calc(100vw - 2rem), (max-width: 1023px) 46vw, (max-width: 1440px) 31vw, 376px" width="1920" height="1440" alt="Participant on a zip line beside a stone bridge" loading="lazy" fetchpriority="auto" decoding="async"></picture>
+  </figure>
+    <div class="wp-block-group ts-card__body">
+      <p class="ts-card__meta"><svg class="ts-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-5.5 11-8 13-2.5-2-8-8-8-13a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Góis</span></p>
+      <h3 id="catalog-title-activity-multi-activities" class="wp-block-heading has-heading-3-font-size">Multi-activity adventure</h3>
+
+      <p class="ts-card__lead">Adventure challenges brought together for your group. Start with your team’s aims and experience to shape the outing.</p>
+      <span class="ts-editorial-link ts-card__action">View activity <svg class="ts-editorial-link__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+    </div>
+  </a></article></div>
+    </section>
+    <section class="ts-river-story alignwide ts-audience-journey" aria-labelledby="audience-selection-title">
+      <div><h2 id="audience-selection-title">Start with the purpose of the visit</h2><p class="ts-river-lead">Begin with the visit’s purpose and the class profile. Participation by minors and activity suitability require prior confirmation.</p><section><h3>Set the objective and age range</h3><p>Describe the learning purpose and pupils’ age range. No minimum age is stated here.</p></section><section><h3>Plan supervision</h3><p>Share pupil and adult numbers, relevant needs and any equipment to consider.</p></section><section><h3>Check the conditions</h3><p>Confirm suitability, safety, documentation and applicable terms before deciding.</p></section></div>
+      <section class="ts-river-choice" aria-labelledby="audience-checklist-title"><h2 id="audience-checklist-title">Useful information for the school to gather</h2><ul><li>Visit objectives and pupils’ age range</li><li>Approximate class size and accompanying adults</li><li>Possible dates and intended duration, to be confirmed</li><li>Mobility, support needs and information relevant to safety</li><li>Permissions or documents required by the school; included equipment and what to bring, to be confirmed</li><li>School pricing and terms: ask for confirmation rather than assuming a special rate</li></ul>
+        <p>Discuss these details with the team before committing to a date or activity.</p>
+      </section>
+    </section>
+    <section class="ts-river-contact alignwide ts-audience-cta" aria-labelledby="audience-contact-title"><div><h2 id="audience-contact-title">Prepare a school enquiry</h2><p>Speak to the team by email, WhatsApp or telephone to prepare your enquiry.</p></div><a class="wp-block-button__link wp-element-button" href="/en/contact/?audience=schools&amp;source=schools&amp;locale=en#request" data-audience-prefill="schools">Prepare a school enquiry</a></section>
+  </article></main>
+  <footer class="ts-aventura-site-footer"><div class="ts-footer-grid"><section class="ts-footer-brand"><p class="ts-site-brand">TS Aventura</p><p>Outdoor experiences in Góis and the surrounding region.</p><p>Since 1999 · Góis</p><ul class="ts-footer-section"><li><a href="mailto:geral@transserrano.com">Email: geral@transserrano.com</a></li><li><a href="https://wa.me/351961787772" rel="noopener noreferrer external nofollow">WhatsApp: +351 961 787 772</a></li><li><a href="tel:+351235778938">Landline: +351 235 778 938</a></li></ul></section><nav class="ts-footer-section" aria-label="Explore"><h2>Explore</h2><ul><li><a href="/en/activities/">Activities</a></li><li><a href="/en/for/groups/">Groups</a></li><li><a href="/en/for/schools/">Schools</a></li><li><a href="/en/for/companies/">Companies</a></li><li><a href="/en/about/">About us</a></li><li><a href="/en/plan/safety-insurance/">Preparation and safety</a></li><li><a href="/en/faq/">FAQ</a></li><li><a href="/en/contact/">Contact</a></li></ul></nav><nav class="ts-footer-section" aria-label="Information"><h2>Information</h2><ul><li><a href="/en/legal/privacy/">Privacy</a></li><li><a href="/en/legal/cookies/">Cookies</a></li><li><a href="/en/legal/accessibility/">Accessibility</a></li><li><a href="/en/legal/terms-conditions/">Terms</a></li></ul><nav class="ts-language-switcher" aria-label="Footer language"><ul><li><a href="/para-quem/escolas/" lang="pt-PT" hreflang="pt-PT" aria-label="Português">PT</a></li><li><a href="/en/for/schools/" lang="en" hreflang="en" aria-label="English" aria-current="page">EN</a></li></ul></nav></nav></div><p class="ts-footer-note">Contact the team to plan your experience.</p></footer>
+<script src="/wp-content/themes/ts-aventura/assets/js/navigation.js" defer></script>
 </body>
 </html>
