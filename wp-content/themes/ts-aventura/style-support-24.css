@@ -112,7 +112,7 @@ a { text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
 .ts-media-slot::before { background: repeating-radial-gradient(circle at 75% 30%, transparent 0px, transparent 19px, rgba(23, 61, 43, 0.16) 20px, rgba(23, 61, 43, 0.16) 21px); inset: -20% -10% 0px 15%; }
 .ts-media-slot::after { background: var(--wp--preset--color--forest-700, #285c40); border-radius: 55% 45% 0px 0px; bottom: -16%; height: 58%; left: -8%; transform: rotate(4deg); width: 80%; }
 
-
+.ts-media-slot--river { background: linear-gradient(155deg, rgba(255, 255, 255, 0.18), transparent 38%), linear-gradient(145deg, rgb(11, 97, 112), rgb(40, 92, 64) 62%, rgb(100, 122, 50)); }
 
 
 
@@ -401,8 +401,8 @@ a { text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
 
 
 .ts-media-slot::before, .ts-media-slot::after { display: none; }
-
-
+.svh-synthetic-media { height: 100%; inset: 0px; object-fit: cover; position: absolute; width: 100%; }
+.svh-territory-mark { bottom: 1rem; color: rgba(255, 255, 255, 0.82); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; position: absolute; right: 1rem; z-index: 3; }
 
 
 
