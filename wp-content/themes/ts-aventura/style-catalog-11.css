@@ -293,7 +293,7 @@ a { text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
 
 
 .ts-page-lead { max-width: 52rem; }
-
+.ts-content-section { margin-block: clamp(2rem, 6vw, 4rem); max-width: 52rem; }
 
 
 
@@ -732,7 +732,7 @@ html { accent-color: var(--ts-system-action); scrollbar-color: var(--ts-system-a
 @media print {.ts-aventura-site-header, .ts-site-header, .ts-aventura-site-footer, .ts-breadcrumbs, .ts-activity-actions, .ts-activity-cta, .ts-related, .ts-navigation, .ts-mobile-menu { display: none !important; }
 .ts-activity-cover, .ts-section, .ts-activity-story, .ts-content-section, .ts-activity-practical-card, .ts-water-walking-truth { background: rgb(255, 255, 255) !important; color: rgb(17, 17, 17) !important; }
 
-
+.ts-activity-cover__media, .ts-gallery, .ts-water-walking-truth section, .ts-content-section, .ts-activity-programme { break-inside: avoid; }
 details > :not(summary) { display: block !important; }
 a { text-decoration: underline; color: rgb(17, 17, 17) !important; }}
 
