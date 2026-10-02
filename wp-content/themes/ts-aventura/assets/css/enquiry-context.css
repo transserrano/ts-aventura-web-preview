@@ -1,5 +1,7 @@
 /* Native fragments retain curated audience context without collecting data. */
 .ts-contact-context-variant,.ts-activity-audience-context,[data-contact-audience]{display:none}
+/* Beat the activity button display rules without hiding the selected fragment. */
+body :is(.ts-river-page,.ts-activity-page) [data-contact-audience]{display:none}
 .ts-contact-context-variant:target,.ts-activity-audience-context:target{display:block}
 body:has(.ts-contact-context-variant:target) .ts-contact-context-default,
 body:has(.ts-activity-audience-context:target) [data-contact-default]{display:none}
