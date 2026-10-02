@@ -1,0 +1,14 @@
+/* Native fragments retain curated audience context without collecting data. */
+.ts-contact-context-variant,.ts-activity-audience-context,[data-contact-audience]{display:none}
+.ts-contact-context-variant:target,.ts-activity-audience-context:target{display:block}
+body:has(.ts-contact-context-variant:target) .ts-contact-context-default,
+body:has(.ts-activity-audience-context:target) [data-contact-default]{display:none}
+body:has(#audience-groups:target) [data-contact-audience=groups],
+body:has(#audience-schools:target) [data-contact-audience=schools],
+body:has(#audience-companies:target) [data-contact-audience=companies],
+body:has(#audience-families:target) [data-contact-audience=families]{display:inline-flex}
+.ts-activity-audience-context{padding:1rem 0;border-block-end:1px solid var(--wp--preset--color--neutral-200,#d8e0e1);scroll-margin-top:6rem}
+.ts-contact-context-variant{scroll-margin-top:6rem}
+.ts-contact-context-controls{margin-block:1.5rem}
+.ts-contact-context-controls li{margin-block:.75rem}
+.ts-contact-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem}

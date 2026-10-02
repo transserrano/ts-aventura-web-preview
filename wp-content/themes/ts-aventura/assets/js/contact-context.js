@@ -34,7 +34,11 @@
   if (activitySelect) activitySelect.value = selectedOption?.value ?? '';
   preview.dataset.selectedActivityId = selectedOption?.value ?? '';
 
-  if (audienceValue && audiences.has(audienceValue)) preview.dataset.prefillAudience = audienceValue;
+  if (params.has('audience')) preview.dataset.prefillAudience = audienceValue && audiences.has(audienceValue) ? audienceValue : 'general';
+  else {
+    const nativeAudience = /^#request-(groups|schools|companies|families)$/.exec(location.hash)?.[1];
+    if (nativeAudience) preview.dataset.prefillAudience = nativeAudience;
+  }
   if (sourceValue && sources.has(sourceValue)) preview.dataset.prefillSource = sourceValue;
 
   // Locale comes from the active PT/EN route, never from a query-string hint.
@@ -54,12 +58,41 @@
 
   // Context is exclusively a curated activity/audience label, never raw URL input or personal details.
   if (preview.hasAttribute('data-public-contact')) {
+    const nativeAudience = ['groups','schools','companies','families'].includes(preview.dataset.prefillAudience) ? preview.dataset.prefillAudience : null;
+    const fragment = nativeAudience ? `#request-${nativeAudience}` : '#request';
+    if (location.hash !== fragment) history.replaceState(null, '', location.pathname + location.search + fragment);
     const en = locale === 'en';
     const label = summary.join(' · ').replace(/[\r\n\x00-\x1f]/g, ' ').slice(0, 360);
     const subject = `${en ? 'Activity enquiry' : 'Pedido de informação'}${label ? ` — ${label}` : ''}`;
     const body = en ? `Hello, I would like information${label ? ` about ${label}` : ' about your activities'}.\nPreferred date and group size: ` : `Olá, gostaria de informações${label ? ` sobre ${label}` : ' sobre as vossas atividades'}.\nData pretendida e número de participantes: `;
     preview.querySelector('[data-context-channel="email"]')?.setAttribute('href', `mailto:geral@transserrano.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
     preview.querySelector('[data-context-channel="whatsapp"]')?.setAttribute('href', `https://wa.me/351961787772?text=${encodeURIComponent(body)}`);
+    for (const variant of preview.querySelectorAll('[data-native-audience]')) {
+      const name = audienceLabels[variant.dataset.nativeAudience];
+      const variantLabel = [selectedOption?.textContent?.trim(),name].filter(Boolean).join(' · ');
+      const message = en ? `Hello, I would like information about ${variantLabel}.\nPreferred date and group size: ` : `Olá, gostaria de informações sobre ${variantLabel}.\nData pretendida e número de participantes: `;
+      variant.querySelector('[data-enquiry-context]').textContent = variantLabel;
+      variant.querySelector('[data-context-channel="email"]').setAttribute('href', `mailto:geral@transserrano.com?subject=${encodeURIComponent(`${en?'Activity enquiry':'Pedido de informação'} — ${variantLabel}`)}&body=${encodeURIComponent(message)}`);
+      variant.querySelector('[data-context-channel="whatsapp"]').setAttribute('href', `https://wa.me/351961787772?text=${encodeURIComponent(message)}`);
+    }
+    // Native links remain usable without JS; validated query context enhances them.
+    for (const link of preview.querySelectorAll('[data-contact-activity-choice], [data-contact-audience-choice]')) {
+      const target = new URL(link.getAttribute('href'), window.location.href);
+      if (target.origin !== location.origin) continue;
+      const activityChoice = link.hasAttribute('data-contact-activity-choice');
+      const option = activityChoice ? activityOptions.find(item => item.value === target.searchParams.get('activity_id')) : selectedOption;
+      const nextAudience = activityChoice ? preview.dataset.prefillAudience : target.searchParams.get('audience');
+      const audience = audiences.has(nextAudience) ? nextAudience : 'general';
+      const slug = locale === 'en' ? option?.dataset.slugEn : option?.dataset.slugPt;
+      target.pathname = (locale === 'en' ? '/en/contact/' : '/contactos/') + (slug ? `${slug}/` : '');
+      target.search = '';
+      if (option && slug) { target.searchParams.set('activity_id', option.value); target.searchParams.set('activity', slug); }
+      target.searchParams.set('locale', locale);
+      target.searchParams.set('audience', audience);
+      target.searchParams.set('source', sources.has(preview.dataset.prefillSource) ? preview.dataset.prefillSource : 'other');
+      target.hash = ['groups','schools','companies','families'].includes(audience) ? `request-${audience}` : 'request';
+      link.setAttribute('href', `${target.pathname}${target.search}${target.hash}`);
+    }
   }
 
   // Rebuild the language links from safe context, never copying the query.
@@ -86,7 +119,7 @@
     target.searchParams.set('audience', audiences.has(preview.dataset.prefillAudience) ? preview.dataset.prefillAudience : 'general');
     target.searchParams.set('source', sources.has(preview.dataset.prefillSource) ? preview.dataset.prefillSource : 'other');
     target.searchParams.set('locale', targetLocale);
-    target.hash = 'request';
+    target.hash = ['groups','schools','companies','families'].includes(preview.dataset.prefillAudience) ? `request-${preview.dataset.prefillAudience}` : 'request';
     link.setAttribute('href', `${target.pathname}${target.search}${target.hash}`);
   }
 

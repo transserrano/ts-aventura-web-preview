@@ -4,7 +4,9 @@
 
   // Carry only a curated audience through an activity, never arbitrary URL data.
   const audienceParams = new URLSearchParams(location.search);
-  const audience = audienceParams.getAll('audience').length === 1 ? audienceParams.get('audience') : null;
+  const audience = audienceParams.has('audience')
+    ? audienceParams.getAll('audience').length === 1 ? audienceParams.get('audience') : null
+    : /^#audience-(groups|schools|companies|families)$/.exec(location.hash)?.[1];
   if (['groups', 'schools', 'companies', 'families'].includes(audience)) {
     for (const link of document.querySelectorAll('main a[href*="activity_id="], .ts-language-switcher a[hreflang]')) {
       const target = new URL(link.getAttribute('href'), location.origin);
@@ -12,7 +14,10 @@
       if (/^\/(?:en\/)?(?:activities|atividades)\/.+/.test(target.pathname)
           || (/\/(?:contact|contactos)\//.test(target.pathname) && target.searchParams.has('activity_id'))) {
         target.searchParams.set('audience', audience);
-        if (target.searchParams.has('activity_id')) target.searchParams.set('source', audience === 'families' ? 'catalog' : audience);
+        if (target.searchParams.has('activity_id')) {
+          target.searchParams.set('source', audience === 'families' ? 'catalog' : audience);
+          target.hash = `request-${audience}`;
+        } else target.hash = `audience-${audience}`;
         link.setAttribute('href', target.pathname + target.search + target.hash);
       }
     }
