@@ -2,6 +2,36 @@
   'use strict';
   if (navigator.connection?.saveData || window.matchMedia('(prefers-reduced-data: reduce)').matches) document.documentElement.dataset.tsReducedData = '';
 
+  // Native fragments filter without JS; enhancement adds announcements and
+  // preserves that same allowlisted choice when following the equivalent locale.
+  const catalogueChoices = [...document.querySelectorAll('[data-catalog-filter]')];
+  if (catalogueChoices.length) {
+    const syncCatalogueChoice = () => {
+      const selected = catalogueChoices.find(link => link.getAttribute('href') === location.hash);
+      for (const link of catalogueChoices) {
+        if (link === selected) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+      const cards = selected
+        ? document.querySelectorAll(`${selected.getAttribute('href')} [data-discovery-category]`)
+        : document.querySelectorAll('[data-discovery-category]');
+      const status = document.querySelector('[data-catalog-summary]');
+      if (status) {
+        status.hidden = false;
+        status.textContent = `${cards.length} ${document.documentElement.lang === 'en' ? 'activities' : 'atividades'}`;
+      }
+      for (const link of document.querySelectorAll('a[hreflang]')) {
+        const target = new URL(link.getAttribute('href'), location.origin);
+        if (target.origin === location.origin && ['/atividades/', '/en/activities/'].includes(target.pathname)) {
+          target.hash = selected ? selected.getAttribute('href') : '';
+          link.setAttribute('href', target.pathname + target.search + target.hash);
+        }
+      }
+    };
+    syncCatalogueChoice();
+    window.addEventListener('hashchange', syncCatalogueChoice);
+  }
+
   const menu = document.querySelector('.ts-mobile-menu');
   if (!(menu instanceof HTMLDetailsElement)) {
     return;

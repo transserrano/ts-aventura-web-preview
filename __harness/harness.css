@@ -571,7 +571,10 @@ body:has(#catalog-equipa:target) .ts-catalog-discovery-nav [href="#catalog-equip
 }
 
 .svh-catalog-photos {
-  min-height: 10rem;
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: .5rem;
+  min-height: 0;
   max-width: 340px;
   justify-self: end;
   width: 100%;
@@ -580,35 +583,20 @@ body:has(#catalog-equipa:target) .ts-catalog-discovery-nav [href="#catalog-equip
 
 .svh-catalog-photos .ts-media-slot {
   border-radius: 0.75rem;
-  box-shadow: 0 1.2rem 3rem rgb(23 33 27 / 16%);
+  box-shadow: none;
 }
 
 .svh-catalog-photos__primary {
   aspect-ratio: 4 / 3;
-  height: 10rem;
-  left: 0;
-  top: 0;
-  width: 82%;
-}
-
-.svh-catalog-photos__secondary {
-  aspect-ratio: 4 / 3;
-  border: 0.3rem solid var(--wp--preset--color--sand-100);
-  bottom: 0;
-  height: 30%;
-  position: absolute;
-  right: 0;
-  width: 38%;
-  z-index: 3;
+  height: auto;
+  position: relative;
+  width: 100%;
 }
 
 .svh-catalog-photos [data-media-id="media72-108"] .ts-approved-media img {
   object-position: 50% 56%;
 }
 
-.svh-catalog-photos [data-media-id="media72-092"] .ts-approved-media img {
-  object-position: 54% 58%;
-}
 
 .ts-catalog-intro {
   align-items: center;
@@ -942,18 +930,14 @@ body:has(#catalog-equipa:target) .ts-catalog-discovery-nav [href="#catalog-equip
   }
 
   .svh-catalog-photos__primary {
-    aspect-ratio: 3 / 1;
+    aspect-ratio: 4 / 3;
     height: auto;
     left: auto;
-    max-height: 4rem;
     position: relative;
     top: auto;
     width: 100%;
   }
 
-  .svh-catalog-photos__secondary {
-    display: none;
-  }
 
   .ts-catalog-intro {
     gap: 0.35rem;
