@@ -60,7 +60,9 @@
   if (preview.hasAttribute('data-public-contact')) {
     const nativeAudience = ['groups','schools','companies','families'].includes(preview.dataset.prefillAudience) ? preview.dataset.prefillAudience : null;
     const fragment = nativeAudience ? `#request-${nativeAudience}` : '#request';
-    if (location.hash !== fragment) history.replaceState(null, '', location.pathname + location.search + fragment);
+    // Bare contact navigation must not gain a fragment during first paint.
+    // Preserve intentional anchored/audience journeys without causing an unsolicited scroll.
+    if ((location.hash || nativeAudience) && location.hash !== fragment) history.replaceState(null, '', location.pathname + location.search + fragment);
     const en = locale === 'en';
     const label = summary.join(' · ').replace(/[\r\n\x00-\x1f]/g, ' ').slice(0, 360);
     const subject = `${en ? 'Activity enquiry' : 'Pedido de informação'}${label ? ` — ${label}` : ''}`;
