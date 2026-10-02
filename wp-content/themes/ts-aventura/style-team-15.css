@@ -715,6 +715,7 @@ html { accent-color: var(--ts-system-action); scrollbar-color: var(--ts-system-a
 @media (prefers-reduced-motion: reduce) {.ts-mobile-menu[open] .ts-mobile-menu__panel, body.home .ts-hero-art { animation: auto ease 0s 1 normal none running none; }
 .ts-card, .ts-audience-card, .ts-activity-practical-card, .ts-card :where(img, .ts-approved-media img), .wp-block-button__link, .wp-element-button, .ts-navigation-cta, .ts-mobile-menu__toggle { transition: none; }
 .ts-card:hover, .ts-card:focus-within, .ts-audience-card:hover, .ts-audience-card:focus-within, .ts-card:hover :where(img, .ts-approved-media img), .ts-card:focus-within :where(img, .ts-approved-media img) { transform: none; }}
+
 .ts-mobile-menu__panel { max-height: calc(100dvh - 90px); overflow: auto; inset-inline: auto 0px; }
 .ts-mobile-menu__label--open, .ts-mobile-menu[open] .ts-mobile-menu__label--closed { display: none; }
 .ts-mobile-menu[open] .ts-mobile-menu__label--open { display: inline; }

@@ -2299,7 +2299,6 @@ a {
 	}
 }
 
-/* Adventure editorial direction — approved working system, 2026-09-25. */
 :root {
 	--ts-editorial-rule: 1px solid rgb(23 33 27 / 24%);
 	--ts-editorial-display: var(--wp--preset--font-family--editorial-display, "Segoe UI Variable Display", "Aptos Display", system-ui, -apple-system, "Segoe UI", sans-serif);
@@ -3072,7 +3071,6 @@ a {
 	}
 }
 
-/* Global shell: one localized source of routes, with a no-JavaScript mobile disclosure. */
 .ts-skip-link {
 	background: var(--wp--preset--color--forest-900, #173d2b);
 	border-radius: var(--ts-radius-control);
@@ -3458,7 +3456,6 @@ a {
 	}
 }
 
-/* Homepage refinement: let the landscape support the story without delaying it. */
 .ts-hero {
 	min-height: min(680px, calc(100svh - 104px));
 	padding-block: clamp(3rem, 5vw, 4.75rem);
@@ -3599,7 +3596,6 @@ a {
 	}
 }
 
-/* Static and WordPress cards share compact editorial arrows and clear intro points. */
 .ts-editorial-link__arrow {
 	block-size: 1em;
 	flex: 0 0 1em;
@@ -3617,7 +3613,6 @@ a {
 	padding: 0;
 }
 
-/* V3 concept A: photography leads; brand colour is reserved for useful signals. */
 :root {
 	--ts-a-ink: var(--wp--preset--color--ink-900, #17211b);
 	--ts-a-muted: var(--wp--preset--color--ink-600, #4d5a52);
@@ -3976,7 +3971,6 @@ body,
 	}
 }
 
-/* V3 expressive system — photo-first, bright surfaces, functional brand accents. */
 :root {
 	--ts-system-ink: var(--wp--custom--color--semantic--text, #17211b);
 	--ts-system-muted: var(--wp--custom--color--semantic--text-muted, #4d5a52);
@@ -4106,7 +4100,6 @@ html {
 	}
 }
 
-/* One restrained authored entrance: the real homepage hero image, never its content. */
 @media (prefers-reduced-motion: no-preference) {
 	body.home .ts-hero-art {
 		animation: ts-home-photo-arrive 720ms var(--ts-motion-enter) both;
@@ -4398,7 +4391,7 @@ html {
 	}
 }
 
-/* Shared navigation and footer refinements. */
+.ts-primary-navigation a[aria-current="page"] { color: var(--ts-system-action); text-decoration: underline; text-underline-offset: 0.3em; font-weight: 700; }
 .ts-mobile-menu__panel{max-height:calc(100dvh - 90px);overflow:auto;inset-inline-start:auto;inset-inline-end:0}
 .ts-mobile-menu__label--open,.ts-mobile-menu[open] .ts-mobile-menu__label--closed{display:none}
 .ts-mobile-menu[open] .ts-mobile-menu__label--open{display:inline}
