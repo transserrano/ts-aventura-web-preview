@@ -1,0 +1,29 @@
+/* Activity photography: native links and an optional first-party dialog. */
+.ts-activity-gallery { margin-block: clamp(2.5rem, 6vw, 5rem); }
+.ts-activity-gallery__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), min(100%, 30rem))); gap: 1.25rem; }
+.ts-activity-gallery__item { min-width: 0; margin: 0; }
+.ts-activity-gallery__photo { position: relative; display: block; overflow: hidden; border-radius: .5rem; }
+.ts-activity-gallery__photo picture { display: block; }
+.ts-activity-gallery__photo img { display: block; width: 100%; height: auto; }
+.ts-activity-gallery__open { position: absolute; right: .75rem; bottom: .75rem; padding: .5rem .75rem; border-radius: .25rem; background: #173d2b; color: #fff; font-size: .875rem; }
+.ts-activity-gallery__item figcaption { margin-top: .65rem; font-size: .9375rem; line-height: 1.5; }
+.ts-activity-gallery__photo:focus-visible, .ts-activity-gallery-dialog button:focus-visible { outline: 3px solid #0b6170; outline-offset: 4px; }
+.ts-activity-gallery-dialog { box-sizing: border-box; width: min(64rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); padding: 1rem; border: 0; border-radius: .5rem; background: #fbf9f4; color: #17211b; overflow: auto; }
+.ts-activity-gallery-dialog::backdrop { background: rgb(0 0 0 / .8); }
+.ts-activity-gallery-dialog__header, .ts-activity-gallery-dialog__controls, .ts-activity-gallery-dialog__description { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.ts-activity-gallery-dialog__header { margin-bottom: 1rem; }
+.ts-activity-gallery-dialog__heading { margin: 0; font-size: 1.125rem; line-height: 1.4; }
+.ts-activity-gallery-dialog button { min-height: 44px; padding: .6rem .8rem; border: 1px solid #173d2b; border-radius: .25rem; background: #173d2b; color: #fff; font: inherit; line-height: 1.3; cursor: pointer; }
+.ts-activity-gallery-dialog button[hidden] { display: none; }
+.ts-activity-gallery-dialog__figure { margin: 0; }
+.ts-activity-gallery-dialog__image { display: block; width: 100%; height: min(65dvh, 42rem); object-fit: contain; }
+.ts-activity-gallery-dialog__description { align-items: flex-start; justify-content: flex-start; margin-top: .75rem; line-height: 1.5; }
+.ts-activity-gallery-dialog__counter { flex: none; font-variant-numeric: tabular-nums; }
+.ts-activity-gallery-dialog__controls { margin-top: 1rem; }
+@media (max-width: 479px) {
+	.ts-activity-gallery-dialog { width: calc(100% - 1rem); max-height: calc(100dvh - 1rem); padding: .75rem; }
+	.ts-activity-gallery-dialog__header { align-items: flex-start; gap: .5rem; }
+	.ts-activity-gallery-dialog__heading { font-size: 1rem; }
+	.ts-activity-gallery-dialog__controls { gap: .5rem; }
+	.ts-activity-gallery-dialog__controls button { flex: 1; font-size: .875rem; }
+}
