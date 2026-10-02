@@ -336,6 +336,11 @@ h3 { font-size: var(--wp--preset--font-size--heading-3); }
   border-top: var(--ts-border);
   padding-block: 2rem;
 }
+.ts-catalog-audience-nav,.ts-activity-section-nav{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-block:1.5rem}
+.ts-catalog-audience-nav a,.ts-activity-section-nav a{display:inline-flex;align-items:center;min-height:44px;color:#0b6170;font-weight:700;text-underline-offset:.25em}
+.ts-activity-section-nav{padding-block:.75rem;border-block:1px solid #c8d5d0}
+.ts-activity-section-nav a:hover{color:#17211b}
+.ts-activity-section-nav a:focus-visible{outline:3px solid #0b6170;outline-offset:4px}
 
 .ts-catalog-choose > p {
   max-width: 65ch;
