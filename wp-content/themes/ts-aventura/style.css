@@ -4457,6 +4457,8 @@ html {
 }
 
 .ts-direct-contact li { margin-block: 0.75rem; }
+.ts-enquiry-preview[data-public-contact] { display: block; }
+.ts-enquiry-preview[data-public-contact] .wp-block-buttons { margin-block: 1.25rem; gap: 1rem; }
 .ts-direct-contact a { overflow-wrap: break-word; word-break: normal; }
 
 .ts-enquiry-preview__distinction {

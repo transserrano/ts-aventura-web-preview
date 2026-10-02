@@ -733,6 +733,8 @@ a { text-decoration: underline; color: rgb(17, 17, 17) !important; }}
 .ts-enquiry-overview { margin: 0px 0px clamp(1.5rem, 4vw, 3rem); max-width: 72rem; }
 .ts-direct-contact { list-style: none; padding: 0px; }
 .ts-direct-contact li { margin-block: 0.75rem; }
+.ts-enquiry-preview[data-public-contact] { display: block; }
+.ts-enquiry-preview[data-public-contact] .wp-block-buttons { margin-block: 1.25rem; gap: 1rem; }
 .ts-direct-contact a { overflow-wrap: break-word; word-break: normal; }
 
 .ts-enquiry-preview { background: var(--wp--preset--color--white, #fff); border: 1px solid var(--wp--preset--color--stone-300, #cec7ba); border-radius: var(--ts-radius-feature); display: grid; gap: 1.25rem; grid-template-columns: repeat(2, minmax(0px, 1fr)); margin-inline: auto; max-width: 76rem; padding: clamp(1.25rem, 3.5vw, 2.5rem); }

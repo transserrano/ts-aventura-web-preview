@@ -52,6 +52,16 @@
     : preview.hasAttribute('data-public-contact') ? (locale === 'en' ? 'We can help you choose an activity.' : 'Podemos ajudá-lo a escolher uma atividade.')
     : locale === 'en' ? 'No request details selected.' : 'Nenhum detalhe do pedido selecionado.';
 
+  // Context is exclusively a curated activity/audience label, never raw URL input or personal details.
+  if (preview.hasAttribute('data-public-contact')) {
+    const en = locale === 'en';
+    const label = summary.join(' · ').replace(/[\r\n\x00-\x1f]/g, ' ').slice(0, 360);
+    const subject = `${en ? 'Activity enquiry' : 'Pedido de informação'}${label ? ` — ${label}` : ''}`;
+    const body = en ? `Hello, I would like information${label ? ` about ${label}` : ' about your activities'}.\nPreferred date and group size: ` : `Olá, gostaria de informações${label ? ` sobre ${label}` : ' sobre as vossas atividades'}.\nData pretendida e número de participantes: `;
+    preview.querySelector('[data-context-channel="email"]')?.setAttribute('href', `mailto:geral@transserrano.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    preview.querySelector('[data-context-channel="whatsapp"]')?.setAttribute('href', `https://wa.me/351961787772?text=${encodeURIComponent(body)}`);
+  }
+
   // Rebuild the language links from safe context, never copying the query.
   for (const link of document.querySelectorAll('.ts-language-switcher a[hreflang]')) {
     const targetLocale = link.getAttribute('hreflang');
