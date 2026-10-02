@@ -2,6 +2,22 @@
   'use strict';
   if (navigator.connection?.saveData || window.matchMedia('(prefers-reduced-data: reduce)').matches) document.documentElement.dataset.tsReducedData = '';
 
+  // Carry only a curated audience through an activity, never arbitrary URL data.
+  const audienceParams = new URLSearchParams(location.search);
+  const audience = audienceParams.getAll('audience').length === 1 ? audienceParams.get('audience') : null;
+  if (['groups', 'schools', 'companies', 'families'].includes(audience)) {
+    for (const link of document.querySelectorAll('main a[href*="activity_id="], .ts-language-switcher a[hreflang]')) {
+      const target = new URL(link.getAttribute('href'), location.origin);
+      if (target.origin !== location.origin) continue;
+      if (/^\/(?:en\/)?(?:activities|atividades)\/.+/.test(target.pathname)
+          || (/\/(?:contact|contactos)\//.test(target.pathname) && target.searchParams.has('activity_id'))) {
+        target.searchParams.set('audience', audience);
+        if (target.searchParams.has('activity_id')) target.searchParams.set('source', audience === 'families' ? 'catalog' : audience);
+        link.setAttribute('href', target.pathname + target.search + target.hash);
+      }
+    }
+  }
+
   // Native fragments filter without JS; enhancement adds announcements and
   // preserves that same allowlisted choice when following the equivalent locale.
   const catalogueChoices = [...document.querySelectorAll('[data-catalog-filter]')];
