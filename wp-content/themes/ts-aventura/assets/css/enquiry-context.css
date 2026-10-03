@@ -14,3 +14,15 @@ body:has(#audience-families:target) [data-contact-audience=families]{display:inl
 .ts-contact-context-controls{margin-block:1.5rem}
 .ts-contact-context-controls li{margin-block:.75rem}
 .ts-contact-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
+.ts-preparation-context{display:none;scroll-margin-top:6rem}
+.ts-preparation-context:target{display:block;margin-block:1.5rem;padding-block:1rem;border-block:1px solid var(--wp--preset--color--sand-200)}
+.ts-preparation-choices>section{margin-block-start:2rem}
+.ts-preparation-link{margin-block:2rem}
+/* Curated composite anchors preserve selection across in-page navigation. */
+body:has([id^=audience-]:target) [data-contact-default],html[data-ts-audience] [data-contact-default]{display:none}
+body:has([id^=audience-groups]:target) [data-contact-audience=groups],html[data-ts-audience=groups] [data-contact-audience=groups],
+body:has([id^=audience-schools]:target) [data-contact-audience=schools],html[data-ts-audience=schools] [data-contact-audience=schools],
+body:has([id^=audience-companies]:target) [data-contact-audience=companies],html[data-ts-audience=companies] [data-contact-audience=companies],
+body:has([id^=audience-families]:target) [data-contact-audience=families],html[data-ts-audience=families] [data-contact-audience=families]{display:inline-flex}
+body:has([id^=audience-groups]:target) #audience-groups,body:has([id^=audience-schools]:target) #audience-schools,body:has([id^=audience-companies]:target) #audience-companies,body:has([id^=audience-families]:target) #audience-families{display:block}
+.ts-context-anchor{display:block;scroll-margin-top:6rem}

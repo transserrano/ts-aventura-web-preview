@@ -6,9 +6,10 @@
   const audienceParams = new URLSearchParams(location.search);
   const audience = audienceParams.has('audience')
     ? audienceParams.getAll('audience').length === 1 ? audienceParams.get('audience') : null
-    : /^#audience-(groups|schools|companies|families)$/.exec(location.hash)?.[1];
+    : /^#audience-(groups|schools|companies|families)(?:-[a-z0-9-]+)?$/.exec(location.hash)?.[1];
   if (['groups', 'schools', 'companies', 'families'].includes(audience)) {
-    for (const link of document.querySelectorAll('main a[href*="activity_id="], .ts-language-switcher a[hreflang]')) {
+    document.documentElement.dataset.tsAudience = audience;
+    for (const link of document.querySelectorAll('main a[href*="activity_id="], main .ts-related a, main .ts-river-choice a, .ts-language-switcher a[hreflang]')) {
       const target = new URL(link.getAttribute('href'), location.origin);
       if (target.origin !== location.origin) continue;
       if (/^\/(?:en\/)?(?:activities|atividades)\/.+/.test(target.pathname)
@@ -22,6 +23,25 @@
       }
     }
   }
+
+  // The selected preparation fragment already carries a curated equivalent.
+  // Reuse that native alternative in header/footer, never rebuild raw URL hints.
+  const syncPreparationLanguage = () => {
+    // Fragment targeting is applied after defer scripts in some engines.
+    // Select only an existing curated preparation panel, not arbitrary URL data.
+    const fragment = /^#prepare-[a-z0-9-]+$/.test(location.hash)
+      ? document.getElementById(location.hash.slice(1)) : null;
+    const preparationLanguage = fragment?.classList.contains('ts-preparation-context')
+      ? fragment.querySelector('[data-preparation-language]') : null;
+    if (!preparationLanguage) return;
+    for (const link of document.querySelectorAll('.ts-language-switcher a[hreflang]')) {
+      if (link.getAttribute('hreflang') === preparationLanguage.getAttribute('hreflang')) {
+        link.setAttribute('href', preparationLanguage.getAttribute('href'));
+      }
+    }
+  };
+  syncPreparationLanguage();
+  window.addEventListener('hashchange', syncPreparationLanguage);
 
   // Native fragments filter without JS; enhancement adds announcements and
   // preserves that same allowlisted choice when following the equivalent locale.
