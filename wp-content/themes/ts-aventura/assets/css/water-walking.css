@@ -11,4 +11,5 @@
 .ts-gallery-narrative{min-width:0}.ts-gallery-narrative h2{max-width:22ch}.ts-gallery-narrative p{margin-bottom:0}
 .ts-activity-gallery--narrative .ts-activity-gallery__grid>section:nth-of-type(2){grid-column:2;grid-row:2}
 .ts-activity-gallery--narrative .ts-activity-gallery__grid>figure:nth-of-type(2){grid-column:1;grid-row:2}
+.ts-activity-gallery--narrative .ts-activity-gallery__grid>figure:nth-of-type(n+3) img{aspect-ratio:4/3;object-fit:cover;object-position:center 65%}
 @media(max-width:782px){.ts-river-page .ts-activity-gallery--narrative .ts-activity-gallery__grid{grid-template-columns:1fr;gap:1.5rem}.ts-activity-gallery--narrative .ts-activity-gallery__grid>:is(section,figure):nth-of-type(2){grid-column:auto;grid-row:auto}}
