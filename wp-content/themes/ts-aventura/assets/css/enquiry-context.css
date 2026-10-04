@@ -18,7 +18,9 @@ body:has(#audience-families:target) [data-contact-audience=families]{display:inl
 .ts-contact-context-controls li{margin-block:.75rem}
 .ts-contact-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
 .ts-preparation-context{display:none;scroll-margin-top:6rem}
-.ts-preparation-context:target{display:block;margin-block:1.5rem;padding-block:1rem;border-block:1px solid var(--wp--preset--color--sand-200)}
+.ts-preparation-context:target{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-block:1.5rem;padding-block:1rem;border-block:1px solid var(--wp--preset--color--sand-200)}
+.ts-preparation-context>h3,.ts-preparation-context>p{flex-basis:100%;margin:0}
+.ts-preparation-context>h3{font-size:1rem;line-height:1.6;letter-spacing:normal}
 .ts-preparation-choices>section{margin-block-start:2rem}
 .ts-preparation-link{margin-block:2rem}
 /* Curated composite anchors preserve selection across in-page navigation. */
