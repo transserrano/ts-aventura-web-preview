@@ -1,7 +1,10 @@
 /* Native fragments retain curated audience context without collecting data. */
+[data-context-global]{display:contents}
+[data-context-card]{position:relative}[data-context-card-link]{position:absolute;inset:0;z-index:1}[data-context-card-link]:focus-visible{outline:3px solid var(--ts-system-action);outline-offset:3px}
+@media(max-width:64rem){[data-context-desktop-cta]{display:none}}
 .ts-contact-context-variant,.ts-activity-audience-context,[data-contact-audience]{display:none}
 /* Beat the activity button display rules without hiding the selected fragment. */
-body :is(.ts-river-page,.ts-activity-page) [data-contact-audience]{display:none}
+body [data-ts-context-surface][data-context-activity] [data-contact-audience],body [data-context-global] [data-contact-audience]{display:none}
 .ts-contact-context-variant:target,.ts-activity-audience-context:target{display:block}
 body:has(.ts-contact-context-variant:target) .ts-contact-context-default,
 body:has(.ts-activity-audience-context:target) [data-contact-default]{display:none}
@@ -19,10 +22,21 @@ body:has(#audience-families:target) [data-contact-audience=families]{display:inl
 .ts-preparation-choices>section{margin-block-start:2rem}
 .ts-preparation-link{margin-block:2rem}
 /* Curated composite anchors preserve selection across in-page navigation. */
-body:has([id^=audience-]:target) [data-contact-default],html[data-ts-audience] [data-contact-default]{display:none}
-body:has([id^=audience-groups]:target) [data-contact-audience=groups],html[data-ts-audience=groups] [data-contact-audience=groups],
-body:has([id^=audience-schools]:target) [data-contact-audience=schools],html[data-ts-audience=schools] [data-contact-audience=schools],
-body:has([id^=audience-companies]:target) [data-contact-audience=companies],html[data-ts-audience=companies] [data-contact-audience=companies],
-body:has([id^=audience-families]:target) [data-contact-audience=families],html[data-ts-audience=families] [data-contact-audience=families]{display:inline-flex}
-body:has([id^=audience-groups]:target) #audience-groups,body:has([id^=audience-schools]:target) #audience-schools,body:has([id^=audience-companies]:target) #audience-companies,body:has([id^=audience-families]:target) #audience-families{display:block}
+body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-"]:target) [data-contact-default]{display:none}
+body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-groups"]:target) [data-contact-audience=groups],
+body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-schools"]:target) [data-contact-audience=schools],
+body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-companies"]:target) [data-contact-audience=companies],
+body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-families"]:target) [data-contact-audience=families]{display:inline-flex}
+body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-groups"]:target) #audience-groups,body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-schools"]:target) #audience-schools,body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-companies"]:target) #audience-companies,body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-families"]:target) #audience-families{display:block}
 .ts-context-anchor{display:block;scroll-margin-top:6rem}
+.ts-context-selection{margin-block:1rem}.ts-context-selection summary{min-height:44px;cursor:pointer}
+.ts-context-selection nav{display:flex;flex-wrap:wrap;gap:1rem}.ts-context-selection nav a{min-height:44px;align-content:center}
+.ts-context-toolbar{display:flex;flex-wrap:wrap;align-items:start;gap:.5rem 1rem;margin-block:1rem}
+.ts-context-toolbar .ts-context-selection{margin:0}
+.ts-context-toolbar .ts-activity-audience-context{margin:0;padding:0;border:0;flex:1;min-width:10rem}
+.ts-context-toolbar .ts-activity-audience-context>p{margin:0}
+.ts-context-tools>summary{min-height:44px;cursor:pointer;align-content:center}
+body [data-context-global] [data-preparation-global]{display:none}
+body:has(.ts-preparation-context:target) [data-preparation-global-default]{display:none}
+body:has(.ts-contact-context-variant:target) [data-context-global] [data-contact-default]{display:none}
+body:has(#request-groups:target) [data-context-global] [data-contact-audience=groups],body:has(#request-schools:target) [data-context-global] [data-contact-audience=schools],body:has(#request-companies:target) [data-context-global] [data-contact-audience=companies],body:has(#request-families:target) [data-context-global] [data-contact-audience=families]{display:inline-flex}

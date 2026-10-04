@@ -3,26 +3,33 @@
   if (navigator.connection?.saveData || window.matchMedia('(prefers-reduced-data: reduce)').matches) document.documentElement.dataset.tsReducedData = '';
 
   // Carry only a curated audience through an activity, never arbitrary URL data.
-  const audienceParams = new URLSearchParams(location.search);
-  const audience = audienceParams.has('audience')
-    ? audienceParams.getAll('audience').length === 1 ? audienceParams.get('audience') : null
-    : /^#audience-(groups|schools|companies|families)(?:-[a-z0-9-]+)?$/.exec(location.hash)?.[1];
-  if (['groups', 'schools', 'companies', 'families'].includes(audience)) {
-    document.documentElement.dataset.tsAudience = audience;
-    for (const link of document.querySelectorAll('main a[href*="activity_id="], main .ts-related a, main .ts-river-choice a, .ts-language-switcher a[hreflang]')) {
-      const target = new URL(link.getAttribute('href'), location.origin);
-      if (target.origin !== location.origin) continue;
-      if (/^\/(?:en\/)?(?:activities|atividades)\/.+/.test(target.pathname)
-          || (/\/(?:contact|contactos)\//.test(target.pathname) && target.searchParams.has('activity_id'))) {
-        target.searchParams.set('audience', audience);
-        if (target.searchParams.has('activity_id')) {
-          target.searchParams.set('source', audience === 'families' ? 'catalog' : audience);
-          target.hash = `request-${audience}`;
-        } else target.hash = `audience-${audience}`;
-        link.setAttribute('href', target.pathname + target.search + target.hash);
+  let previousAudience = null;
+  const syncActivityContext = () => {
+    let fragment = document.getElementById(location.hash.slice(1));
+    if (fragment && /^(?:activity|river)-/.test(fragment.id) && previousAudience) {
+      const composite = document.getElementById(`audience-${previousAudience}-${fragment.id}`);
+      if (composite) {
+        history.replaceState(null, '', location.pathname + location.search + '#' + composite.id);
+        fragment = composite;
       }
     }
-  }
+    const audience = fragment?.matches('.ts-context-anchor,.ts-activity-audience-context')
+      ? /^audience-(groups|schools|companies|families)(?:-|$)/.exec(fragment.id)?.[1] : null;
+    previousAudience = audience ?? null;
+    delete document.documentElement.dataset.tsAudience;
+    if (audience) document.documentElement.dataset.tsAudience = audience;
+    // Diagnostic only. CSS follows :target; immutable alternatives are not rewritten.
+  };
+  syncActivityContext();
+  document.addEventListener('click', event => {
+    const link=event.target instanceof Element ? event.target.closest('a[href]') : null;
+    const href=link?.getAttribute('href');
+    if(!previousAudience || !/^#(?:activity|river)-/.test(href??'')) return;
+    const composite=document.getElementById(`audience-${previousAudience}-${href.slice(1)}`);
+    if(composite){event.preventDefault();location.hash=composite.id;}
+  });
+  window.addEventListener('hashchange', syncActivityContext);
+  window.addEventListener('popstate', () => { previousAudience = null; syncActivityContext(); });
 
   // The selected preparation fragment already carries a curated equivalent.
   // Reuse that native alternative in header/footer, never rebuild raw URL hints.
@@ -34,7 +41,10 @@
     const preparationLanguage = fragment?.classList.contains('ts-preparation-context')
       ? fragment.querySelector('[data-preparation-language]') : null;
     if (!preparationLanguage) return;
-    for (const link of document.querySelectorAll('.ts-language-switcher a[hreflang]')) {
+    // Enhance only legacy defaults. Precompiled alternatives must stay immutable,
+    // otherwise leaving a panel would retain the previous selection.
+    for (const link of document.querySelectorAll('.ts-language-switcher a[hreflang]:not([data-contact-audience]):not([data-preparation-global])')) {
+      if (link.closest('[data-context-global]')) continue;
       if (link.getAttribute('hreflang') === preparationLanguage.getAttribute('hreflang')) {
         link.setAttribute('href', preparationLanguage.getAttribute('href'));
       }

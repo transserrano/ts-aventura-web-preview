@@ -2,6 +2,9 @@
 (() => {
   const preview = document.querySelector('[data-enquiry-preview]');
   if (!preview) return;
+  const initialActivity = preview.dataset.selectedActivityId;
+  const locale = document.documentElement.lang === 'en' ? 'en' : 'pt-PT';
+  const refreshContext = () => {
 
   const audiences = new Set(['general', 'individuals', 'families', 'groups', 'schools', 'companies', 'professionals']);
   const sources = new Set(['homepage', 'catalog', 'activity', 'groups', 'schools', 'companies', 'faq', 'navigation', 'footer', 'other']);
@@ -21,7 +24,7 @@
   const hasActivityHint = params.has('activity_id') || params.has('activity');
   // The generated activity route is a trusted no-JS fallback, not query data.
   let selectedOption = hasActivityHint ? null : activityOptions.find((option) =>
-    option.dataset.activityId === 'true' && option.value === preview.dataset.selectedActivityId) ?? null;
+    option.dataset.activityId === 'true' && option.value === initialActivity) ?? null;
   const ambiguousActivity = params.getAll('activity_id').length > 1 || params.getAll('activity').length > 1;
   if (!ambiguousActivity && safeToken(activityId)) {
     const idOption = activityOptions.find((option) => option.dataset.activityId === 'true' && option.value === activityId) ?? null;
@@ -34,11 +37,10 @@
   if (activitySelect) activitySelect.value = selectedOption?.value ?? '';
   preview.dataset.selectedActivityId = selectedOption?.value ?? '';
 
-  if (params.has('audience')) preview.dataset.prefillAudience = audienceValue && audiences.has(audienceValue) ? audienceValue : 'general';
-  else {
-    const nativeAudience = /^#request-(groups|schools|companies|families)$/.exec(location.hash)?.[1];
-    if (nativeAudience) preview.dataset.prefillAudience = nativeAudience;
-  }
+  const targetPane = document.getElementById(location.hash.slice(1));
+  const nativeAudience = targetPane?.classList.contains('ts-contact-context-variant')
+    ? /^request-(groups|schools|companies|families)$/.exec(targetPane.id)?.[1] : null;
+  preview.dataset.prefillAudience = nativeAudience ?? 'general';
   if (sourceValue && sources.has(sourceValue)) preview.dataset.prefillSource = sourceValue;
 
   // Locale comes from the active PT/EN route, never from a query-string hint.
@@ -62,7 +64,7 @@
     const fragment = nativeAudience ? `#request-${nativeAudience}` : '#request';
     // Bare contact navigation must not gain a fragment during first paint.
     // Preserve intentional anchored/audience journeys without causing an unsolicited scroll.
-    if ((location.hash || nativeAudience) && location.hash !== fragment) history.replaceState(null, '', location.pathname + location.search + fragment);
+    // Unknown/query-only audiences are general; never override the curated hash.
     const en = locale === 'en';
     const label = summary.join(' · ').replace(/[\r\n\x00-\x1f]/g, ' ').slice(0, 360);
     const subject = `${en ? 'Activity enquiry' : 'Pedido de informação'}${label ? ` — ${label}` : ''}`;
@@ -78,7 +80,7 @@
       variant.querySelector('[data-context-channel="whatsapp"]').setAttribute('href', `https://wa.me/351961787772?text=${encodeURIComponent(message)}`);
     }
     // Native links remain usable without JS; validated query context enhances them.
-    for (const link of preview.querySelectorAll('[data-contact-activity-choice], [data-contact-audience-choice]')) {
+    for (const link of preview.querySelectorAll('.ts-contact-context-default [data-contact-activity-choice], .ts-contact-context-default [data-contact-audience-choice]')) {
       const target = new URL(link.getAttribute('href'), window.location.href);
       if (target.origin !== location.origin) continue;
       const activityChoice = link.hasAttribute('data-contact-activity-choice');
@@ -99,6 +101,11 @@
 
   // Rebuild the language links from safe context, never copying the query.
   for (const link of document.querySelectorAll('.ts-language-switcher a[hreflang]')) {
+    const globalContext = link.closest('[data-context-global]');
+    if ((globalContext && !hasActivityHint) || link.hasAttribute('data-context-language')) continue;
+    // Identity enhancement/rejection may change the destination, never collapse
+    // the precompiled audience alternatives to the currently visible audience.
+    const linkAudience = globalContext ? (link.getAttribute('data-contact-audience') || 'general') : preview.dataset.prefillAudience;
     const targetLocale = link.getAttribute('hreflang');
     if (!['pt-PT', 'en'].includes(targetLocale)) continue;
     const target = new URL(link.getAttribute('href'), window.location.href);
@@ -118,15 +125,19 @@
       target.searchParams.set('activity_id', selectedOption.value);
       target.searchParams.set('activity', translatedSlug);
     }
-    target.searchParams.set('audience', audiences.has(preview.dataset.prefillAudience) ? preview.dataset.prefillAudience : 'general');
+    target.searchParams.set('audience', audiences.has(linkAudience) ? linkAudience : 'general');
     target.searchParams.set('source', sources.has(preview.dataset.prefillSource) ? preview.dataset.prefillSource : 'other');
     target.searchParams.set('locale', targetLocale);
-    target.hash = ['groups','schools','companies','families'].includes(preview.dataset.prefillAudience) ? `request-${preview.dataset.prefillAudience}` : 'request';
+    target.hash = ['groups','schools','companies','families'].includes(linkAudience) ? `request-${linkAudience}` : 'request';
     link.setAttribute('href', `${target.pathname}${target.search}${target.hash}`);
   }
 
   const composition = preview.querySelector('.ts-enquiry-preview__composition');
   if (composition && ['schools', 'families'].includes(preview.dataset.prefillAudience)) composition.open = true;
+  };
+  refreshContext();
+  window.addEventListener('hashchange', refreshContext);
+  window.addEventListener('popstate', refreshContext);
 
   // Connectivity changes the explanation, never enables the form or transport.
   const status = preview.querySelector('#enquiry-preview-status');
