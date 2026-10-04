@@ -4,9 +4,13 @@
   if (!galleries.length || typeof window.HTMLDialogElement !== 'function'
     || typeof window.HTMLDialogElement.prototype.showModal !== 'function') return;
   const imageRoot = '/wp-content/themes/ts-aventura/assets/images/';
-  const ownedJpeg = value => typeof value === 'string' && value.startsWith(imageRoot)
-    && value.endsWith('.jpg') && value.slice(imageRoot.length).split('/').every(part =>
-      /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(part) && part !== '.' && part !== '..');
+  const ownedJpeg = value => {
+    if(typeof value!=='string')return false;
+    try { const url=new URL(value,location.origin);return url.origin===location.origin
+      &&url.pathname.startsWith(imageRoot)&&url.pathname.endsWith('.jpg')&&!url.search&&!url.hash
+      &&url.pathname.slice(imageRoot.length).split('/').every(part=>/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(part)&&part!=='.'&&part!=='..');
+    } catch {return false;}
+  };
   let dialog, image, caption, counter, heading, previous, next, close;
   let photos = [], current = 0, opener = null, labels, scrollStyles = [];
   const element = (tag, className, text) => {
