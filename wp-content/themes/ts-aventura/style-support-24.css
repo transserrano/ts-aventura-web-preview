@@ -259,14 +259,14 @@ a{text-decoration-thickness:0.08em;text-underline-offset:0.18em;}
 
 
 
-.ts-catalog-guidance, .ts-business-questions, .ts-partner-status{border-left:0.28rem solid var(--wp--preset--color--river-500, #2c7a82);margin-block:0px 1.5rem;padding:0.75rem 1rem;}
-
-
-.ts-partner-status{background:rgba(255, 255, 255, 0.72);border-left-color:var(--wp--preset--color--clay-500, #a64d1f);border-radius:0 var(--wp--custom--radius--control, 0.5rem) var(--wp--custom--radius--control, 0.5rem) 0;margin-top:1.5rem;}
 
 
 
-.ts-catalog-guidance p:last-child, .ts-business-questions p:last-child, .ts-partner-status p:last-child{margin-bottom:0px;}
+
+
+
+
+
 .ts-activity-facts-panel, .ts-activity-cta, .ts-contact-panel, .ts-page-cta{background:var(--wp--preset--color--white, #fff);border:var(--ts-border);border-radius:var(--ts-radius-card);box-shadow:var(--ts-shadow-card);padding:clamp(1.25rem, 3vw, 2rem);}
 
 
@@ -291,7 +291,7 @@ a{text-decoration-thickness:0.08em;text-underline-offset:0.18em;}
 
 
 
-.ts-related{border-top:var(--ts-border);margin-top:clamp(3rem, 8vw, 6rem);padding-top:clamp(2rem, 5vw, 3.5rem);}
+
 .ts-page-lead{max-width:52rem;}
 .ts-content-section{margin-block:clamp(2rem, 6vw, 4rem);max-width:52rem;}
 .ts-page-cta{background:var(--wp--preset--color--river-100, #d8edf0);margin-block:clamp(3rem, 7vw, 5rem);}
@@ -463,15 +463,15 @@ a{text-decoration-thickness:0.08em;text-underline-offset:0.18em;}
 
 
 
-.ts-tour-planning{border-block:1px solid rgba(23, 33, 27, 0.18);margin-block:clamp(2rem, 5vw, 4rem);padding-block:clamp(1.5rem, 3.5vw, 2.5rem);}
-.ts-tour-planning__heading{max-width:46rem;}
-.ts-tour-planning__heading h2{margin-block:0.35rem 0.65rem;}
-.ts-tour-planning__heading > p:last-child{color:var(--wp--preset--color--ink-600, #4d5a52);margin-bottom:0px;}
-.ts-tour-planning ul{display:grid;gap:0px;grid-template-columns:repeat(2, minmax(0px, 1fr));list-style:none;margin:clamp(1.25rem, 3vw, 2rem) 0px 0px;padding:0px;}
-.ts-tour-planning li{border-top:1px solid rgba(23, 33, 27, 0.18);display:grid;gap:0.35rem;min-width:0px;padding:1rem 1rem 1rem 0px;}
-.ts-tour-planning li:nth-child(2n){padding-inline:1rem 0px;}
-.ts-tour-planning li strong{color:var(--wp--preset--color--river-700, #0b6170);}
-.ts-tour-planning li span{color:var(--wp--preset--color--ink-700, #344139);}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -488,8 +488,8 @@ a{text-decoration-thickness:0.08em;text-underline-offset:0.18em;}
 
 
 .ts-activity-actions{grid-row:6;}
-.ts-tour-planning ul{grid-template-columns:minmax(0px, 1fr);}
-.ts-tour-planning li, .ts-tour-planning li:nth-child(2n){padding-inline:0px;}}
+
+}
 @media (max-width: 37.4375rem) {
 .ts-cover-line{align-items:flex-start;flex-wrap:wrap;}
 .ts-cover-line::before{margin-top:0.45rem;width:1.6rem;}

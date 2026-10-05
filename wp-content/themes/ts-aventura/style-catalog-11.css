@@ -38,7 +38,7 @@ a{text-decoration-thickness:0.08em;text-underline-offset:0.18em;}
 
 
 
-.ts-section{padding-block:var(--ts-section-space);}
+
 
 
 
@@ -521,7 +521,7 @@ a{text-decoration-thickness:0.08em;text-underline-offset:0.18em;}
 .ts-primary-navigation--desktop ul{flex-wrap:nowrap;gap:clamp(0.45rem, 1.05vw, 1rem);justify-content:flex-end;list-style:none;margin:0px;padding:0px;}
 .ts-primary-navigation--desktop a, .ts-primary-navigation--desktop a:visited, .ts-mobile-menu .ts-primary-navigation a, .ts-mobile-menu .ts-primary-navigation a:visited{align-items:center;color:var(--wp--preset--color--ink-900, #17211b);display:inline-flex;font-size:0.86rem;font-weight:690;justify-content:center;min-height:44px;padding-inline:0.16rem;text-decoration-color:transparent;text-decoration-line:underline;text-underline-offset:0.28em;}
 .ts-primary-navigation--desktop a:hover, .ts-mobile-menu .ts-primary-navigation a:hover{color:var(--wp--preset--color--river-700, #0b6170);text-decoration-color:currentcolor;}
-.ts-primary-navigation--desktop a[aria-current="page"], .ts-mobile-menu .ts-primary-navigation a[aria-current="page"]{color:var(--wp--preset--color--forest-900, #173d2b);font-weight:800;text-decoration-color:var(--wp--preset--color--ember-700, #b44712);text-decoration-thickness:0.15em;}
+
 .ts-navigation-utilities--desktop{flex:0 0 auto;gap:0.75rem;}
 .ts-navigation-utilities--desktop .ts-language-switcher ul, .ts-mobile-menu__panel .ts-language-switcher ul{align-items:center;display:flex;gap:0.25rem;list-style:none;margin:0px;padding:0px;}
 .ts-navigation-utilities--desktop .ts-language-switcher a, .ts-navigation-utilities--desktop .ts-language-switcher a:visited{align-items:center;color:var(--wp--preset--color--forest-900, #173d2b);display:inline-flex;font-size:0.82rem;font-weight:730;justify-content:center;min-height:44px;min-width:44px;padding-inline:0.25rem;}
@@ -542,7 +542,7 @@ a{text-decoration-thickness:0.08em;text-underline-offset:0.18em;}
 .ts-mobile-menu .ts-primary-navigation ul{align-items:stretch;flex-direction:column;gap:0px;list-style:none;margin:0px;padding:0px;}
 .ts-mobile-menu .ts-primary-navigation li{border-bottom:1px solid rgba(255, 255, 255, 0.22);width:100%;}
 .ts-mobile-menu .ts-primary-navigation a, .ts-mobile-menu .ts-primary-navigation a:visited{color:var(--wp--preset--color--white, #fff);font-size:1.08rem;justify-content:flex-start;min-height:50px;padding-inline:0.25rem;text-decoration-color:transparent;width:100%;}
-.ts-mobile-menu .ts-primary-navigation a[aria-current="page"]{color:var(--wp--preset--color--river-100, #d8edf0);text-decoration-color:var(--wp--preset--color--ember-700, #b44712);}
+
 .ts-mobile-menu .ts-language-switcher{border-top:1px solid rgba(255, 255, 255, 0.26);padding-top:0.75rem;}
 .ts-mobile-menu .ts-language-switcher a, .ts-mobile-menu .ts-language-switcher a:visited{align-items:center;color:var(--wp--preset--color--white, #fff);display:inline-flex;font-weight:730;justify-content:center;min-height:48px;min-width:48px;padding-inline:0.5rem;}
 .ts-mobile-menu .ts-navigation-cta, .ts-mobile-menu .ts-navigation-cta:visited{align-self:stretch;background:var(--wp--preset--color--ember-700, #b44712);border-color:var(--wp--preset--color--white, #fff);color:var(--wp--preset--color--white, #fff);min-height:50px;}
@@ -711,7 +711,7 @@ html{accent-color:var(--ts-system-action);scrollbar-color:var(--ts-system-action
 @media (prefers-reduced-motion: reduce) {.ts-mobile-menu[open] .ts-mobile-menu__panel, body.home .ts-hero-art{animation:auto ease 0s 1 normal none running none;}
 .ts-card, .ts-audience-card, .ts-activity-practical-card, .ts-card :where(img, .ts-approved-media img), .wp-block-button__link, .wp-element-button, .ts-navigation-cta, .ts-mobile-menu__toggle{transition:none;}
 }
-.ts-primary-navigation a[aria-current="page"]{color:var(--ts-system-action);text-decoration:underline;text-underline-offset:0.3em;font-weight:700;}
+
 .ts-mobile-menu__panel{max-height:calc(100dvh - 90px);overflow:auto;inset-inline:auto 0px;}
 .ts-mobile-menu__label--open, .ts-mobile-menu[open] .ts-mobile-menu__label--closed{display:none;}
 .ts-mobile-menu[open] .ts-mobile-menu__label--open{display:inline;}
@@ -726,7 +726,7 @@ html{accent-color:var(--ts-system-action);scrollbar-color:var(--ts-system-action
 .ts-footer-brand{grid-column:auto;}}
 @page { margin: 1.5cm; }
 @media print {.ts-aventura-site-header, .ts-site-header, .ts-aventura-site-footer, .ts-breadcrumbs, .ts-activity-actions, .ts-activity-cta, .ts-related, .ts-navigation, .ts-mobile-menu{display:none !important;}
-.ts-activity-cover, .ts-section, .ts-activity-story, .ts-content-section, .ts-activity-practical-card, .ts-water-walking-truth{background:rgb(255, 255, 255) !important;color:rgb(17, 17, 17) !important;}
+
 
 
 details > :not(summary){display:block !important;}

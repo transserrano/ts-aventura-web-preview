@@ -15,6 +15,8 @@
     const stop = () => { clearTimeout(timer); timer = null; };
     const show = (next, announce = false) => {
       index = (next + slides.length) % slides.length;
+      const template = slides[index].querySelector('[data-photo-template]');
+      if (template) { template.replaceWith(template.content.cloneNode(true)); }
       slides.forEach((slide, i) => { slide.hidden = i !== index; });
       status.textContent = announce ? `${index + 1} / ${slides.length}` : '';
     };
@@ -35,8 +37,24 @@
     updateLabel(); schedule();
   }
   for (const menu of document.querySelectorAll('[data-product-menu]')) {
+    menu.addEventListener('toggle', event => { const family=event.target; if(family.open){ const template=family.querySelector(':scope > [data-menu-links]'); if(template)template.replaceWith(template.content.cloneNode(true)); } },true);
     menu.addEventListener('keydown', event => { if (event.key === 'Escape') { menu.open = false; menu.querySelector('summary').focus(); event.stopPropagation(); } });
     menu.addEventListener('click', event => { if (event.target.closest('a')) menu.open = false; });
+  }
+  for (const catalog of document.querySelectorAll('[data-product-catalog]')) {
+    const sections = [...catalog.querySelectorAll('[data-product-family]')];
+    const filters = [...catalog.querySelectorAll('[data-product-filter]')];
+    const filter = id => {
+      if (id !== 'all' && !sections.some(s => s.dataset.productFamily === id)) id = 'all';
+      sections.forEach(s => { s.hidden = id !== 'all' && s.dataset.productFamily !== id; });
+      filters.forEach(a => a.setAttribute('aria-current', String(a.dataset.productFilter === id)));
+      const count = sections.filter(s => !s.hidden).reduce((n,s) => n + s.querySelectorAll('.ts95-card').length,0);
+      catalog.querySelector('[data-product-count]').textContent = `${count} ${en ? 'experiences' : 'experiências'}`;
+      catalog.querySelector('[data-product-empty]').hidden = count !== 0;
+    };
+    filters.forEach(a => a.addEventListener('click', event => { event.preventDefault(); filter(a.dataset.productFilter); history.replaceState(null,'',a.hash || location.pathname); }));
+    filter(location.hash.replace('#family-','') || 'all');
+    addEventListener('hashchange', () => filter(location.hash.replace('#family-','') || 'all'));
   }
   for (const button of document.querySelectorAll('[data-video-id]')) {
     button.addEventListener('click', () => {

@@ -99,8 +99,12 @@
       : { close: 'Fechar fotografias', previous: 'Fotografia anterior', next: 'Fotografia seguinte', navigation: 'Navegação das fotografias', title: 'Fotografias da atividade' };
     heading.textContent = gallery.dataset.galleryTitle || labels.title;
     close.textContent = labels.close;
-    previous.textContent = `← ${labels.previous}`;
-    next.textContent = `${labels.next} →`;
+    for(const [button,label,path] of [[previous,labels.previous,'m12 19-7-7 7-7M5 12h14'],[next,labels.next,'m12 5 7 7-7 7M5 12h14']]){
+      const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      for(const [name,value] of Object.entries({viewBox:'0 0 24 24',width:'20',height:'20',fill:'none',stroke:'currentColor','stroke-width':'2','aria-hidden':'true'}))svg.setAttribute(name,value);
+      const mark=document.createElementNS('http://www.w3.org/2000/svg','path');mark.setAttribute('d',path);svg.append(mark);
+      button.replaceChildren(svg,document.createTextNode(' '+label));
+    }
     previous.parentElement.setAttribute('aria-label', labels.navigation);
     previous.hidden = next.hidden = links.length < 2;
     photos = links.map(node => ({ href: node.getAttribute('href'), alt: node.dataset.galleryAlt || node.querySelector('img')?.alt || '', caption: node.dataset.galleryCaption || '' }));

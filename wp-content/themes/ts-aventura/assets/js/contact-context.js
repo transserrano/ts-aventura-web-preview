@@ -13,7 +13,7 @@
     && value.length <= 80
     && /^[a-z0-9][a-z0-9._-]*$/i.test(value);
   const params = new URLSearchParams(window.location.search);
-  // Reject ambiguous repeated keys. Read only the four non-personal hints.
+  // Reject ambiguous keys; only curated identity, audience and pack interest are read.
   const unique = (key) => params.getAll(key).length === 1 ? params.get(key) : null;
   const activityId = unique('activity_id');
   const activitySlug = unique('activity');
@@ -37,20 +37,23 @@
   if (activitySelect) activitySelect.value = selectedOption?.value ?? '';
   preview.dataset.selectedActivityId = selectedOption?.value ?? '';
 
+  const interests = new Map([['pack-basico',locale==='en'?'Pack Basic':'Pack Básico'],['pack-standard','Pack Standard'],['pack-premium','Pack Premium'],['pack-deluxe','Pack Deluxe']]);
   const targetPane = document.getElementById(location.hash.slice(1));
+  const interest = interests.has(targetPane?.dataset?.nativeInterest) ? targetPane.dataset.nativeInterest : null;
   const nativeAudience = targetPane?.classList.contains('ts-contact-context-variant')
-    ? /^request-(groups|schools|companies|families)$/.exec(targetPane.id)?.[1] : null;
+    ? /^request-(groups|schools|companies|families)(?:-pack-(?:basico|standard|premium|deluxe))?$/.exec(targetPane.id)?.[1] : null;
   preview.dataset.prefillAudience = nativeAudience ?? 'general';
+  preview.dataset.prefillInterest = interest ?? '';
   if (sourceValue && sources.has(sourceValue)) preview.dataset.prefillSource = sourceValue;
 
   // Locale comes from the active PT/EN route, never from a query-string hint.
-  const locale = document.documentElement.lang === 'en' ? 'en' : 'pt-PT';
   preview.dataset.prefillLocale = locale;
   const audienceLabels = locale === 'en'
     ? { individuals: 'Individuals', families: 'Families', groups: 'Groups', schools: 'Schools', companies: 'Companies', professionals: 'Professionals' }
     : { individuals: 'Particulares', families: 'Famílias', groups: 'Grupos', schools: 'Escolas', companies: 'Empresas', professionals: 'Profissionais' };
   const summary = [
     selectedOption?.textContent?.trim(),
+    interests.get(interest),
     preview.dataset.prefillAudience !== 'general' ? audienceLabels[preview.dataset.prefillAudience] : '',
   ].filter(Boolean);
   const contextNode = preview.querySelector('[data-enquiry-context]');
@@ -73,14 +76,14 @@
     preview.querySelector('[data-context-channel="whatsapp"]')?.setAttribute('href', `https://wa.me/351961787772?text=${encodeURIComponent(body)}`);
     for (const variant of preview.querySelectorAll('[data-native-audience]')) {
       const name = audienceLabels[variant.dataset.nativeAudience];
-      const variantLabel = [selectedOption?.textContent?.trim(),name].filter(Boolean).join(' · ');
+      const variantLabel = [selectedOption?.textContent?.trim(),name,interests.get(variant.dataset.nativeInterest)].filter(Boolean).join(' · ');
       const message = en ? `Hello, I would like information about ${variantLabel}.\nPreferred date and group size: ` : `Olá, gostaria de informações sobre ${variantLabel}.\nData pretendida e número de participantes: `;
       variant.querySelector('[data-enquiry-context]').textContent = variantLabel;
       variant.querySelector('[data-context-channel="email"]').setAttribute('href', `mailto:geral@transserrano.com?subject=${encodeURIComponent(`${en?'Activity enquiry':'Pedido de informação'} — ${variantLabel}`)}&body=${encodeURIComponent(message)}`);
       variant.querySelector('[data-context-channel="whatsapp"]').setAttribute('href', `https://wa.me/351961787772?text=${encodeURIComponent(message)}`);
     }
     // Native links remain usable without JS; validated query context enhances them.
-    for (const link of preview.querySelectorAll('.ts-contact-context-default [data-contact-activity-choice], .ts-contact-context-default [data-contact-audience-choice]')) {
+    for (const link of preview.querySelectorAll('[data-contact-activity-choice], [data-contact-audience-choice]')) {
       const target = new URL(link.getAttribute('href'), window.location.href);
       if (target.origin !== location.origin) continue;
       const activityChoice = link.hasAttribute('data-contact-activity-choice');
@@ -128,7 +131,8 @@
     target.searchParams.set('audience', audiences.has(linkAudience) ? linkAudience : 'general');
     target.searchParams.set('source', sources.has(preview.dataset.prefillSource) ? preview.dataset.prefillSource : 'other');
     target.searchParams.set('locale', targetLocale);
-    target.hash = ['groups','schools','companies','families'].includes(linkAudience) ? `request-${linkAudience}` : 'request';
+    if(interest && linkAudience === 'groups')target.searchParams.set('interest',interest);
+    target.hash = ['groups','schools','companies','families'].includes(linkAudience) ? `request-${linkAudience}${interest&&linkAudience==='groups'?'-'+interest:''}` : 'request';
     link.setAttribute('href', `${target.pathname}${target.search}${target.hash}`);
   }
 

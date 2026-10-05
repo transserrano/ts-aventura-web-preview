@@ -54,11 +54,11 @@ h3{font-size:var(--wp--preset--font-size--heading-3);}
 
 
 
-.ts-catalog-audience-nav, .ts-activity-section-nav{display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;margin-block:1.5rem;}
-.ts-catalog-audience-nav a, .ts-activity-section-nav a{display:inline-flex;align-items:center;min-height:44px;color:rgb(11, 97, 112);font-weight:700;text-underline-offset:0.25em;}
-.ts-activity-section-nav{padding-block:0.75rem;border-block:1px solid rgb(200, 213, 208);}
-.ts-activity-section-nav a:hover{color:rgb(23, 33, 27);}
-.ts-activity-section-nav a:focus-visible{outline:rgb(11, 97, 112) solid 3px;outline-offset:4px;}
+
+
+
+
+
 
 
 
@@ -90,11 +90,11 @@ h3{font-size:var(--wp--preset--font-size--heading-3);}
 
 
 
-.ts-catalog-guidance, .ts-business-questions, .ts-partner-status{border-left:0.28rem solid var(--wp--preset--color--river-500);margin-block:0px 1.5rem;padding:0.75rem 1rem;}
 
-.ts-catalog-guidance p:last-child, .ts-business-questions p:last-child, .ts-partner-status p:last-child{margin-bottom:0px;}
 
-.ts-partner-status{background:rgba(255, 255, 255, 0.72);border-left-color:var(--wp--preset--color--clay-500);border-radius:0 var(--wp--custom--radius--control) var(--wp--custom--radius--control) 0;margin-top:1.5rem;}
+
+
+
 
 .svh-page-hero__grid .ts-section-heading{margin:0px;}
 .svh-page-hero__media{aspect-ratio:5 / 3;border-radius:1.2rem 4rem;}
@@ -125,7 +125,7 @@ h3{font-size:var(--wp--preset--font-size--heading-3);}
 
 .svh-editorial-note{align-self:start;border-top:0.35rem solid var(--wp--preset--color--river-700);padding-top:clamp(1.25rem, 3vw, 2rem);position:sticky;top:1rem;}
 .svh-editorial-note h2{font-family:var(--ts-editorial-display);font-size:clamp(1.7rem, 2.7vw, 2.4rem);font-weight:600;letter-spacing:-0.025em;line-height:1.1;margin:0px 0px 1rem;}
-.svh-editorial-note .ts-editorial-link{margin-top:0.75rem;}
+
 
 
 
