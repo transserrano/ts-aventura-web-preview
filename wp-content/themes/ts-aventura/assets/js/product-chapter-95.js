@@ -49,7 +49,7 @@
       sections.forEach(s => { s.hidden = id !== 'all' && s.dataset.productFamily !== id; });
       filters.forEach(a => a.setAttribute('aria-current', String(a.dataset.productFilter === id)));
       const count = sections.filter(s => !s.hidden).reduce((n,s) => n + s.querySelectorAll('.ts95-card').length,0);
-      catalog.querySelector('[data-product-count]').textContent = `${count} ${en ? 'experiences' : 'experiências'}`;
+    catalog.querySelector('[data-product-count]').textContent = `${count} ${en ? (count === 1 ? 'experience' : 'experiences') : (count === 1 ? 'experiência' : 'experiências')}`;
       catalog.querySelector('[data-product-empty]').hidden = count !== 0;
     };
     filters.forEach(a => a.addEventListener('click', event => { event.preventDefault(); filter(a.dataset.productFilter); history.replaceState(null,'',a.hash || location.pathname); }));

@@ -1359,7 +1359,7 @@ body{background:#fff}
 .ts95-photo-controls button{display:inline-flex;align-items:center;justify-content:center}
 @media(min-width:783px){
 .ts95-home-hero{background:#fff;color:var(--ts96-ink);min-height:0}
-.ts95-slides{position:relative;height:clamp(390px,31vw,540px)}
+.ts95-slides{position:relative;height:clamp(390px,42vw,780px)}
 .ts95-slides>figure::after{background:linear-gradient(0deg,#08282491,transparent 30%)}
 .ts95-home-intro{display:grid;grid-template-columns:1.1fr 1fr;gap:0 2rem;padding:1.5rem 0 2rem;pointer-events:auto}
 .ts95-home-intro h1{color:var(--ts96-ink);grid-row:1/3;margin:0;font-size:clamp(2.3rem,3.6vw,3.4rem)}
@@ -1377,6 +1377,8 @@ body{background:#fff}
 .ts95-detail .ts-activity-gallery__photo{display:block;position:relative;aspect-ratio:4/3;border:0;padding:0;overflow:hidden;border-radius:12px}
 .ts95-detail .ts-activity-gallery__photo picture{display:block;position:static;inset:auto;width:100%;height:100%}
 .ts95-detail .ts-activity-gallery__photo img{display:block;width:100%;height:100%;object-fit:cover}
+[data-product-id="activity.canoeing-alva"] .ts96-gallery figure:first-of-type{grid-column:1/-1}
+[data-product-id="activity.canoeing-alva"] .ts96-gallery figure:first-of-type .ts-activity-gallery__photo{aspect-ratio:2/1}
 .ts-audience-page .ts-card .ts-media-slot{padding:0;background:none;border:0;border-radius:12px;overflow:hidden;aspect-ratio:3/2}
 .ts-audience-page .ts-card .ts-approved-media{position:static;display:block;height:100%;width:100%}
 .ts-audience-page .ts-card .ts-approved-media img{display:block;height:100%;width:100%;object-fit:cover}
@@ -1384,4 +1386,6 @@ body{background:#fff}
 .ts96-support-body figure{margin:1.5rem 0;max-width:100%;overflow:hidden}
 .ts96-support-body figure picture{display:block;position:static;width:100%}
 .ts96-support-body figure img{display:block;width:100%;height:auto;max-width:100%;object-fit:contain}
+/* TSA97: keep mobile controls off faces; content and photographs remain visible. */
+@media(max-width:767px){.ts95-photo-controls{position:static;justify-content:flex-end;width:calc(100% - 2rem);margin:-.5rem auto .75rem}.ts95-photo-controls button{background:var(--ts96-blue)}}
 
