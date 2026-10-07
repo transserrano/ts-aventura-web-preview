@@ -38,7 +38,7 @@
   }
   for (const menu of document.querySelectorAll('[data-product-menu]')) {
     menu.addEventListener('toggle', event => { const family=event.target; if(family.open){ const template=family.querySelector(':scope > [data-menu-links]'); if(template)template.replaceWith(template.content.cloneNode(true)); } },true);
-    menu.addEventListener('keydown', event => { if (event.key === 'Escape') { menu.open = false; menu.querySelector('summary').focus(); event.stopPropagation(); } });
+    menu.addEventListener('keydown', event => { if (event.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); event.stopPropagation(); } });
     menu.addEventListener('click', event => { if (event.target.closest('a')) menu.open = false; });
   }
   for (const catalog of document.querySelectorAll('[data-product-catalog]')) {

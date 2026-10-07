@@ -37,14 +37,16 @@
   if (activitySelect) activitySelect.value = selectedOption?.value ?? '';
   preview.dataset.selectedActivityId = selectedOption?.value ?? '';
 
-  const interests = new Map([['pack-basico',locale==='en'?'Pack Basic':'Pack Básico'],['pack-standard','Pack Standard'],['pack-premium','Pack Premium'],['pack-deluxe','Pack Deluxe']]);
+  const interests = new Map([['pack-basico',locale==='en'?'Pack Basic':'Pack Básico'],['pack-standard','Pack Standard'],['pack-premium','Pack Premium'],['pack-deluxe','Pack Deluxe'],['despedidas',locale==='en'?'Stag & hen groups':'Despedidas'],['finalistas',locale==='en'?'School leavers':'Finalistas']]);
+  const interestAudience = key => key === 'finalistas' ? 'schools' : interests.has(key) ? 'groups' : null;
   const targetPane = document.getElementById(location.hash.slice(1));
-  const interest = interests.has(targetPane?.dataset?.nativeInterest) ? targetPane.dataset.nativeInterest : null;
   const nativeAudience = targetPane?.classList.contains('ts-contact-context-variant')
-    ? /^request-(groups|schools|companies|families)(?:-pack-(?:basico|standard|premium|deluxe))?$/.exec(targetPane.id)?.[1] : null;
+    ? /^request-(groups|schools|companies|families)(?:-(?:pack-(?:basico|standard|premium|deluxe)|despedidas|finalistas))?$/.exec(targetPane.id)?.[1] : null;
+  const candidateInterest=targetPane?.dataset?.nativeInterest;
+  const interest = interestAudience(candidateInterest)===nativeAudience ? candidateInterest : null;
   preview.dataset.prefillAudience = nativeAudience ?? 'general';
   preview.dataset.prefillInterest = interest ?? '';
-  if (sourceValue && sources.has(sourceValue)) preview.dataset.prefillSource = sourceValue;
+  preview.dataset.prefillSource = sourceValue && sources.has(sourceValue) ? sourceValue : 'other';
 
   // Locale comes from the active PT/EN route, never from a query-string hint.
   preview.dataset.prefillLocale = locale;
@@ -97,7 +99,9 @@
       target.searchParams.set('locale', locale);
       target.searchParams.set('audience', audience);
       target.searchParams.set('source', sources.has(preview.dataset.prefillSource) ? preview.dataset.prefillSource : 'other');
-      target.hash = ['groups','schools','companies','families'].includes(audience) ? `request-${audience}` : 'request';
+      const nextInterest=interestAudience(interest)===audience ? interest : null;
+      if(nextInterest)target.searchParams.set('interest',nextInterest);
+      target.hash = ['groups','schools','companies','families'].includes(audience) ? `request-${audience}${nextInterest?'-'+nextInterest:''}` : 'request';
       link.setAttribute('href', `${target.pathname}${target.search}${target.hash}`);
     }
   }
@@ -105,10 +109,13 @@
   // Rebuild the language links from safe context, never copying the query.
   for (const link of document.querySelectorAll('.ts-language-switcher a[hreflang]')) {
     const globalContext = link.closest('[data-context-global]');
-    if ((globalContext && !hasActivityHint) || link.hasAttribute('data-context-language')) continue;
+    if (globalContext && !hasActivityHint) continue;
     // Identity enhancement/rejection may change the destination, never collapse
     // the precompiled audience alternatives to the currently visible audience.
-    const linkAudience = globalContext ? (link.getAttribute('data-contact-audience') || 'general') : preview.dataset.prefillAudience;
+    const variant=link.closest('.ts-contact-context-variant');
+    const linkAudience = variant?.dataset?.nativeAudience ?? (globalContext ? (link.getAttribute('data-contact-audience') || 'general') : preview.dataset.prefillAudience);
+    const linkInterest=variant?.dataset?.nativeInterest ?? interest;
+    const translatedInterest=interestAudience(linkInterest)===linkAudience ? linkInterest : null;
     const targetLocale = link.getAttribute('hreflang');
     if (!['pt-PT', 'en'].includes(targetLocale)) continue;
     const target = new URL(link.getAttribute('href'), window.location.href);
@@ -131,8 +138,8 @@
     target.searchParams.set('audience', audiences.has(linkAudience) ? linkAudience : 'general');
     target.searchParams.set('source', sources.has(preview.dataset.prefillSource) ? preview.dataset.prefillSource : 'other');
     target.searchParams.set('locale', targetLocale);
-    if(interest && linkAudience === 'groups')target.searchParams.set('interest',interest);
-    target.hash = ['groups','schools','companies','families'].includes(linkAudience) ? `request-${linkAudience}${interest&&linkAudience==='groups'?'-'+interest:''}` : 'request';
+    if(translatedInterest)target.searchParams.set('interest',translatedInterest);
+    target.hash = ['groups','schools','companies','families'].includes(linkAudience) ? `request-${linkAudience}${translatedInterest?'-'+translatedInterest:''}` : 'request';
     link.setAttribute('href', `${target.pathname}${target.search}${target.hash}`);
   }
 
