@@ -306,7 +306,7 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 .ts99-detail-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--ts96-blue);text-underline-offset:0.3em;}
 
 
-
+.ts99-variants{margin-block:3rem;scroll-margin-top:6rem;}
 
 
 
