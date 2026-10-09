@@ -38,8 +38,12 @@
     // Select only an existing curated preparation panel, not arbitrary URL data.
     const fragment = /^#prepare-[a-z0-9-]+$/.test(location.hash)
       ? document.getElementById(location.hash.slice(1)) : null;
-    const preparationLanguage = fragment?.classList.contains('ts-preparation-context')
-      ? fragment.querySelector('[data-preparation-language]') : null;
+    const panel = fragment?.classList.contains('ts-preparation-context')
+      ? fragment : fragment?.closest('.ts-preparation-context');
+    const audience = fragment?.getAttribute('data-context-audience');
+    const preparationLanguage = audience
+      ? panel?.querySelector(`[data-contact-audience="${audience}"] [data-preparation-language]`)
+      : panel?.querySelector('[data-preparation-language]');
     if (!preparationLanguage) return;
     // Enhance only legacy defaults. Precompiled alternatives must stay immutable,
     // otherwise leaving a panel would retain the previous selection.

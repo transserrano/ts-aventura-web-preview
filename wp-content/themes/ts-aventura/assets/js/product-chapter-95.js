@@ -44,17 +44,50 @@
   for (const catalog of document.querySelectorAll('[data-product-catalog]')) {
     const sections = [...catalog.querySelectorAll('[data-product-family]')];
     const filters = [...catalog.querySelectorAll('[data-product-filter]')];
-    const filter = id => {
-      if (id !== 'all' && !sections.some(s => s.dataset.productFamily === id)) id = 'all';
-      sections.forEach(s => { s.hidden = id !== 'all' && s.dataset.productFamily !== id; });
-      filters.forEach(a => a.setAttribute('aria-current', String(a.dataset.productFilter === id)));
-      const count = sections.filter(s => !s.hidden).reduce((n,s) => n + s.querySelectorAll('.ts95-card').length,0);
-    catalog.querySelector('[data-product-count]').textContent = `${count} ${en ? (count === 1 ? 'experience' : 'experiences') : (count === 1 ? 'experiência' : 'experiências')}`;
+    const search = catalog.querySelector('[data-catalog-search]');
+    const clear = catalog.querySelector('[data-catalog-clear]');
+    const normalize = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase();
+    let family = 'all';
+    const update = () => {
+      const query = normalize(search.value.trim());
+      let count = 0;
+      for (const section of sections) {
+        let visible = 0;
+        for (const card of section.querySelectorAll('[data-catalog-item]')) {
+          card.hidden = !normalize(card.dataset.catalogName).includes(query);
+          if (!card.hidden) visible++;
+        }
+        section.hidden = (family !== 'all' && section.dataset.productFamily !== family) || visible === 0;
+        if (!section.hidden) count += visible;
+        for (const table of section.querySelectorAll('.ts99-compare')) table.hidden = query.length > 0;
+      }
+      filters.forEach(a => a.setAttribute('aria-current',String(a.dataset.productFilter === family)));
+      const active = filters.find(a => a.dataset.productFilter === family)?.textContent.trim();
+      catalog.querySelector('[data-product-count]').textContent = `${count} ${en ? (count === 1 ? 'experience' : 'experiences') : (count === 1 ? 'experiência' : 'experiências')} · ${active}${search.value.trim() ? ` · “${search.value.trim()}”` : ''}`;
       catalog.querySelector('[data-product-empty]').hidden = count !== 0;
+      clear.disabled = family === 'all' && !search.value;
+      for (const a of document.querySelectorAll('a[hreflang]')) {
+        const url = new URL(a.href,location.href);
+        if (['/atividades/','/en/activities/'].includes(url.pathname)) { url.search = location.search; url.hash = location.hash; a.href = url.href; }
+      }
     };
-    filters.forEach(a => a.addEventListener('click', event => { event.preventDefault(); filter(a.dataset.productFilter); history.replaceState(null,'',a.hash || location.pathname); }));
-    filter(location.hash.replace('#family-','') || 'all');
-    addEventListener('hashchange', () => filter(location.hash.replace('#family-','') || 'all'));
+    const save = push => {
+      const url = new URL(location.href);url.search = '';url.hash = family === 'all' ? '' : `family-${family}`;
+      if (search.value.trim()) url.searchParams.set('q',search.value.trim().slice(0,80));
+      history[push ? 'pushState' : 'replaceState'](null,'',url.pathname+url.search+url.hash);update();
+    };
+    const restore = () => {
+      const id = location.hash.replace('#family-','');family = sections.some(s=>s.dataset.productFamily===id) ? id : 'all';
+      search.value = (new URLSearchParams(location.search).get('q') || '').slice(0,80);update();
+    };
+    search.maxLength = 80;search.addEventListener('input',()=>save(false));
+    filters.forEach(a=>a.addEventListener('click',event=>{event.preventDefault();family=a.dataset.productFilter;save(true);}));
+    clear.addEventListener('click',()=>{family='all';search.value='';save(true);search.focus();});
+    catalog.querySelector('[data-catalog-tools]').hidden = false;
+    addEventListener('popstate',restore);addEventListener('hashchange',restore);restore();
+  }
+  for (const comparison of document.querySelectorAll('.ts99-compare')) {
+    comparison.addEventListener('toggle',()=>{if(comparison.open){const template=comparison.querySelector('[data-compare-table]');if(template)template.replaceWith(template.content.cloneNode(true));}});
   }
   for (const button of document.querySelectorAll('[data-video-id]')) {
     button.addEventListener('click', () => {
@@ -70,4 +103,78 @@
       frame.focus();
     }, {once: true});
   }
+  for (const library of document.querySelectorAll('[data-document-library]')) {
+    const tools = library.querySelector('[data-document-tools]');
+    const search = library.querySelector('[data-document-search]');
+    const filters = [...library.querySelectorAll('[data-document-filter]')];
+    const entries = [...library.querySelectorAll('[data-document-entry]')];
+    const normalize = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase();
+    let language = 'all';
+    const update = () => {
+      const query = normalize(search.value.trim());
+      let count = 0;
+      for (const entry of entries) {
+        const nameMatches = normalize(entry.querySelector('h2').textContent).includes(query);
+        let hasLanguage = false;
+        for (const link of entry.querySelectorAll('[data-document-languages]')) {
+          link.hidden = language !== 'all' && !link.dataset.documentLanguages.split(' ').includes(language);
+          hasLanguage ||= !link.hidden;
+        }
+        entry.hidden = !nameMatches || !hasLanguage;
+        if (!entry.hidden) count++;
+      }
+      library.querySelector('[data-document-count]').textContent = `${count} ${en ? 'activities with a sheet' : 'atividades com ficha'}`;
+      library.querySelector('[data-document-empty]').hidden = count !== 0;
+    };
+    search.addEventListener('input', update);
+    for (const button of filters) button.addEventListener('click', () => {
+      language = button.dataset.documentFilter;
+      filters.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+      update();
+    });
+    tools.hidden = false;
+    update();
+  }
+  // One below-fold editorial movement. Content is never hidden or observer-gated.
+  // A failed/unsupported observer, reduced motion or no JS leaves the final state.
+  const moments = [...document.querySelectorAll('.ts98-shared-days, .ts96-history, .ts99-document')];
+  if (moments.length && 'IntersectionObserver' in window && typeof Element.prototype.animate === 'function') {
+    const preference = matchMedia('(prefers-reduced-motion: reduce)');
+    const animations = new Set();
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        if (!preference.matches && entry.boundingClientRect.top > 80) {
+          const animation = entry.target.animate([{transform:'translateY(10px)'},{transform:'none'}], {duration:360,easing:'cubic-bezier(.16,1,.3,1)'});
+          animations.add(animation);animation.finished.then(()=>animations.delete(animation)).catch(()=>animations.delete(animation));
+        }
+      }
+    }, {threshold:0.08});
+    moments.forEach(moment=>observer.observe(moment));
+    preference.addEventListener('change',()=>{if(preference.matches){for(const animation of animations)animation.cancel();animations.clear();}});
+  }
+})();
+// TSA99 optional composer: page-local only. Hrefs open an application on explicit click.
+(() => {
+  const composer=document.querySelector('[data-message-composer]');
+  if(!composer)return;
+  const en=document.documentElement.lang==='en',preview=composer.querySelector('[data-message-preview]');
+  const clean=(text,limit)=>String(text??'').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'').slice(0,limit);
+  const updateLinks=()=>{const message=clean(preview.value,2400);composer.querySelector('[data-message-whatsapp]').href='https://wa.me/351961787772?text='+encodeURIComponent(message);composer.querySelector('[data-message-email]').href='mailto:geral@transserrano.com?subject='+encodeURIComponent(en?'Activity enquiry':'Pedido de informação')+'&body='+encodeURIComponent(message);};
+  composer.hidden=false;
+  composer.querySelector('[data-message-prepare]').addEventListener('click',()=>{
+    const pane=document.querySelector('.ts-contact-context-variant:target')??document.querySelector('.ts-contact-context-default');
+    const context=clean(pane?.querySelector('[data-enquiry-context]')?.textContent?.trim(),360);
+    const date=composer.querySelector('[data-message-date]').value,people=composer.querySelector('[data-message-people]');
+    if(!people.checkValidity()){people.reportValidity();return;}
+    const parts=[en?'Hello, I would like information.':'Olá, gostaria de informações.',context];
+    if(date){const [year,month,day]=date.split('-');parts.push((en?'Preferred date: ':'Data pretendida: ')+day+'/'+month+'/'+year);}
+    if(people.value)parts.push((en?'Participants: ':'Participantes: ')+people.value);
+    const question=clean(composer.querySelector('[data-message-question]').value.trim(),1500);if(question)parts.push(question);
+    preview.value=parts.filter(Boolean).join('\n\n');composer.querySelector('[data-message-output]').hidden=false;updateLinks();preview.focus();
+    composer.querySelector('[data-message-status]').textContent=en?'Text prepared locally. Nothing has been sent.':'Texto preparado nesta página. Nada foi enviado.';
+  });
+  preview.addEventListener('input',updateLinks);
+  // Discard values on page lifecycle, including back-forward-cache entry.
+  window.addEventListener('pagehide',()=>{for(const input of composer.querySelectorAll('input,textarea'))input.value='';composer.querySelector('[data-message-output]').hidden=true;composer.querySelector('[data-message-status]').textContent='';updateLinks();});
 })();

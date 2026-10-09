@@ -1,0 +1,428 @@
+:root{--ts96-ink:#123525;--ts96-muted:#425a4e;--ts96-blue:#0b6170;--ts96-line:#d9dfd8;--ts96-surface:#fbf9f4;--ts98-lime:#c8df22;--ts96-ease:cubic-bezier(.16,1,.3,1);--ts99-feedback:160ms;--ts99-menu:210ms;--ts99-image:280ms;--ts99-section:360ms;}
+body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var(--ts96-blue);}
+::selection{background:var(--ts98-lime);color:var(--ts96-ink);}
+[hidden]{display:none !important;}
+@media (max-width: 599px) {.ts-aventura-site-header .ts-header-shell{column-gap:2vw;}
+.ts-aventura-site-header .ts-site-brand{flex:0 1 auto;max-width:min(9rem, 40vw);}}
+:where(a, button, summary, input, select, textarea):focus-visible{outline:3px solid var(--ts96-blue);outline-offset:4px;}
+:where(button, .wp-block-button__link){transition:background-color var(--ts99-feedback),color var(--ts99-feedback),box-shadow var(--ts99-feedback);}
+:where(input, select, textarea){font:inherit;max-width:100%;}
+.ts96-facts dd, .ts99-document-meta{font-variant-numeric:tabular-nums;}
+
+
+
+
+
+
+
+
+
+.ts95-detail a:focus-visible, .ts95-card:focus-visible, .ts95-explore summary:focus-visible, .ts95-family-nav a:focus-visible, .ts98-terrain a:focus-visible, .ts98-shared-copy a:focus-visible, .ts95-home-hero a:focus-visible{outline:rgb(168, 105, 0) solid 3px;outline-offset:5px;}
+
+
+.ts-editorial-link{text-underline-offset:0.28em;text-decoration-thickness:1px;}
+.ts-aventura-site-header .ts-header-shell{position:relative;min-height:74px;}
+.ts-aventura-site-header .ts-site-brand::before{content:none;}
+.ts-aventura-site-header .ts-site-brand picture{display:block;width:100%;}
+.ts-primary-navigation--desktop > ul{align-items:center;}
+.ts95-explore{position:static;font-size:0.86rem;}
+.ts95-explore > summary{min-height:44px;display:flex;align-items:center;gap:0.45rem;cursor:pointer;font-weight:650;list-style:none;padding:0.25rem 0px;}
+.ts95-explore > summary::after{content:"";width:0.45rem;height:0.45rem;border-right:1.5px solid;border-bottom:1.5px solid;transform:rotate(45deg);margin-left:0.2rem;}
+.ts95-explore > summary::-webkit-details-marker{display:none;}
+.ts95-menu-grid{position:absolute;z-index:100;left:50%;transform:translateX(-50%);top:calc(100% - 1px);width:min(1000px, -3rem + 100vw);max-height:min(70vh, 650px);overflow:auto;overscroll-behavior:contain;background:rgb(255, 255, 255);box-shadow:rgba(18, 53, 37, 0.15) 0px 18px 45px;padding:1.3rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:0.4rem 1.4rem;}
+.ts96-menu-all{grid-column:1 / -1;padding:0.5rem 0px 0.8rem;border-bottom:1px solid var(--ts96-line);}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ts-aventura-site-footer .ts-footer-grid{padding-block:2.5rem;gap:1.5rem;}
+.ts-aventura-site-footer .ts-footer-section ul{display:grid;grid-template-columns:1fr 1fr;gap:0.3rem 0.8rem;list-style:none;padding:0px;}
+.ts-aventura-site-footer a{display:inline-block;padding:0.35rem 0px;line-height:1.4;}
+@media (min-width: 783px) {.ts-mobile-menu .ts95-menu-grid{display:none;}}
+@media (max-width: 999px) {
+
+
+}
+@media (max-width: 782px) {
+.ts95-menu-grid{position:static;width:100%;transform:none;max-height:none;box-shadow:none;padding:0.3rem 0px;grid-template-columns:1fr;}
+
+.ts95-explore > summary{font-size:1rem;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ts-aventura-site-footer .ts-footer-grid{gap:1.5rem;grid-template-columns:1fr !important;}
+.ts-aventura-site-footer .ts-footer-brand p{max-width:45ch;}
+.ts-aventura-site-footer .ts-footer-section ul{grid-template-columns:1fr 1fr !important;}
+.ts-footer-note{font-size:0.78rem;}}
+@media (max-width: 599px) {
+
+
+
+
+
+}
+
+@media (prefers-reduced-motion: reduce) {html{scroll-behavior:auto !important;}
+*, ::before, ::after{scroll-behavior:auto !important;transition:none !important;}
+}
+
+
+
+
+
+
+
+@media (max-width: 767px) {
+}
+
+
+
+
+
+
+
+
+.ts99-document-meta{font-size:0.85rem;color:var(--ts96-muted);}
+
+.ts99-document-library{padding-block:3rem;}
+.ts99-document-library > header{max-width:65ch;}
+.ts99-document-tools{margin-block:2rem;}
+.ts99-document-tools label{display:grid;gap:0.5rem;max-width:35rem;}
+.ts99-document-tools input{font:inherit;min-height:48px;border:1px solid var(--ts96-line);border-radius:4px;padding:0.6rem;}
+.ts99-document-tools [role="group"]{display:flex;flex-wrap:wrap;gap:0.5rem;margin-block:1rem;}
+.ts99-document-tools button{font:inherit;min-height:44px;background:rgb(255, 255, 255);border:1px solid var(--ts96-line);padding:0.5rem 0.8rem;cursor:pointer;}
+.ts99-document-tools button[aria-pressed="true"]{background:var(--ts96-ink);color:rgb(255, 255, 255);}
+.ts99-document-list{list-style:none;padding:0px;}
+.ts99-document-list > li{padding-block:1.5rem;border-top:1px solid var(--ts96-line);}
+.ts99-document-list h2{font-size:1.25rem;margin-top:0px;}
+.ts99-document-list ul{list-style:none;padding:0px;display:flex;flex-wrap:wrap;gap:0.75rem 2rem;}
+.ts99-document-list ul > li{display:flex;flex-direction:column;gap:0.5rem;}
+.ts99-document-library [hidden]{display:none !important;}
+@media (max-width: 599px) {
+
+
+.ts99-document-list ul{display:block;}
+.ts99-document-list ul > li + li{margin-top:1rem;}}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 782px) {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 782px) {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 782px) {
+
+
+
+}
+.ts95-menu-grid{width:min(760px, -3rem + 100vw);}
+.ts99-menu-intent{display:flex;align-items:center;min-height:48px;padding:0.55rem 0.25rem;color:var(--ts96-ink);text-decoration:none !important;white-space:normal !important;}
+.ts99-menu-intent:hover, .ts99-menu-intent:focus-visible{color:var(--ts96-blue);text-underline-offset:0.3em;text-decoration:underline !important;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 600px) and (max-width: 999px) {
+
+}
+@media (max-width: 782px) {.ts95-menu-grid{width:100%;}
+
+
+}
+@media (max-width: 599px) {
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+@media (max-width: 782px) {
+
+
+
+
+}
+@media (max-width: 599px) {
+
+
+
+
+
+
+
+
+}

@@ -23,6 +23,7 @@
   <url><loc>https://transserranoaventura.com/atividades/caminhada-do-vale-glaciar/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/caminhada-passadicos-do-mondego/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/caminhada-rota-das-faias-serra-da-estrela/</loc></url>
+  <url><loc>https://transserranoaventura.com/atividades/caminhadas/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canoagem-alva-moura-morta/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canoagem-rio-alva/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canoagem-rio-alvoco/</loc></url>
@@ -35,19 +36,25 @@
   <url><loc>https://transserranoaventura.com/atividades/canoagem-rio-zezere-i/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canoagem-rio-zezere-ii/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canoagem-rio-zezere-iii/</loc></url>
+  <url><loc>https://transserranoaventura.com/atividades/canoagem/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canyoning-ribeira-da-pena/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canyoning-ribeira-das-quelhas/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canyoning-rio-frades/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canyoning-rio-teixeira/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/canyoning-rio-vessadas/</loc></url>
+  <url><loc>https://transserranoaventura.com/atividades/canyoning/</loc></url>
+  <url><loc>https://transserranoaventura.com/atividades/desafios-de-equipa/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/espeleologia-soprador-do-carvalho/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/multiatividades/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/orientacao/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/paintball-coimbra/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/paintball-gois/</loc></url>
+  <url><loc>https://transserranoaventura.com/atividades/paintball/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/parede-de-escalada-e-aluguer-do-equipamento/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/passeio-4x4-serra-do-acor/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/passeio-4x4-serra-do-sico/</loc></url>
+  <url><loc>https://transserranoaventura.com/atividades/passeios-4x4/</loc></url>
+  <url><loc>https://transserranoaventura.com/atividades/passeios-de-carrinha/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/vantour-aldeias-do-xisto-da-lousa/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/vantour-piodao-e-benfeita/</loc></url>
   <url><loc>https://transserranoaventura.com/atividades/vantour-serra-da-estrela/</loc></url>
@@ -57,6 +64,7 @@
   <url><loc>https://transserranoaventura.com/en/</loc></url>
   <url><loc>https://transserranoaventura.com/en/about/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/activities/4x4-tours/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/bike-rental/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/buggy-serra-da-lousa/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/canoe-rental/</loc></url>
@@ -71,15 +79,18 @@
   <url><loc>https://transserranoaventura.com/en/activities/canoeing-zezere-bouca-foz-alge/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/canoeing-zezere-castelo-bode-constancia/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/canoeing-zezere-tejo-almourol/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/activities/canoeing/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/canyoning-frades/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/canyoning-quelhas/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/canyoning-ribeira-da-pena/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/canyoning-teixeira/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/canyoning-vessadas/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/activities/canyoning/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/caving-soprador-carvalho/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/e-bike-rental/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/four-by-four-serra-da-estrela/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/four-by-four-serra-da-lousa/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/activities/guided-walks/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/inflatable-rental/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/jeep-tour-acor-piodao/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/jeep-tour-sico/</loc></url>
@@ -90,12 +101,15 @@
   <url><loc>https://transserranoaventura.com/en/activities/orienteering/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/paintball-coimbra/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/paintball-gois/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/activities/paintball/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/activities/team-challenges/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/treasure-hunt-gois/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/van-tour-ceira-valley/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/van-tour-lousa-schist-villages/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/van-tour-piodao-benfeita/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/van-tour-serra-da-estrela/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/van-tour-sico/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/activities/van-tours/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/walking-beech-route-estrela/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/walking-estrela-central-plateau/</loc></url>
   <url><loc>https://transserranoaventura.com/en/activities/walking-gois-schist-villages/</loc></url>
@@ -112,16 +126,28 @@
   <url><loc>https://transserranoaventura.com/en/faq/</loc></url>
   <url><loc>https://transserranoaventura.com/en/for/companies/</loc></url>
   <url><loc>https://transserranoaventura.com/en/for/groups/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/for/groups/stag-hen-parties/</loc></url>
   <url><loc>https://transserranoaventura.com/en/for/schools/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/getaways/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/getaways/basic-pack/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/getaways/deluxe-pack/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/getaways/premium-pack/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/getaways/standard-pack/</loc></url>
   <url><loc>https://transserranoaventura.com/en/gois/outdoor-adventure/</loc></url>
   <url><loc>https://transserranoaventura.com/en/legal/accessibility/</loc></url>
   <url><loc>https://transserranoaventura.com/en/legal/cookies/</loc></url>
   <url><loc>https://transserranoaventura.com/en/legal/privacy/</loc></url>
   <url><loc>https://transserranoaventura.com/en/legal/terms-conditions/</loc></url>
+  <url><loc>https://transserranoaventura.com/en/plan/activity-sheets/</loc></url>
   <url><loc>https://transserranoaventura.com/en/plan/prepare-water-activity/</loc></url>
   <url><loc>https://transserranoaventura.com/en/plan/safety-insurance/</loc></url>
   <url><loc>https://transserranoaventura.com/en/plan/serra-do-acor-piodao/</loc></url>
   <url><loc>https://transserranoaventura.com/en/plan/serra-do-sico/</loc></url>
+  <url><loc>https://transserranoaventura.com/escapadas/</loc></url>
+  <url><loc>https://transserranoaventura.com/escapadas/pack-basico/</loc></url>
+  <url><loc>https://transserranoaventura.com/escapadas/pack-deluxe/</loc></url>
+  <url><loc>https://transserranoaventura.com/escapadas/pack-premium/</loc></url>
+  <url><loc>https://transserranoaventura.com/escapadas/pack-standard/</loc></url>
   <url><loc>https://transserranoaventura.com/faq/</loc></url>
   <url><loc>https://transserranoaventura.com/gois/aventura-natureza/</loc></url>
   <url><loc>https://transserranoaventura.com/legal/acessibilidade/</loc></url>
@@ -131,6 +157,8 @@
   <url><loc>https://transserranoaventura.com/para-quem/empresas/</loc></url>
   <url><loc>https://transserranoaventura.com/para-quem/escolas/</loc></url>
   <url><loc>https://transserranoaventura.com/para-quem/grupos/</loc></url>
+  <url><loc>https://transserranoaventura.com/para-quem/grupos/despedidas/</loc></url>
+  <url><loc>https://transserranoaventura.com/planear/fichas-preparacao/</loc></url>
   <url><loc>https://transserranoaventura.com/planear/preparar-atividade-aquatica/</loc></url>
   <url><loc>https://transserranoaventura.com/planear/seguranca-seguros/</loc></url>
   <url><loc>https://transserranoaventura.com/planear/serra-do-acor-piodao/</loc></url>

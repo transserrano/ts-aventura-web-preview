@@ -105,15 +105,15 @@ h3{font-size:var(--wp--preset--font-size--heading-3);}
 
 
 
-.svh-territory-mark{color:rgba(255, 255, 255, 0.78);font-size:0.7rem;font-weight:800;letter-spacing:0.12em;position:absolute;right:1rem;text-transform:uppercase;top:1rem;z-index:2;}
-.svh-synthetic-media{height:100%;inset:0px;object-fit:cover;opacity:0.32;position:absolute;width:100%;}
 
 
 
 
 
 
-@media (forced-colors: active) {.svh-synthetic-media{opacity:0;}
+
+
+@media (forced-colors: active) {
 .ts-media-slot, .wp-block-button__link, .svh-legal-status{border:2px solid canvastext;}}
 .svh-activity-title, .svh-legal-title{margin:0px;padding-block:clamp(2.5rem, 7vw, 5.5rem);}
 
@@ -137,14 +137,14 @@ h3{font-size:var(--wp--preset--font-size--heading-3);}
 [data-media-id="media72-070"] .ts-approved-media img{object-position:50% 46%;}
 
 
-.svh-faq-layout{display:grid;gap:clamp(2rem, 6vw, 5rem);grid-template-columns:minmax(13rem, 0.45fr) minmax(0px, 1.2fr);}
+
 
 
 
 
 .svh-legal-document{background:var(--wp--preset--color--white);border:var(--ts-border);border-radius:var(--wp--custom--radius--card);max-width:900px;padding:clamp(1.25rem, 5vw, 4rem);}
 
-.svh-legal-document h2{border-top:var(--ts-border);margin-top:2.5rem;padding-top:2rem;}
+
 
 
 

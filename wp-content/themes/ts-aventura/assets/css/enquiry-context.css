@@ -6,19 +6,17 @@
 /* Beat the activity button display rules without hiding the selected fragment. */
 body [data-ts-context-surface][data-context-activity] [data-contact-audience],body [data-context-global] [data-contact-audience]{display:none}
 .ts-contact-context-variant:target,.ts-activity-audience-context:target{display:block}
-body:has(.ts-contact-context-variant:target) .ts-contact-context-default,
-body:has(.ts-activity-audience-context:target) [data-contact-default]{display:none}
-body:has(#audience-groups:target) [data-contact-audience=groups],
-body:has(#audience-schools:target) [data-contact-audience=schools],
-body:has(#audience-companies:target) [data-contact-audience=companies],
-body:has(#audience-families:target) [data-contact-audience=families]{display:inline-flex}
+body:has(.ts-contact-context-variant:target) .ts-contact-context-default{display:none}
 .ts-activity-audience-context{padding:1rem 0;border-block-end:1px solid var(--wp--preset--color--neutral-200,#d8e0e1);scroll-margin-top:6rem}
 .ts-contact-context-variant{scroll-margin-top:6rem}
 .ts-contact-context-controls{margin-block:1.5rem}
 .ts-contact-context-controls li{margin-block:.75rem}
 .ts-contact-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
 .ts-preparation-context{display:none;scroll-margin-top:6rem}
-.ts-preparation-context:target{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-block:1.5rem;padding-block:1rem;border-block:1px solid var(--wp--preset--color--sand-200)}
+.ts-preparation-context:is(:target,:has(.ts-context-anchor:target)){display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-block:1.5rem;padding-block:1rem;border-block:1px solid var(--wp--preset--color--sand-200)}
+.ts-preparation-context [data-contact-default]{display:inline-flex;gap:1rem;flex-wrap:wrap}
+body:has(.ts-preparation-context [data-context-audience]:target) :is(.ts-preparation-context,[data-preparation-global]) [data-contact-default]{display:none}
+body:has(.ts-preparation-context [data-context-audience=groups]:target) [data-contact-audience=groups],body:has(.ts-preparation-context [data-context-audience=schools]:target) [data-contact-audience=schools],body:has(.ts-preparation-context [data-context-audience=companies]:target) [data-contact-audience=companies],body:has(.ts-preparation-context [data-context-audience=families]:target) [data-contact-audience=families]{display:inline-flex;gap:1rem;flex-wrap:wrap}
 .ts-preparation-context>h3,.ts-preparation-context>p{flex-basis:100%;margin:0}
 .ts-preparation-context>h3{font-size:1rem;line-height:1.6;letter-spacing:normal}
 .ts-preparation-choices>section{margin-block-start:2rem}
@@ -39,6 +37,6 @@ body:has(:is(.ts-context-anchor,.ts-activity-audience-context)[id^="audience-gro
 .ts-context-toolbar .ts-activity-audience-context>p{margin:0}
 .ts-context-tools>summary{min-height:44px;cursor:pointer;align-content:center}
 body [data-context-global] [data-preparation-global]{display:none}
-body:has(.ts-preparation-context:target) [data-preparation-global-default]{display:none}
+body:has(.ts-preparation-context:target,.ts-preparation-context .ts-context-anchor:target) [data-preparation-global-default]{display:none}
 body:has(.ts-contact-context-variant:target) [data-context-global] [data-contact-default]{display:none}
 body:has(#request-groups:target) [data-context-global] [data-contact-audience=groups],body:has(#request-schools:target) [data-context-global] [data-contact-audience=schools],body:has(#request-companies:target) [data-context-global] [data-contact-audience=companies],body:has(#request-families:target) [data-context-global] [data-contact-audience=families]{display:inline-flex}
