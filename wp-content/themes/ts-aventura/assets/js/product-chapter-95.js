@@ -66,6 +66,14 @@
       catalog.querySelector('[data-product-count]').textContent = `${count} ${en ? (count === 1 ? 'experience' : 'experiences') : (count === 1 ? 'experiência' : 'experiências')} · ${active}${search.value.trim() ? ` · “${search.value.trim()}”` : ''}`;
       catalog.querySelector('[data-product-empty]').hidden = count !== 0;
       clear.disabled = family === 'all' && !search.value;
+      for (const card of catalog.querySelectorAll('a[data-catalog-item]')) {
+        const destination = new URL(card.href, location.href);
+        if (family === 'all') destination.searchParams.delete('from_family');
+        else destination.searchParams.set('from_family', family);
+        if (search.value.trim()) destination.searchParams.set('from_q', search.value.trim().slice(0, 80));
+        else destination.searchParams.delete('from_q');
+        card.href = destination.href;
+      }
       for (const a of document.querySelectorAll('a[hreflang]')) {
         const url = new URL(a.href,location.href);
         if (['/atividades/','/en/activities/'].includes(url.pathname)) { url.search = location.search; url.hash = location.hash; a.href = url.href; }
@@ -85,6 +93,30 @@
     clear.addEventListener('click',()=>{family='all';search.value='';save(true);search.focus();});
     catalog.querySelector('[data-catalog-tools]').hidden = false;
     addEventListener('popstate',restore);addEventListener('hashchange',restore);restore();
+  }
+  const productPage = document.querySelector('.ts100-detail');
+  if (productPage) {
+    const query = new URLSearchParams(location.search);
+    const family = query.get('from_family');
+    const search = query.get('from_q')?.slice(0, 80);
+    const validFamily = ['water','canyoning','tours','walking','team','cycling','rentals'].includes(family);
+    if (validFamily || search) {
+      const catalogPath = en ? '/en/activities/' : '/atividades/';
+      for (const link of productPage.querySelectorAll('.ts-breadcrumbs a')) {
+        const destination = new URL(link.href, location.href);
+        if (destination.pathname !== catalogPath) continue;
+        if (search) destination.searchParams.set('q', search);
+        if (validFamily) destination.hash = 'family-' + family;
+        link.href = destination.href;
+      }
+      for (const link of document.querySelectorAll('a[hreflang]')) {
+        const destination = new URL(link.href, location.href);
+        if (!/^\/(?:en\/activities|atividades)\/[a-z0-9-]+\/$/.test(destination.pathname)) continue;
+        if (validFamily) destination.searchParams.set('from_family', family);
+        if (search) destination.searchParams.set('from_q', search);
+        link.href = destination.href;
+      }
+    }
   }
   for (const comparison of document.querySelectorAll('.ts99-compare')) {
     comparison.addEventListener('toggle',()=>{if(comparison.open){const template=comparison.querySelector('[data-compare-table]');if(template)template.replaceWith(template.content.cloneNode(true));}});
@@ -133,11 +165,44 @@
       update();
     });
     tools.hidden = false;
+    const selectFromFragment = () => {
+      const chosen = entries.find(entry => '#' + entry.id === location.hash);
+      if (!chosen) return;
+      search.value = chosen.querySelector('h2 a').textContent.replace(/\s*→\s*$/, '');
+      update();
+      for (const link of document.querySelectorAll('header a[hreflang], footer a[hreflang]')) {
+        const destination = new URL(link.href, location.href);
+        if (['/planear/fichas-preparacao/','/en/plan/activity-sheets/'].includes(destination.pathname)) {
+          destination.hash = chosen.id;
+          link.href = destination.href;
+        }
+      }
+    };
     update();
+    selectFromFragment();
+    search.addEventListener('search', () => {
+      if (search.value) return;
+      language = 'all';
+      filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.documentFilter === 'all')));
+      history.replaceState(null, '', location.pathname);
+      for (const link of document.querySelectorAll('header a[hreflang], footer a[hreflang]')) {
+        const destination = new URL(link.href, location.href);
+        if (['/planear/fichas-preparacao/','/en/plan/activity-sheets/'].includes(destination.pathname)) {
+          destination.hash = '';link.href = destination.href;
+        }
+      }
+      update();
+    });
+    window.addEventListener('hashchange', selectFromFragment);
   }
   // One below-fold editorial movement. Content is never hidden or observer-gated.
   // A failed/unsupported observer, reduced motion or no JS leaves the final state.
-  const moments = [...document.querySelectorAll('.ts98-shared-days, .ts96-history, .ts99-document')];
+  const heroMoment = document.querySelector('.ts100-home .ts95-slides');
+  if (heroMoment && !matchMedia('(prefers-reduced-motion: reduce)').matches && typeof Element.prototype.animate === 'function') {
+    const entry = heroMoment.animate([{transform:'translateY(16px)'},{transform:'none'}], {duration:480,easing:'cubic-bezier(.16,1,.3,1)'});
+    matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',event=>{if(event.matches)entry.cancel();});
+  }
+  const moments = [...document.querySelectorAll('.ts98-shared-days, .ts96-history')];
   if (moments.length && 'IntersectionObserver' in window && typeof Element.prototype.animate === 'function') {
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
     const animations = new Set();

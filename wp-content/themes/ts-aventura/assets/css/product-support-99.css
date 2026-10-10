@@ -1,4 +1,19 @@
 :root{--ts96-ink:#123525;--ts96-muted:#425a4e;--ts96-blue:#0b6170;--ts96-line:#d9dfd8;--ts96-surface:#fbf9f4;--ts98-lime:#c8df22;--ts96-ease:cubic-bezier(.16,1,.3,1);--ts99-feedback:160ms;--ts99-menu:210ms;--ts99-image:280ms;--ts99-section:360ms;}
+:root{--ts100-stone:#e5e1d8;--ts100-reading:68ch;--ts100-section:clamp(3rem,6vw,6rem);--ts100-photo-entry:480ms;--ts100-photo-distance:16px;}
+
+
+
+
+
+
+.ts99-comparison tbody th{position:sticky;left:0px;z-index:1;background:rgb(255, 255, 255);min-width:12rem;}
+.ts99-comparison thead th{white-space:normal;min-width:9rem;}
+.ts99-comparison thead th:first-child{position:sticky;left:0px;background:var(--ts96-surface);z-index:2;}
+.ts99-comparison table{min-width:45rem;}
+.ts99-comparison:focus-visible{outline:3px solid var(--ts96-blue);outline-offset:4px;}
+@media (max-width: 782px) {
+.ts99-comparison tbody th{min-width:10rem;max-width:12rem;}
+.ts99-comparison :is(th, td){padding:0.75rem;}}
 body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var(--ts96-blue);}
 ::selection{background:var(--ts98-lime);color:var(--ts96-ink);}
 [hidden]{display:none !important;}
@@ -31,6 +46,10 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 .ts95-explore > summary::-webkit-details-marker{display:none;}
 .ts95-menu-grid{position:absolute;z-index:100;left:50%;transform:translateX(-50%);top:calc(100% - 1px);width:min(1000px, -3rem + 100vw);max-height:min(70vh, 650px);overflow:auto;overscroll-behavior:contain;background:rgb(255, 255, 255);box-shadow:rgba(18, 53, 37, 0.15) 0px 18px 45px;padding:1.3rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:0.4rem 1.4rem;}
 .ts96-menu-all{grid-column:1 / -1;padding:0.5rem 0px 0.8rem;border-bottom:1px solid var(--ts96-line);}
+
+
+
+
 
 
 
@@ -410,6 +429,44 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 782px) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 @media (max-width: 782px) {.ts99-water-preparation .svh-page-hero__grid{grid-template-columns:minmax(0px, 1fr);gap:1rem;padding-block:1.5rem;}
 .ts99-water-preparation .ts-section-heading{margin:0px;}
 .ts99-water-preparation .svh-page-hero__media{aspect-ratio:3 / 2;}
@@ -424,5 +481,63 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 
 
 
+
+}
+
+
+.ts-navigation-utilities--desktop.ts100-language{display:block !important;}
+.ts100-language .ts-language-switcher a{align-items:center;justify-content:center;min-height:44px;min-width:32px;text-decoration:underline;text-underline-offset:0.3em;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ts100-programme > section:not(.ts96-close){padding-block:1.5rem;border-top:1px solid var(--ts100-stone);}
+.ts100-programme[data-programme-kind="pack"] > section:first-of-type{display:grid;grid-template-columns:minmax(0px, 1fr) minmax(0px, 1.2fr);gap:0px 3rem;}
+.ts100-programme[data-programme-kind="pack"] > section:first-of-type > h2{grid-area:span 4 / 1;font-size:clamp(1.8rem, 3vw, 2.8rem);margin-top:0px;}
+.ts100-programme[data-programme-kind="pack"] > section:first-of-type > :not(h2){grid-column:2;}
+.ts100-programme h2{line-height:1.2;text-wrap:balance;}
+.ts-location-page .ts-river-story{background:var(--ts96-surface);padding:2rem;gap:3rem;border:0px;box-shadow:none;}
+.ts-location-page .ts-river-choice{background:none;border:0px;box-shadow:none;padding:0px;}
+.ts-location-page .ts-river-story h2{margin-top:0px;}
+.ts100-about-opening .svh-page-hero__grid{display:block;padding-block:2rem 0px;}
+.ts100-about-opening .ts-section-heading{max-width:var(--ts100-reading);margin-bottom:0px;}
+.ts96-about > .ts96-narrative{padding-top:2rem;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 782px) {.ts100-language .ts-language-switcher ul{gap:0.15rem;}
+.ts100-language .ts-language-switcher a{min-width:28px;}
+
+
+
+
+.ts100-programme[data-programme-kind="pack"] > section:first-of-type{display:block;}
+.ts100-programme[data-programme-kind="pack"] > section:first-of-type > h2{font-size:2rem;}
+.ts-location-page .ts-river-story{padding:1.25rem;}
+
+.ts100-about-opening .svh-page-hero__grid{padding-top:1.25rem;}
 
 }

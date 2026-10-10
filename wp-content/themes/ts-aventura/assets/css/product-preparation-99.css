@@ -1,4 +1,19 @@
 :root{--ts96-ink:#123525;--ts96-muted:#425a4e;--ts96-blue:#0b6170;--ts96-line:#d9dfd8;--ts96-surface:#fbf9f4;--ts98-lime:#c8df22;--ts96-ease:cubic-bezier(.16,1,.3,1);--ts99-feedback:160ms;--ts99-menu:210ms;--ts99-image:280ms;--ts99-section:360ms;}
+:root{--ts100-stone:#e5e1d8;--ts100-reading:68ch;--ts100-section:clamp(3rem,6vw,6rem);--ts100-photo-entry:480ms;--ts100-photo-distance:16px;}
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 782px) {
+
+}
 body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var(--ts96-blue);}
 ::selection{background:var(--ts98-lime);color:var(--ts96-ink);}
 [hidden]{display:none !important;}
@@ -14,12 +29,12 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 .ts95-detail, .ts95-portfolio, .ts95-home-discover, .ts96-history, .ts96-programmes, .ts96-support-body{color:var(--ts96-ink);}
 .ts95-detail p, .ts95-portfolio p, .ts95-card p, .ts96-history p, .ts96-programme p, .ts96-support-body p{font-weight:400;line-height:1.65;}
 
-.ts95-detail h2, .ts95-home-discover h2, .ts96-history h2, .ts98-introduction h2, .ts98-shared-copy h2, .ts96-close h2{font-size:clamp(1.8rem, 3.1vw, 3rem);line-height:1.12;letter-spacing:-0.035em;text-wrap:balance;}
+
 
 
 .ts95-detail a:focus-visible, .ts95-card:focus-visible, .ts95-explore summary:focus-visible, .ts95-family-nav a:focus-visible, .ts98-terrain a:focus-visible, .ts98-shared-copy a:focus-visible, .ts95-home-hero a:focus-visible{outline:rgb(168, 105, 0) solid 3px;outline-offset:5px;}
 
-.ts95-detail .wp-block-button__link, .ts96-close .wp-block-button__link{background:var(--ts96-blue);color:rgb(255, 255, 255);}
+
 .ts-editorial-link{text-underline-offset:0.28em;text-decoration-thickness:1px;}
 .ts-aventura-site-header .ts-header-shell{position:relative;min-height:74px;}
 .ts-aventura-site-header .ts-site-brand::before{content:none;}
@@ -137,9 +152,13 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 
 
 
-.ts96-close{padding-block:3rem;border-top:1px solid var(--ts96-line);display:flex;align-items:center;flex-wrap:wrap;gap:1.2rem 2rem;}
-.ts96-close h2{margin:0px;flex-basis:100%;}
-.ts96-close p{margin:0px;flex-basis:100%;max-width:65ch;}
+
+
+
+
+
+
+
 
 .ts96-programmes, .ts96-support-body{max-width:1200px;width:calc(100% - 3rem);margin-inline:auto;padding-block:2rem;}
 
@@ -180,7 +199,7 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 
 
 
-.ts-preparation-choices > section{border-top:1px solid var(--ts96-line);padding-block:1rem;}
+
 
 .ts-preparation-choices li{break-inside:avoid;padding:0.4rem 0px;}
 .ts-aventura-site-footer .ts-footer-grid{padding-block:2.5rem;gap:1.5rem;}
@@ -228,7 +247,7 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 
 
 
-.ts96-close{padding-block:2.5rem;}
+
 
 
 
@@ -410,6 +429,44 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 782px) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 @media (max-width: 782px) {
 
 
@@ -423,6 +480,64 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 
 
 
+
+
+}
+
+
+.ts-navigation-utilities--desktop.ts100-language{display:block !important;}
+.ts100-language .ts-language-switcher a{align-items:center;justify-content:center;min-height:44px;min-width:32px;text-decoration:underline;text-underline-offset:0.3em;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ts-preparation-context{background:var(--ts96-surface);border:0px;box-shadow:none;padding:2rem;border-radius:4px;}
+.ts-preparation-context h3{font-size:clamp(1.6rem, 2.5vw, 2.4rem);line-height:1.2;margin:0px 0px 1.5rem;}
+.ts-preparation-context h4{font-size:1.15rem;margin-top:1.3rem;}
+.ts100-preparation-alternatives{margin-top:3rem;}
+.ts100-preparation-alternatives details{border-top:1px solid var(--ts100-stone);padding-block:0.3rem;}
+.ts100-preparation-alternatives summary{cursor:pointer;min-height:48px;padding:0.6rem 0px;font-weight:650;}
+
+
+
+
+
+
+@media (max-width: 782px) {.ts100-language .ts-language-switcher ul{gap:0.15rem;}
+.ts100-language .ts-language-switcher a{min-width:28px;}
+
+
+
+
+
+
+
+.ts-preparation-context{padding:1.25rem;}
 
 
 }
