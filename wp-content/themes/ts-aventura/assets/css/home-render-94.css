@@ -309,7 +309,7 @@ a{text-decoration-thickness:0.08em;text-underline-offset:0.18em;}
 
 
 
-@keyframes ts-hero-arrive { 
+@keyframes ts-hero-arrive {
   0% { opacity: 1; transform: scale(0.96) rotate(-1deg); }
   100% { opacity: 1; transform: scale(1) rotate(0deg); }
 }
@@ -605,7 +605,7 @@ a{text-decoration-thickness:0.08em;text-underline-offset:0.18em;}
 
 }
 
-@keyframes ts-river-line { 
+@keyframes ts-river-line {
   0% { opacity: 0; transform: scaleX(0.35); }
   100% { opacity: 1; transform: scaleX(1); }
 }
@@ -758,7 +758,7 @@ html{accent-color:var(--ts-system-action);scrollbar-color:var(--ts-system-action
 @supports (background-image: image-set(url("/wp-content/themes/ts-aventura/brand.avif") type("image/avif") 1x)) {.ts-site-brand::before{background-image:image-set(url("/wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-128.avif") 1x type("image/avif"), url("/wp-content/themes/ts-aventura/assets/brand/optimized/transserrano-logo-horizontal-256.avif") 2x type("image/avif"));}}
 .ts-mobile-menu__panel{z-index:var(--ts-layer-menu);}
 .ts-mobile-menu[open] .ts-mobile-menu__panel{animation:ts-menu-arrive var(--ts-motion-fast) var(--ts-motion-enter) both;}
-@keyframes ts-menu-arrive { 
+@keyframes ts-menu-arrive {
   0% { opacity: 0.72; transform: translateY(-0.35rem); }
   100% { opacity: 1; transform: translateY(0px); }
 }
@@ -772,7 +772,7 @@ html{accent-color:var(--ts-system-action);scrollbar-color:var(--ts-system-action
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
 }
 
-@keyframes ts-home-photo-arrive { 
+@keyframes ts-home-photo-arrive {
   0% { clip-path: inset(1.5%); transform: scale(0.99); }
   100% { clip-path: inset(0px); transform: scale(1); }
 }
@@ -1877,7 +1877,7 @@ html[lang="en"] .ts95-home-intro h1{font-size:clamp(3rem, 4.8vw, 4.8rem);max-wid
 }
 @media (prefers-reduced-motion: no-preference) {
 
-@keyframes ts101-choice-feedback { 
+@keyframes ts101-choice-feedback {
   0% { opacity: 0.85; }
   100% { opacity: 1; }
 }}

@@ -663,7 +663,7 @@ html[lang="en"] .ts95-home-intro h1{font-size:clamp(3rem, 4.8vw, 4.8rem);max-wid
 }
 @media (prefers-reduced-motion: no-preference) {
 
-@keyframes ts101-choice-feedback { 
+@keyframes ts101-choice-feedback {
   0% { opacity: 0.85; }
   100% { opacity: 1; }
 }}

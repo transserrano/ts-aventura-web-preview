@@ -663,7 +663,7 @@ body[data-choice-composer="ready"] .ts101-direct-contact :is(.ts-contact-context
 .ts101-enquiry-selection li{margin-bottom:0.5rem;justify-content:space-between;}}
 @media (prefers-reduced-motion: no-preference) {.ts101-card-tools button, .ts101-check, .ts101-preparation-item > summary::after{transition:background-color 160ms, color 160ms, transform 160ms;}
 .ts101-selection, .ts101-comparison-grid{animation:ts101-choice-feedback 160ms var(--ts96-ease);}
-@keyframes ts101-choice-feedback { 
+@keyframes ts101-choice-feedback {
   0% { opacity: 0.85; }
   100% { opacity: 1; }
 }}

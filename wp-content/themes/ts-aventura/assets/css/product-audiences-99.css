@@ -663,7 +663,7 @@ body{background:rgb(255, 255, 255);accent-color:var(--ts96-blue);caret-color:var
 }
 @media (prefers-reduced-motion: no-preference) {
 
-@keyframes ts101-choice-feedback { 
+@keyframes ts101-choice-feedback {
   0% { opacity: 0.85; }
   100% { opacity: 1; }
 }}
