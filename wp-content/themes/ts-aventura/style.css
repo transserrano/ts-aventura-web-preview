@@ -4395,6 +4395,7 @@ html {
 .ts-mobile-menu__panel{max-height:calc(100dvh - 90px);overflow:auto;inset-inline-start:auto;inset-inline-end:0}
 .ts-mobile-menu__label--open,.ts-mobile-menu[open] .ts-mobile-menu__label--closed{display:none}
 .ts-mobile-menu[open] .ts-mobile-menu__label--open{display:inline}
+@media(max-width:359px){.ts-mobile-menu__label--open{max-inline-size:3.5rem;white-space:normal;line-height:1.2}}
 .ts-mobile-menu__close{align-self:flex-end;border:1px solid currentcolor;border-radius:var(--ts-radius-control);color:inherit;cursor:pointer;display:inline-flex;font:inherit;font-weight:700;justify-content:center;min-height:44px;min-width:44px;padding-inline:.8rem}
 .ts-mobile-menu__close[hidden]{display:none}
 .ts-mobile-menu__close:hover,.ts-mobile-menu__close:focus-visible{text-decoration:underline;text-underline-offset:.2em}

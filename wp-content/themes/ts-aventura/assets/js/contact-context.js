@@ -147,6 +147,7 @@
   if (composition && ['schools', 'families'].includes(preview.dataset.prefillAudience)) composition.open = true;
   };
   refreshContext();
+  window.dispatchEvent(new Event('ts-contact-context-ready'));
   window.addEventListener('hashchange', refreshContext);
   window.addEventListener('popstate', refreshContext);
 

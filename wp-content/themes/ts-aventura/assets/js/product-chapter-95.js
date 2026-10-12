@@ -42,6 +42,7 @@
     menu.addEventListener('click', event => { if (event.target.closest('a')) menu.open = false; });
   }
   for (const catalog of document.querySelectorAll('[data-product-catalog]')) {
+    if (catalog.hasAttribute('data-choice-explorer')) continue;
     const sections = [...catalog.querySelectorAll('[data-product-family]')];
     const filters = [...catalog.querySelectorAll('[data-product-filter]')];
     const search = catalog.querySelector('[data-catalog-search]');
@@ -136,6 +137,7 @@
     }, {once: true});
   }
   for (const library of document.querySelectorAll('[data-document-library]')) {
+    if (library.hasAttribute('data-preparation-explorer')) continue;
     const tools = library.querySelector('[data-document-tools]');
     const search = library.querySelector('[data-document-search]');
     const filters = [...library.querySelectorAll('[data-document-filter]')];
@@ -223,6 +225,7 @@
 (() => {
   const composer=document.querySelector('[data-message-composer]');
   if(!composer)return;
+  if(composer.querySelector('[data-message-activity]'))return;
   const en=document.documentElement.lang==='en',preview=composer.querySelector('[data-message-preview]');
   const clean=(text,limit)=>String(text??'').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'').slice(0,limit);
   const updateLinks=()=>{const message=clean(preview.value,2400);composer.querySelector('[data-message-whatsapp]').href='https://wa.me/351961787772?text='+encodeURIComponent(message);composer.querySelector('[data-message-email]').href='mailto:geral@transserrano.com?subject='+encodeURIComponent(en?'Activity enquiry':'Pedido de informação')+'&body='+encodeURIComponent(message);};
@@ -242,4 +245,122 @@
   preview.addEventListener('input',updateLinks);
   // Discard values on page lifecycle, including back-forward-cache entry.
   window.addEventListener('pagehide',()=>{for(const input of composer.querySelectorAll('input,textarea'))input.value='';composer.querySelector('[data-message-output]').hidden=true;composer.querySelector('[data-message-status]').textContent='';updateLinks();});
+})();
+
+// Shared choice continuity contains public product identifiers, never personal fields.
+(() => {
+  const en=document.documentElement.lang==='en',catalogPath=en?'/en/activities/':'/atividades/';
+  const query=new URLSearchParams(location.search),one=key=>query.getAll(key).length===1?query.get(key):'';
+  const families=['water','canyoning','tours','walking','team','cycling','rentals'];
+  let choices=[...new Set((one('choices')||'').split(',').filter(x=>/^activity\.[a-z0-9-]{1,70}$/.test(x)))].slice(0,3);
+  let search=(one('q')||one('from_q')||'').slice(0,80);
+  let family=one('from_family')||location.hash.replace('#family-','');if(!families.includes(family))family='all';
+  const transferable=link=>link.origin===location.origin&&/^\/(?:en\/)?(?:activities|atividades|contact|contactos|plan|planear)(?:\/|$)/.test(link.pathname);
+  const carry=()=>{for(const a of document.querySelectorAll('a[href]')){if(a.getAttribute('href').startsWith('#'))continue;const url=new URL(a.href,location.href);if(!transferable(url)||url.pathname.endsWith('.pdf')||a.hasAttribute('data-product-filter'))continue;
+    if(choices.length)url.searchParams.set('choices',choices.join(','));else url.searchParams.delete('choices');
+    if(url.pathname===catalogPath||(a.hreflang&&['/atividades/','/en/activities/'].includes(url.pathname))){url.searchParams.delete('from_q');url.searchParams.delete('from_family');if(search)url.searchParams.set('q',search);else url.searchParams.delete('q');if(family!=='all')url.hash='family-'+family;else if(url.hash.startsWith('#family-'))url.hash='';}
+    else{if(search)url.searchParams.set('from_q',search);else url.searchParams.delete('from_q');if(family!=='all')url.searchParams.set('from_family',family);else url.searchParams.delete('from_family');}
+    a.href=url.pathname+url.search+url.hash;
+  }};
+  const save=(push=false)=>{const url=new URL(location.href);if(choices.length)url.searchParams.set('choices',choices.join(','));else url.searchParams.delete('choices');
+    if(document.querySelector('[data-choice-explorer]')){if(search)url.searchParams.set('q',search);else url.searchParams.delete('q');url.hash=family==='all'?'':'family-'+family;}
+    history[push?'pushState':'replaceState'](null,'',url.pathname+url.search+url.hash);carry();};
+  const catalog=document.querySelector('[data-choice-explorer]');
+  if(catalog){
+    const cards=[...catalog.querySelectorAll('[data-choice-id]')],known=new Set(cards.map(c=>c.dataset.choiceId));choices=choices.filter(x=>known.has(x));
+    const input=catalog.querySelector('[data-catalog-search]'),filters=[...catalog.querySelectorAll('[data-product-filter]')],clear=catalog.querySelector('[data-catalog-clear]');
+    const list=catalog.querySelector('[data-choice-list]'),selection=catalog.querySelector('[data-choice-selection]'),panels=catalog.querySelector('[data-choice-panels]'),comparison=catalog.querySelector('[data-choice-comparison]'),status=catalog.querySelector('[data-choice-status]');
+    const normalize=text=>text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase();
+    const remove=id=>{const restoreFocus=document.activeElement?.closest('[data-choice-list],[data-choice-panels]');choices=choices.filter(x=>x!==id);renderSelection();save();if(restoreFocus){const card=cards.find(c=>c.dataset.choiceId===id);(card&&!card.hidden?card.querySelector('[data-choice-toggle]'):input).focus();}};
+    const renderSelection=()=>{list.replaceChildren();panels.replaceChildren();selection.hidden=!choices.length;comparison.hidden=!choices.length||comparison.dataset.open!=='true';
+      for(const card of cards){const button=card.querySelector('[data-choice-toggle]'),chosen=choices.includes(card.dataset.choiceId);button.hidden=false;button.setAttribute('aria-pressed',String(chosen));button.textContent=chosen?(en?'Selected — remove':'Selecionada — retirar'):(en?'Add to compare':'Selecionar para comparar');button.disabled=!chosen&&choices.length===3;}
+      for(const id of choices){const card=cards.find(c=>c.dataset.choiceId===id),li=document.createElement('li'),label=document.createElement('span'),button=document.createElement('button');label.textContent=card.querySelector('h3').textContent;button.type='button';button.textContent=en?'Remove':'Retirar';button.setAttribute('aria-label',(en?'Remove ':'Retirar ')+label.textContent);button.addEventListener('click',()=>remove(id));li.append(label,button);list.append(li);panels.append(card.querySelector('[data-choice-template]').content.cloneNode(true));}
+      status.textContent=choices.length===3?(en?'Three selected. Remove one to choose another.':'Três selecionadas. Retire uma para escolher outra.') : choices.length?(en?`${choices.length} selected, up to three.`:`${choices.length} selecionadas, até três.`):'';
+      carry();
+    };
+    const update=()=>{let count=0;for(const section of catalog.querySelectorAll('[data-product-family]')){let n=0;for(const card of section.querySelectorAll('[data-choice-id]')){const item=card.querySelector('[data-catalog-item]');card.hidden=!(family==='all'||section.dataset.productFamily===family)||!normalize(item.dataset.catalogName).includes(normalize(search.trim()));if(!card.hidden)n++;}section.hidden=!n;count+=n;}
+      filters.forEach(a=>{if(a.dataset.productFilter===family)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});catalog.querySelector('[data-product-count]').textContent=`${count} ${en?'experiences':'experiências'}`;catalog.querySelector('[data-product-empty]').hidden=!!count;clear.disabled=family==='all'&&!search;const familySummary=catalog.querySelector('.ts101-family-picker>summary');if(familySummary)familySummary.textContent=family==='all'?(en?'Filter by experience':'Filtrar por experiência'):(en?'Experience: ':'Experiência: ')+filters.find(a=>a.dataset.productFilter===family).textContent;carry();};
+    input.value=search;input.maxLength=80;input.addEventListener('input',()=>{search=input.value;update();save();});filters.forEach(a=>a.addEventListener('click',event=>{event.preventDefault();family=a.dataset.productFilter;update();save(true);const picker=catalog.querySelector('.ts101-family-picker');if(picker&&matchMedia('(max-width:782px)').matches){picker.open=false;picker.querySelector('summary').focus();}}));
+    clear.addEventListener('click',()=>{family='all';search='';input.value='';update();save(true);input.focus();});
+    catalog.addEventListener('click',event=>{const toggle=event.target.closest('[data-choice-toggle]'),removeButton=event.target.closest('[data-choice-remove]');if(removeButton){remove(removeButton.dataset.choiceRemove);return;}if(!toggle)return;const id=toggle.dataset.choiceToggle;if(choices.includes(id)){remove(id);return;}if(choices.length>=3)return;choices.push(id);renderSelection();save();});
+    catalog.querySelector('[data-choice-reset]').addEventListener('click',()=>{choices=[];renderSelection();save();input.focus();});
+    catalog.querySelector('[data-choice-compare]').addEventListener('click',event=>{event.preventDefault();comparison.dataset.open='true';comparison.hidden=false;comparison.focus();});
+    const familyPicker=catalog.querySelector('.ts101-family-picker');if(familyPicker)familyPicker.open=matchMedia('(min-width:783px)').matches;catalog.querySelector('[data-catalog-tools]').hidden=false;renderSelection();update();save();
+    addEventListener('popstate',()=>{const p=new URLSearchParams(location.search);search=(p.get('q')||'').slice(0,80);input.value=search;const f=location.hash.replace('#family-','');family=families.includes(f)?f:'all';choices=[...new Set((p.get('choices')||'').split(','))].filter(x=>known.has(x)).slice(0,3);renderSelection();update();});
+  }
+  const planner=document.querySelector('[data-preparation-explorer]');
+  if(planner){
+    const directory=planner.querySelector('[data-preparation-directory]'),entries=[...directory.querySelectorAll('[data-document-entry]')],selected=planner.querySelector('[data-selected-preparation]'),input=planner.querySelector('[data-document-search]'),filters=[...planner.querySelectorAll('[data-document-filter]')];
+    const places=new Map(entries.map(e=>{const p=document.createComment('directory position');e.before(p);return[e,p];}));
+    const globalLinks=new Map([...document.querySelectorAll('a[href]')].filter(a=>!a.closest('[data-document-entry]')&&(/\/(?:contactos|contact)\//.test(new URL(a.href,location.href).pathname)||a.hreflang)).map(a=>[a,a.getAttribute('href')]));
+    const returnEntry=e=>{e.open=false;places.get(e).after(e);};
+    const checklist=e=>{
+      const block=e.querySelector('[data-preparation-checklist]');if(!block||block.dataset.ready)return;
+      const label=block.dataset.practicalLabel,text=block.textContent,prefix=label+': ';
+      const section=document.createElement('section');section.dataset.preparationChecklist='';section.dataset.ready='true';
+      const heading=document.createElement('h2');heading.textContent=label;
+      const note=document.createElement('p');note.className='ts101-checklist-note';note.textContent=en?'Optional checklist, kept on this page only.':'Checklist opcional, apenas nesta página.';
+      const ul=document.createElement('ul');
+      for(const sentence of (text.startsWith(prefix)?text.slice(prefix.length):text).split(/(?<=\.)\s+(?=\p{Lu})/u)){
+        const li=document.createElement('li'),button=document.createElement('button');button.type='button';button.className='ts101-check';button.setAttribute('aria-pressed','false');button.textContent=sentence;
+        button.addEventListener('click',()=>button.setAttribute('aria-pressed',String(button.getAttribute('aria-pressed')!=='true')));li.append(button);ul.append(li);
+      }
+      section.append(heading,note,ul);block.replaceWith(section);
+    };
+    let language='all',active=null,audience='general';const normalize=text=>text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase();
+    const update=()=>{let count=0;for(const entry of entries){if(entry===active){entry.hidden=false;for(const row of entry.querySelectorAll('[data-document-languages]'))row.hidden=false;continue;}const match=normalize(entry.querySelector('summary').textContent).includes(normalize(input.value.trim()));let has=false;for(const row of entry.querySelectorAll('[data-document-languages]')){row.hidden=language!=='all'&&!row.dataset.documentLanguages.split(' ').includes(language);has||=!row.hidden;}entry.hidden=!match||!has;if(!entry.hidden)count++;}planner.querySelector('[data-document-count]').textContent=`${count} ${active?(en?'other experiences':'outras experiências'):(en?'experiences':'experiências')}`;planner.querySelector('[data-document-empty]').hidden=count>0;};
+    const select=entry=>{if(active&&active!==entry)returnEntry(active);active=entry;selected.hidden=!entry;planner.querySelector('[data-directory-reset]').hidden=!entry;if(entry){entry.hidden=false;entry.open=true;selected.replaceChildren(entry);checklist(entry);
+        const back=entry.querySelector('[data-preparation-return]'),href=new URL(back.href,location.href);if(audience==='general'){href.searchParams.delete('audience');href.hash='';}else{href.searchParams.set('audience',audience);href.hash='audience-'+audience;}back.href=href.pathname+href.search+href.hash;
+        for(const a of document.querySelectorAll('a[hreflang]')){const u=new URL(a.href,location.href);if(!/\/(?:plan|planear)\//.test(u.pathname)||(a.closest('[data-document-entry]')&&!entry.contains(a)))continue;const targetEn=a.hreflang==='en',safety=planner.dataset.preparationMode==='preparation';u.pathname=safety?(targetEn?'/en/plan/safety-insurance/':'/planear/seguranca-seguros/'):(targetEn?'/en/plan/activity-sheets/':'/planear/fichas-preparacao/');u.hash='prepare-'+(targetEn===en?entry.dataset.preparationSlug:entry.dataset.preparationOther)+'-'+audience;u.searchParams.delete('activity_id');u.searchParams.delete('activity');u.searchParams.set('audience',audience);a.href=u.pathname+u.search+u.hash;}
+        for(const a of document.querySelectorAll('a[href]')){if(a.closest('[data-document-entry]'))continue;const u=new URL(a.href,location.href);if(u.pathname!==(en?'/en/contact/':'/contactos/'))continue;const target=entry.querySelector('[data-preparation-audience="'+audience+'"]');if(target)a.href=target.getAttribute('href');}
+      }update();carry();};
+    const restore=()=>{const hash=location.hash.slice(1),p=new URLSearchParams(location.search);let entry=entries.find(e=>e.id===hash||e.dataset.documentActivity===p.get('activity_id'));const match=/^prepare-(.+)-(general|groups|schools|companies|families)$/.exec(hash);if(match){entry=entries.find(e=>e.dataset.preparationSlug===match[1]);audience=match[2];}else if(['general','groups','schools','companies','families'].includes(p.get('audience')))audience=p.get('audience');if(entry)select(entry);};
+    for(const entry of entries)entry.addEventListener('toggle',()=>{if(entry.open&&entry!==active){const url=new URL(location.href);url.hash=entry.id;for(const k of ['activity_id','activity','audience'])url.searchParams.delete(k);audience='general';history.replaceState(null,'',url.pathname+url.search+url.hash);select(entry);const summary=entry.querySelector('summary');summary.focus();}});
+    input.addEventListener('input',update);for(const button of filters)button.addEventListener('click',()=>{language=button.dataset.documentFilter;filters.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));update();});
+    planner.querySelector('[data-directory-reset]').addEventListener('click',event=>{event.preventDefault();if(active)returnEntry(active);active=null;selected.replaceChildren();selected.hidden=true;input.value='';language='all';audience='general';for(const [a,href]of globalLinks)a.setAttribute('href',href);const u=new URL(location.href);for(const k of ['activity_id','activity','audience'])u.searchParams.delete(k);u.hash='document-directory';history.replaceState(null,'',u.pathname+u.search+u.hash);filters.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.documentFilter==='all')));update();carry();input.focus();});
+    planner.querySelector('[data-document-tools]').hidden=false;update();restore();addEventListener('hashchange',restore);
+  }
+  addEventListener('ts-contact-context-ready',carry);
+  addEventListener('ts-choices-updated',event=>{choices=event.detail.filter(x=>/^activity\.[a-z0-9-]{1,70}$/.test(x)).slice(0,3);carry();});
+  carry();
+})();
+
+// TSA101 optional composer extends the same page-local privacy contract.
+(() => {
+  const composer=document.querySelector('[data-message-composer]'),select=composer?.querySelector('[data-message-activity]');if(!select)return;
+  const en=document.documentElement.lang==='en',preview=composer.querySelector('[data-message-preview]'),audience=composer.querySelector('[data-message-audience]'),status=composer.querySelector('[data-message-status]');
+  const clean=(text,limit)=>String(text??'').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'').slice(0,limit),known=new Map([...select.options].filter(o=>o.value).map(o=>[o.value,o.textContent]));
+  const interestLabels={'pack-basico':en?'Pack Basic':'Pack Básico','pack-standard':'Pack Standard','pack-premium':'Pack Premium','pack-deluxe':'Pack Deluxe','despedidas':en?'Stag & hen groups':'Despedidas','finalistas':en?'School leavers':'Finalistas'};
+  const interestAudience=key=>key==='finalistas'?'schools':interestLabels[key]?'groups':'';
+  function contextForMessage101(params, hash, fallbackAudience, fallbackInterest) {
+    const one=key=>params.getAll(key).length===1?params.get(key):'';
+    const native=/^#request-(general|groups|schools|companies|families)(?:-(pack-(?:basico|standard|premium|deluxe)|despedidas|finalistas))?$/.exec(hash);
+    const candidate=one('audience')||native?.[1]||fallbackAudience||'general';
+    const audience=['general','individuals','families','groups','schools','companies'].includes(candidate)?candidate:'general';
+    const key=one('interest')||native?.[2]||fallbackInterest||'';
+    const owner=key==='finalistas'?'schools':['pack-basico','pack-standard','pack-premium','pack-deluxe','despedidas'].includes(key)?'groups':'';
+    return {audience,interest:owner===audience?key:''};
+  }
+  function productIDsForMessage101(params, nativeId, known) {
+    const one=key=>params.getAll(key).length===1?params.get(key):'';
+    if(params.has('choices'))return [...new Set((one('choices')||'').split(','))].filter(id=>known.has(id)).slice(0,3);
+    const id=one('activity_id')||one('activity')||nativeId;
+    return known.has(id)?[id]:[];
+  }
+  let chosen=[],interestKey='',manualEdited=false,contextText='';
+  const updateLinks=()=>{const message=clean([contextText,preview.value].filter(Boolean).join('\n\n'),4000);composer.querySelector('[data-message-whatsapp]').href='https://wa.me/351961787772?text='+encodeURIComponent(message);composer.querySelector('[data-message-email]').href='mailto:geral@transserrano.com?subject='+encodeURIComponent(en?'Activity enquiry':'Pedido de informação')+'&body='+encodeURIComponent(message);for(const [key,target]of [['whatsapp','[data-message-whatsapp]'],['email','[data-message-email]']]){const immediate=document.querySelector('[data-immediate-'+key+']');if(immediate)immediate.href=composer.querySelector(target).href;}};
+  const syncLanguage=()=>{const self=new URL(location.href);self.searchParams.set('choices',chosen.join(','));self.searchParams.set('audience',audience.value);const interest=interestAudience(interestKey)===audience.value?interestKey:'';if(interest)self.searchParams.set('interest',interest);else self.searchParams.delete('interest');self.searchParams.delete('activity_id');self.searchParams.delete('activity');if(self.hash.startsWith('#request'))self.hash=audience.value==='general'?'request':'request-'+audience.value+(interest?'-'+interest:'');history.replaceState(null,'',self.pathname+self.search+self.hash);dispatchEvent(new CustomEvent('ts-choices-updated',{detail:chosen}));
+    for(const link of document.querySelectorAll('a[hreflang]')){const url=new URL(link.href,location.href);if(!/\/(?:contactos|contact)\//.test(url.pathname))continue;url.pathname=link.hreflang==='en'?'/en/contact/':'/contactos/';url.searchParams.delete('activity_id');url.searchParams.delete('activity');url.searchParams.set('choices',chosen.join(','));url.searchParams.set('audience',audience.value);url.searchParams.set('locale',link.hreflang);if(interest)url.searchParams.set('interest',interest);else url.searchParams.delete('interest');url.hash=audience.value==='general'?'request':'request-'+audience.value+(interest?'-'+interest:'');link.href=url.pathname+url.search+url.hash;}};
+  const prepare=()=>{const people=composer.querySelector('[data-message-people]');if(!people.checkValidity()){people.reportValidity();return false;}const names=chosen.map(id=>known.get(id)),interest=interestAudience(interestKey)===audience.value?interestLabels[interestKey]:'';const summary=[...names,interest,audience.value!=='general'?audience.selectedOptions[0].textContent:''].filter(Boolean).join(' · ');
+    composer.querySelector('[data-message-summary]').textContent=summary||(en?'Help choosing an experience':'Ajuda para escolher uma experiência');
+    const parts=[summary];const date=composer.querySelector('[data-message-date]').value;if(date){const [year,month,day]=date.split('-');parts.push((en?'Preferred date: ':'Data pretendida: ')+day+'/'+month+'/'+year);}if(people.value)parts.push((en?'Participants: ':'Participantes: ')+people.value);const question=clean(composer.querySelector('[data-message-question]').value.trim(),1500);if(question)parts.push((en?'Your question: ':'A sua pergunta: ')+question);contextText=parts.filter(Boolean).join('\n\n');composer.querySelector('[data-message-summary]').textContent=contextText||(en?'Help choosing an experience':'Ajuda para escolher uma experiência');
+    if(!manualEdited)preview.value=en?'Hello, I would like information.':'Olá, gostaria de informações.';composer.querySelector('[data-message-output]').hidden=false;updateLinks();syncLanguage();return true;
+  };
+  const list=()=>{const root=composer.querySelector('[data-message-selection]');root.replaceChildren();for(const id of chosen){const li=document.createElement('li'),text=document.createElement('span'),remove=document.createElement('button');text.textContent=known.get(id);remove.type='button';remove.textContent=en?'Remove':'Retirar';remove.setAttribute('aria-label',(en?'Remove ':'Retirar ')+text.textContent);remove.addEventListener('click',()=>{chosen=chosen.filter(x=>x!==id);list();prepare();select.focus();});li.append(text,remove);root.append(li);}composer.querySelector('[data-message-add]').disabled=chosen.length===3;};
+  const restore=()=>{const params=new URLSearchParams(location.search),one=k=>params.getAll(k).length===1?params.get(k):'',context=document.querySelector('[data-enquiry-preview]'),pane=document.querySelector('.ts-contact-context-variant:target');chosen=productIDsForMessage101(params,context?.dataset.selectedActivityId,known);const state=contextForMessage101(params,location.hash,pane?.dataset.nativeAudience||context?.dataset.prefillAudience,pane?.dataset.nativeInterest||context?.dataset.prefillInterest);audience.value=state.audience;interestKey=state.interest;list();prepare();};
+  composer.hidden=false;document.body.dataset.choiceComposer='ready';const fallback=document.querySelector('[data-contact-fallback]');if(fallback){const immediate=document.createElement('details'),title=document.createElement('summary');title.textContent=en?'Contacts and how the website form works':'Contactos e funcionamento do formulário';fallback.before(immediate);immediate.append(title,fallback);}
+  composer.querySelector('[data-message-add]').addEventListener('click',()=>{if(select.value&&!chosen.includes(select.value)&&chosen.length<3){chosen.push(select.value);list();prepare();}status.textContent=chosen.length===3?(en?'Three options. Remove one to change the shortlist.':'Três opções. Retire uma para alterar a seleção.'):'';});
+  composer.querySelector('[data-message-prepare]').addEventListener('click',()=>{if(!prepare())return;status.textContent=en?'Message updated locally. Nothing has been sent.':'Mensagem atualizada nesta página. Nada foi enviado.';preview.focus();});audience.addEventListener('change',()=>{if(interestAudience(interestKey)!==audience.value)interestKey='';prepare();});preview.addEventListener('input',()=>{manualEdited=true;updateLinks();});for(const field of composer.querySelectorAll('[data-message-date],[data-message-people],[data-message-question]'))field.addEventListener('input',()=>{prepare();if(manualEdited)status.textContent=en?'Your edited message is preserved; the activity, audience, date, participants and question are shown above it.':'A mensagem editada foi preservada; atividade, público, data, participantes e pergunta são apresentados acima.';});
+  restore();addEventListener('ts-contact-context-ready',restore);addEventListener('hashchange',restore);addEventListener('popstate',restore);addEventListener('pageshow',event=>{if(event.persisted)restore();});
+  window.addEventListener('pagehide',()=>{for(const input of composer.querySelectorAll('input,textarea'))input.value='';contextText='';manualEdited=false;composer.querySelector('[data-message-output]').hidden=true;status.textContent='';updateLinks();});
 })();
