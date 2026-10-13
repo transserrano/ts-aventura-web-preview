@@ -37,13 +37,13 @@ a{color:var(--wp--preset--color--river-700);text-underline-offset:0.2em;}
 
 
 
-.ts-card{overflow:hidden;min-width:0px;background:rgb(255, 255, 255);border:1px solid rgb(206, 199, 186);border-radius:12px;box-shadow:none;}
-.ts-card .ts-media-slot{display:block;aspect-ratio:4 / 3;margin:0px;overflow:hidden;}
-.ts-card .ts-media-slot picture, .ts-card .ts-media-slot img{display:block;width:100%;height:100%;}
-.ts-card .ts-media-slot img{object-fit:cover;}
-.ts-card__body{padding:1rem;}
-.ts-card__body h3{margin:0.25rem 0px 0.5rem;color:rgb(23, 33, 27);font-family:var(--wp--preset--font-family--heading);font-size:1.2rem;line-height:1.2;}
-.ts-card__body p{margin:0.5rem 0px 0px;color:rgb(77, 90, 82);font-size:0.92rem;}
+
+
+
+
+
+
+
 
 
 
