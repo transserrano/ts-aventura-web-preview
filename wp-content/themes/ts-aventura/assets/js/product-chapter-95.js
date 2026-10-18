@@ -269,6 +269,10 @@
   if(catalog){
     const cards=[...catalog.querySelectorAll('[data-choice-id]')],known=new Set(cards.map(c=>c.dataset.choiceId));choices=choices.filter(x=>known.has(x));
     const input=catalog.querySelector('[data-catalog-search]'),filters=[...catalog.querySelectorAll('[data-product-filter]')],clear=catalog.querySelector('[data-catalog-clear]');
+    const tools=catalog.querySelector('.ts101-discovery-controls');
+    for(const link of catalog.querySelectorAll('[data-catalog-refine]'))link.addEventListener('click',event=>{
+      event.preventDefault();tools.scrollIntoView({block:'start'});input.focus({preventScroll:true});
+    });
     const legacy=catalog.querySelector('[data-legacy-choice-context]');
     const normalize=text=>text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase();
     const renderLegacy=()=>{legacy.hidden=!choices.length;

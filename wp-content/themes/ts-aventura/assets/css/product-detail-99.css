@@ -118,9 +118,12 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 .ts102-decision h2{font-size:2.2rem;margin:0px 0px 1.25rem;}
 .ts102-decision .ts96-facts dl{grid-template-columns:repeat(3, minmax(0px, 1fr));gap:1rem 1.5rem;}
 .ts102-reading{display:grid;gap:1.5rem;}
-.ts102-reading .ts96-narrative{display:grid;grid-template-columns:repeat(2, minmax(0px, 1fr));gap:2rem;align-items:start;}
+.ts102-reading .ts96-narrative{position:relative;display:grid;grid-template-columns:repeat(2, minmax(0px, 1fr));gap:2rem;align-items:start;}
+.ts102-reading .ts96-narrative > .ts-context-anchor{position:absolute;inset-block-start:0px;}
+.ts102-reading .ts96-narrative h3{margin-top:0px;}
 .ts102-reading .ts96-narrative > div + div{margin:0px;padding:0px;border:0px;}
 .ts102-reading .ts99-variants{margin:0px;padding-top:1.5rem;border-top:1px solid var(--ts96-line);}
+.ts95-detail[data-product-id="activity.four-by-four-lousa"] .ts99-variants > h2{margin:0px 0px 0.5rem;}
 .ts96-practical .ts99-document{margin:0px;padding:1.5rem;background:var(--ts96-surface);border:0px;border-radius:8px;grid-template-columns:4rem minmax(0px, 1fr);gap:1rem;grid-column:1 / -1;}
 .ts96-practical .ts99-document-mark{min-width:4rem;width:4rem;height:auto;align-self:start;word-break:normal;overflow-wrap:normal;}
 .ts96-practical .ts99-document-mark span{white-space:nowrap;display:block;font-size:1.4rem;}
@@ -140,7 +143,8 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 .ts96-practical p, .ts96-narrative p{line-height:1.75;}
 
 .ts96-related h2{margin-bottom:1.5rem;}
-.ts95-detail-body > .ts-activity-gallery{margin-block:0px;}
+.ts95-detail-body > .ts-activity-gallery{position:relative;margin-block:0px;}
+.ts95-detail-body > .ts-activity-gallery > .ts-context-anchor{position:absolute;inset:0px auto auto 0px;}
 .ts95-detail-body > .ts-river-faq{padding-bottom:0px;}
 .ts95-detail-body > .ts95-video, .ts95-detail-body > .ts-river-faq h2, .ts95-detail-body > .ts-activity-gallery h2{margin-top:0px;}
 .ts95-detail-body > .ts95-video > h2{margin-top:0px;}
@@ -169,6 +173,10 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 
 
 
+
+
+
+
 @media (min-width: 1600px) {
 }
 @media (max-width: 1023px) {.ts95-detail-body{gap:2rem;}
@@ -180,6 +188,7 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 
 }
 @media (max-width: 782px) {.ts95-detail .alignwide, .ts95-portfolio.alignwide, .ts95-home-discover.alignwide, .ts96-history.alignwide, .ts96-close.alignwide, .ts98-introduction.alignwide{width:calc(100% - 2rem);}
+
 
 
 
@@ -243,6 +252,9 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 
 
 .ts95-card-grid, .ts101-explorer .ts95-card-grid{grid-template-columns:1fr;gap:2rem;}
+
+
+
 
 
 }

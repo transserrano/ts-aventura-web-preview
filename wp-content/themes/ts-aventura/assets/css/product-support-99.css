@@ -129,6 +129,9 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 
 
 
+
+
+
 .ts96-narrative{display:block;margin:0px;}
 .ts96-narrative h2, .ts96-practical h2{font-size:2.2rem;margin:0px 0px 1rem;}
 
@@ -138,6 +141,11 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 .ts96-practical > section{padding-top:1.5rem;border-top:1px solid var(--ts96-line);}
 .ts96-practical > section + section{margin-top:0px;}
 .ts96-practical p, .ts96-narrative p{line-height:1.75;}
+
+
+
+
+
 
 
 
@@ -212,6 +220,7 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 
 
 
+
 .ts96-close{padding:1.5rem;margin-block:2rem;}
 .ts96-close h2{font-size:2.8rem;}
 .ts96-close .ts-editorial-link{margin-left:0px;display:flex;margin-top:0.5rem;}
@@ -243,6 +252,9 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 
 
 .ts95-card-grid, .ts101-explorer .ts95-card-grid{grid-template-columns:1fr;gap:2rem;}
+
+
+
 
 
 }

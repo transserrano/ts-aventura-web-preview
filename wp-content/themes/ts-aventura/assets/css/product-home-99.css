@@ -169,6 +169,14 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 
 
 
+
+
+
+
+
+
+
+
 @media (min-width: 1600px) {.ts95-home-intro{padding-left:1rem;}
 .ts95-slides img{object-position:50% 55%;}}
 @media (max-width: 1023px) {
@@ -199,6 +207,7 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 
 .ts96-section-title{align-items:start;display:block;}
 .ts96-section-title h2{font-size:3.1rem;margin-bottom:0.6rem;}
+.ts95-home-discover .ts96-section-title{margin-bottom:0.5rem;}
 .ts98-terrain{gap:0.2rem 1rem;padding-bottom:0.8rem;}
 .ts98-terrain a{font-size:0.85rem;}
 .ts98-highlight-grid{grid-template-columns:1fr;}
@@ -243,6 +252,9 @@ main :is(h1, h2, h3, h4), main .ts-river-section h2, main .ts100-home-preparatio
 
 
 .ts95-card-grid, .ts101-explorer .ts95-card-grid{grid-template-columns:1fr;gap:2rem;}
+
+
+
 
 
 }
